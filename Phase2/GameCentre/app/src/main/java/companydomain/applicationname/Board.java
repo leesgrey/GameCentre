@@ -117,6 +117,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         return new BoardIterator();
     }
 
+    // TODO: why do we have this
     /**
      * Returns an int indicating the size of the Sliding Tile board.
      *

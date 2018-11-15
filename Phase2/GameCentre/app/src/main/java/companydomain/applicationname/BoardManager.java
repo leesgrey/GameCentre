@@ -53,6 +53,7 @@ class BoardManager implements Serializable {
         this.previousMoves = new LinkedList<>();
     }
 
+    // TODO: we should get rid of this
     /**
      * Manage a new shuffled board, with a default size and number of allowed undoes.
      */
@@ -181,6 +182,7 @@ class BoardManager implements Serializable {
         return true;
     }
 
+    // TODO: we should get rid of this
     /**
      * Swap the bottom-right tile with the tile immediately to its left.
      */
