@@ -133,7 +133,7 @@ public class GameActivity extends AppCompatActivity implements Observer {
     private void addView() {
         gridView = findViewById(R.id.grid);
         scoreCounter = findViewById(R.id.scoreCounter);
-        gridView.setNumColumns(boardManager.getBoard().getNum_cols());
+        gridView.setNumColumns(boardManager.getBoard().getNumCols());
         gridView.setBoardManager(boardManager);
         boardManager.getBoard().addObserver(this);
         addUndoButtonListener();
@@ -153,8 +153,8 @@ public class GameActivity extends AppCompatActivity implements Observer {
                         int displayWidth = gridView.getMeasuredWidth();
                         int displayHeight = gridView.getMeasuredHeight();
 
-                        columnWidth = displayWidth / boardManager.getBoard().getNum_cols();
-                        columnHeight = displayHeight / boardManager.getBoard().getNum_rows();
+                        columnWidth = displayWidth / boardManager.getBoard().getNumCols();
+                        columnHeight = displayHeight / boardManager.getBoard().getNumRows();
 
                         refresh();
                     }

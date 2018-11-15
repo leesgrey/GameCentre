@@ -14,15 +14,16 @@ import java.util.List;
  */
 public class Board extends Observable implements Serializable, Iterable<Tile> {
 
+    // TODO: collapse these two variables
     /**
      * The number of rows.
      */
-    private int num_rows;
+    private int numRows;
 
     /**
      * The number of columns.
      */
-    private int num_cols;
+    private int numCols;
 
     /**
      * The tiles on the board in row-major order.
@@ -31,16 +32,16 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
 
     /**
      * A new board of tiles in row-major order.
-     * Precondition: len(tiles) == num_rows * num_cols
+     * Precondition: len(tiles) == numRows * numCols
      *
      * @param tiles    the tiles for the board
-     * @param num_rows the number of rows in the board
-     * @param num_cols the number of columns in the board
+     * @param numRows the number of rows in the board
+     * @param numCols the number of columns in the board
      */
-    Board(List<Tile> tiles, int num_rows, int num_cols) {
-        this.num_rows = num_rows;
-        this.num_cols = num_cols;
-        this.tiles = new Tile[num_rows * num_cols];
+    Board(List<Tile> tiles, int numRows, int numCols) {
+        this.numRows = numRows;
+        this.numCols = numCols;
+        this.tiles = new Tile[numRows * numCols];
         Iterator<Tile> iter = tiles.iterator();
 
         for (int position = 0; position != this.numTiles(); position++) {
@@ -54,7 +55,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      * @return the number of tiles on the board
      */
     int numTiles() {
-        return this.num_rows * this.num_cols;
+        return this.numRows * this.numCols;
     }
 
     /**
@@ -62,8 +63,8 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      *
      * @return the number of rows on the board
      */
-    int getNum_rows() {
-        return this.num_rows;
+    int getNumRows() {
+        return this.numRows;
     }
 
     /**
@@ -71,8 +72,8 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      *
      * @return the number of rows on the board
      */
-    int getNum_cols() {
-        return this.num_cols;
+    int getNumCols() {
+        return this.numCols;
     }
 
     /**
@@ -124,7 +125,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      * @return the size of the Sliding Tile board.
      */
     public int getSize() {
-        return this.num_cols;
+        return this.numCols;
     }
 
     /**
@@ -157,7 +158,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
          */
         @Override
         public boolean hasNext() {
-            return this.position < num_rows * num_cols - 1;
+            return this.position < numRows * numCols - 1;
         }
     }
 }

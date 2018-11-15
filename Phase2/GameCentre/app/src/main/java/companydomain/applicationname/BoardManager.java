@@ -75,20 +75,47 @@ class BoardManager implements Serializable {
      * Manage a new shuffled board, with a given size and number of allowed undoes.
      *
      * @param allowedUndoes the number of allowed undoes
-     * @param num_rows      the number of rows
-     * @param num_cols      the number of columns
+     * @param numRows      the number of rows
+     * @param numCols      the number of columns
      */
-    BoardManager(int allowedUndoes, int num_rows, int num_cols) {
+    BoardManager(int allowedUndoes, int numRows, int numCols) {
         List<Tile> tiles = new ArrayList<>();
-        int numTiles = num_rows * num_cols;
+        int numTiles = numRows * numCols;
         for (int tileNum = 0; tileNum != numTiles; tileNum++) {
             tiles.add(new Tile(tileNum));
         }
 
-        Collections.shuffle(tiles);
-        this.board = new Board(tiles, num_rows, num_cols);
+        do {
+            Collections.shuffle(tiles);
+        } while (BoardManager.isSolvable(tiles, numRows));
+        this.board = new Board(tiles, numRows, numCols);
         this.allowedUndoes = allowedUndoes;
         this.previousMoves = new LinkedList<>();
+    }
+
+    /**
+     * Check to see if a list of tiles represents a solvable game.
+     *
+     * @param tiles the list of tiles we are checking for solvability
+     */
+    private static boolean isSolvable(List<Tile> tiles, int numRows) {
+        int inversions = 0;
+        for(int i = 0; i < tiles.size() - 1; i++) {
+            for(int j = i + 1; j < tiles.size(); j++) {
+                if(tiles.get(i).getId() > tiles.get(j).getId()) {
+                    inversions++;
+                }
+            }
+        }
+        if(tiles.size() % 2 == 1) {
+            return inversions % 2 == 0;
+        } else {
+            int blankPosition = 0;
+            while(tiles.get(blankPosition).getId() != 0) {
+                blankPosition++;
+            }
+            return (blankPosition / numRows) % 2 != inversions % 2;
+        }
     }
 
     /**
@@ -138,10 +165,10 @@ class BoardManager implements Serializable {
     boolean isValidTap(int position) {
         int blankPosition = this.findBlankPosition();
         return (position == blankPosition - 1
-                && position % this.board.getNum_cols() != this.board.getNum_cols() - 1)
-                || (position == blankPosition + 1 && position % this.board.getNum_cols() != 0)
-                || position == blankPosition - this.board.getNum_cols()
-                || position == blankPosition + this.board.getNum_cols();
+                && position % this.board.getNumCols() != this.board.getNumCols() - 1)
+                || (position == blankPosition + 1 && position % this.board.getNumCols() != 0)
+                || position == blankPosition - this.board.getNumCols()
+                || position == blankPosition + this.board.getNumCols();
     }
 
     /**
