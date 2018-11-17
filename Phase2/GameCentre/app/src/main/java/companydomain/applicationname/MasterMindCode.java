@@ -1,5 +1,8 @@
 package companydomain.applicationname;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 /**
  * A MasterMind code combination.
  */
@@ -44,15 +47,20 @@ class MasterMindCode {
      * @param answerCode the answer code
      */
     private void initializeCorrectness(int[] answerCode) {
+        this.correctness = new int[2];
         for(int i = 0; i < this.code.length; i++) {
-            for(int j = 0; j < answerCode.length; j++) {
-                if(this.code[i] == answerCode[j]) {
-                    if(i == j) {
-                        this.correctness[0]++;
-                    } else {
-                        this.correctness[1]++;
-                    }
-                }
+            if(this.code[i] == answerCode[i]) {
+                this.correctness[0]++;
+                this.correctness[1]--;
+            }
+        }
+        int[] codeSorted = this.code.clone();
+        Arrays.sort(codeSorted);
+        int[] answerCodeSorted = answerCode.clone();
+        Arrays.sort(answerCodeSorted);
+        for(int i = 0; i < codeSorted.length; i++) {
+            if(codeSorted[i] == answerCodeSorted[i]) {
+                this.correctness[1]++;
             }
         }
     }

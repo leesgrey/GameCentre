@@ -99,6 +99,7 @@ class BoardManager implements Serializable {
      * @param tiles the list of tiles we are checking for solvability
      */
     private static boolean isSolvable(List<Tile> tiles, int numRows) {
+        // https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html
         int inversions = 0;
         for(int i = 0; i < tiles.size() - 1; i++) {
             for(int j = i + 1; j < tiles.size(); j++) {
