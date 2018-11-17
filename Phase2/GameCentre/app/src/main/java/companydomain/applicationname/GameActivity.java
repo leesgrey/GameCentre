@@ -137,7 +137,6 @@ public class GameActivity extends AppCompatActivity implements Observer {
         gridView.setBoardManager(boardManager);
         boardManager.getBoard().addObserver(this);
         addUndoButtonListener();
-        addCheatButtonListener();
     }
 
     /**
@@ -216,18 +215,6 @@ public class GameActivity extends AppCompatActivity implements Observer {
                 Toast.LENGTH_LONG).show();
     }
 
-    /**
-     * Activate the cheat button.
-     */
-    private void addCheatButtonListener() {
-        Button cheatButton = findViewById(R.id.cheatButton);
-        cheatButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boardManager.cheatCode();
-            }
-        });
-    }
 
     /**
      * Dispatch onPause() to fragments.
