@@ -209,16 +209,6 @@ class BoardManager implements Serializable {
         this.previousMoves.removeLast();
         return true;
     }
-
-    // TODO: we should get rid of this
-    /**
-     * Swap the bottom-right tile with the tile immediately to its left.
-     */
-    void cheatCode() {
-        this.scoreCounter++;
-        this.getBoard().swapTiles(this.getBoard().numTiles() - 1, this.getBoard().numTiles() - 2);
-    }
-
     /**
      * Return the current score.
      *
