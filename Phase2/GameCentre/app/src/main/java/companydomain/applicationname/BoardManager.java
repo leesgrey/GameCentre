@@ -19,9 +19,7 @@ abstract class BoardManager implements Serializable {
      *
      * @return the current board.
      */
-    Board getBoard() {
-        return board;
-    }
+    abstract Board getBoard();
 
     /**
      * Return whether the tiles are in row-major order.

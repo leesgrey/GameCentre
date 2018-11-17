@@ -92,6 +92,7 @@ public class ChooseGameActivity extends AppCompatActivity {
         Game2Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                switchToMatching();
             }
         });
     }
@@ -113,6 +114,15 @@ public class ChooseGameActivity extends AppCompatActivity {
      */
     private void switchToSlidingTilesStarting() {
         Intent tmp = new Intent(this, StartingActivity.class);
+        tmp.putExtra("currentUser", currentUser);
+        startActivity(tmp);
+    }
+
+    /**
+     * Go to the sliding tiles starting screen.
+     */
+    private void switchToMatching() {
+        Intent tmp = new Intent(this, MatchingActivity.class);
         tmp.putExtra("currentUser", currentUser);
         startActivity(tmp);
     }
