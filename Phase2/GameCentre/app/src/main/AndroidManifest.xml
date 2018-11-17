@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name="companydomain.applicationname.SignUpActivity"></activity>
-        <activity android:name="companydomain.applicationname.GameActivity"></activity>
+        <activity android:name="companydomain.applicationname.SlidingTilesActivity"></activity>
         <activity android:name="companydomain.applicationname.StartingActivity"></activity>
         <activity android:name="companydomain.applicationname.ChooseGameActivity"></activity>
         <activity android:name="companydomain.applicationname.ScoreboardActivity"></activity>

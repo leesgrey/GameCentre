@@ -10,12 +10,12 @@ import java.util.LinkedList;
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
-class BoardManager implements Serializable {
+class SlidingTilesBoardManager implements Serializable {
 
     /**
      * The board being managed.
      */
-    private Board board;
+    private SlidingTilesBoard board;
 
     /**
      * The number of undoes allowed for this game.
@@ -37,7 +37,7 @@ class BoardManager implements Serializable {
      *
      * @param board the board
      */
-    BoardManager(Board board) {
+    SlidingTilesBoardManager(SlidingTilesBoard board) {
         this(board, 3);
     }
 
@@ -47,7 +47,7 @@ class BoardManager implements Serializable {
      * @param board         the board
      * @param allowedUndoes the number of allowed undoes
      */
-    private BoardManager(Board board, int allowedUndoes) {
+    private SlidingTilesBoardManager(SlidingTilesBoard board, int allowedUndoes) {
         this.board = board;
         this.allowedUndoes = allowedUndoes;
         this.previousMoves = new LinkedList<>();
@@ -57,7 +57,7 @@ class BoardManager implements Serializable {
     /**
      * Manage a new shuffled board, with a default size and number of allowed undoes.
      */
-    BoardManager() {
+    SlidingTilesBoardManager() {
         this(4, 4);
     }
 
@@ -67,7 +67,7 @@ class BoardManager implements Serializable {
      * @param num_rows the number of rows
      * @param num_cols the number of columns
      */
-    private BoardManager(int num_rows, int num_cols) {
+    private SlidingTilesBoardManager(int num_rows, int num_cols) {
         this(3, num_rows, num_cols);
     }
 
@@ -78,7 +78,7 @@ class BoardManager implements Serializable {
      * @param numRows      the number of rows
      * @param numCols      the number of columns
      */
-    BoardManager(int allowedUndoes, int numRows, int numCols) {
+    SlidingTilesBoardManager(int allowedUndoes, int numRows, int numCols) {
         List<Tile> tiles = new ArrayList<>();
         int numTiles = numRows * numCols;
         for (int tileNum = 0; tileNum != numTiles; tileNum++) {
@@ -87,8 +87,8 @@ class BoardManager implements Serializable {
 
         do {
             Collections.shuffle(tiles);
-        } while (BoardManager.isSolvable(tiles, numRows));
-        this.board = new Board(tiles, numRows, numCols);
+        } while (SlidingTilesBoardManager.isSolvable(tiles, numRows));
+        this.board = new SlidingTilesBoard(tiles, numRows, numCols);
         this.allowedUndoes = allowedUndoes;
         this.previousMoves = new LinkedList<>();
     }
@@ -138,7 +138,7 @@ class BoardManager implements Serializable {
      *
      * @return the current board.
      */
-    Board getBoard() {
+    SlidingTilesBoard getBoard() {
         return board;
     }
 

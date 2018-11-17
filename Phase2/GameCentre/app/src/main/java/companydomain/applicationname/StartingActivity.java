@@ -29,7 +29,7 @@ public class StartingActivity extends AppCompatActivity {
     /**
      * The board manager.
      */
-    private BoardManager boardManager;
+    private SlidingTilesBoardManager boardManager;
 
     /**
      * The game save states.
@@ -54,7 +54,7 @@ public class StartingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boardManager = new BoardManager();
+        boardManager = new SlidingTilesBoardManager();
         saveBoardManagerToFile(TEMP_SAVE_FILENAME);
 
         setContentView(R.layout.activity_starting_);
@@ -84,7 +84,7 @@ public class StartingActivity extends AppCompatActivity {
         if (undoes == -1) {
             makeEmptyUndoToast();
         } else {
-            boardManager = new BoardManager(getNumberOfUndoes(), size, size);
+            boardManager = new SlidingTilesBoardManager(getNumberOfUndoes(), size, size);
             switchToGame();
         }
     }
@@ -212,10 +212,10 @@ public class StartingActivity extends AppCompatActivity {
     }
 
     /**
-     * Switch to the GameActivity view to play the game.
+     * Switch to the SlidingTilesActivity view to play the game.
      */
     private void switchToGame() {
-        Intent tmp = new Intent(this, GameActivity.class);
+        Intent tmp = new Intent(this, SlidingTilesActivity.class);
         saveBoardManagerToFile(StartingActivity.TEMP_SAVE_FILENAME);
         tmp.putExtra("currentUser", currentUser);
         startActivity(tmp);
@@ -241,7 +241,7 @@ public class StartingActivity extends AppCompatActivity {
             InputStream inputStream = this.openFileInput(fileName);
             if (inputStream != null) {
                 ObjectInputStream input = new ObjectInputStream(inputStream);
-                boardManager = (BoardManager) input.readObject();
+                boardManager = (SlidingTilesBoardManager) input.readObject();
                 inputStream.close();
             }
         } catch (FileNotFoundException e) {

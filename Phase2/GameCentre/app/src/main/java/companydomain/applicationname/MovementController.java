@@ -6,12 +6,12 @@ import android.widget.Toast;
 
 class MovementController {
 
-    private BoardManager boardManager = null;
+    private SlidingTilesBoardManager boardManager = null;
 
     MovementController() {
     }
 
-    void setBoardManager(BoardManager boardManager) {
+    void setBoardManager(SlidingTilesBoardManager boardManager) {
         this.boardManager = boardManager;
     }
 

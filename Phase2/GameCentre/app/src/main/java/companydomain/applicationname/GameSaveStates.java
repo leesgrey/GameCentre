@@ -26,7 +26,7 @@ class GameSaveStates implements Serializable {
     /**
      * The set of all accountInfo that have signed up for this Game Centre.
      */
-    private HashMap<String, HashMap<String, BoardManager>> gameSaveStates;
+    private HashMap<String, HashMap<String, SlidingTilesBoardManager>> gameSaveStates;
 
     /**
      * Initialize the set of GameSaveStates to an empty set.
@@ -41,7 +41,7 @@ class GameSaveStates implements Serializable {
      * @param email the email address
      */
     void addAccount(String email) {
-        this.gameSaveStates.put(email, new HashMap<String, BoardManager>());
+        this.gameSaveStates.put(email, new HashMap<String, SlidingTilesBoardManager>());
     }
 
     /**
@@ -51,7 +51,7 @@ class GameSaveStates implements Serializable {
      * @param game          the name of the game
      * @param gameSaveState the save state of the game
      */
-    void addGameSaveState(String email, String game, BoardManager gameSaveState) {
+    void addGameSaveState(String email, String game, SlidingTilesBoardManager gameSaveState) {
         if (this.gameSaveStates.containsKey(email)) {
             this.gameSaveStates.get(email).put(game, gameSaveState);
         }
@@ -79,7 +79,7 @@ class GameSaveStates implements Serializable {
      * @param game  the name of the game
      * @return the save state of the game
      */
-    BoardManager getGameSaveState(String email, String game) {
+    SlidingTilesBoardManager getGameSaveState(String email, String game) {
         return this.gameSaveStates.get(email).get(game);
     }
 
