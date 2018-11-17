@@ -33,13 +33,6 @@
             android:backgroundTint="@color/colorAccent"
             android:text="Undo" />
 
-        <Button
-            android:id="@+id/cheatButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorAccent"
-            android:text="Cheat" />
-
         <TextView
             android:id="@+id/scoreCounter"
             android:layout_width="wrap_content"
