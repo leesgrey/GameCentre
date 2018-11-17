@@ -1,7 +1,6 @@
 package companydomain.applicationname;
 
-public class MatchingBoardManager {
-
+public class MatchingBoardManager extends BoardManager {
 
     public boolean isValidTap(int position){
         return false;

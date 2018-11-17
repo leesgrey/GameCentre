@@ -170,7 +170,7 @@ public class SlidingTilesActivity extends AppCompatActivity implements Observer 
      * @param context the context
      */
     private void createTileButtons(Context context) {
-        SlidingTilesBoard board = boardManager.getBoard();
+        Board board = boardManager.getBoard();
         tileButtons = new ArrayList<>();
         for (int position = 0; position != board.numTiles(); position++) {
             Button tmp = new Button(context);
@@ -183,7 +183,7 @@ public class SlidingTilesActivity extends AppCompatActivity implements Observer 
      * Update the backgrounds on the buttons to match the tiles.
      */
     private void updateTileButtons() {
-        SlidingTilesBoard board = boardManager.getBoard();
+        Board board = boardManager.getBoard();
         //scoreCounter.setText(boardManager.getScoreCounter());
         int nextPos = 0;
         for (Button b : tileButtons) {

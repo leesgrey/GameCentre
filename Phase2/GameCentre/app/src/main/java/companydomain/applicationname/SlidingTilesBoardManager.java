@@ -10,12 +10,12 @@ import java.util.LinkedList;
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
-class SlidingTilesBoardManager implements Serializable {
+class SlidingTilesBoardManager extends BoardManager implements Serializable {
 
     /**
      * The board being managed.
      */
-    private SlidingTilesBoard board;
+    private Board board;
 
     /**
      * The number of undoes allowed for this game.
@@ -37,7 +37,7 @@ class SlidingTilesBoardManager implements Serializable {
      *
      * @param board the board
      */
-    SlidingTilesBoardManager(SlidingTilesBoard board) {
+    SlidingTilesBoardManager(Board board) {
         this(board, 3);
     }
 
@@ -47,7 +47,7 @@ class SlidingTilesBoardManager implements Serializable {
      * @param board         the board
      * @param allowedUndoes the number of allowed undoes
      */
-    private SlidingTilesBoardManager(SlidingTilesBoard board, int allowedUndoes) {
+    private SlidingTilesBoardManager(Board board, int allowedUndoes) {
         this.board = board;
         this.allowedUndoes = allowedUndoes;
         this.previousMoves = new LinkedList<>();
@@ -88,7 +88,7 @@ class SlidingTilesBoardManager implements Serializable {
         do {
             Collections.shuffle(tiles);
         } while (SlidingTilesBoardManager.isSolvable(tiles, numRows));
-        this.board = new SlidingTilesBoard(tiles, numRows, numCols);
+        this.board = new Board(tiles, numRows, numCols);
         this.allowedUndoes = allowedUndoes;
         this.previousMoves = new LinkedList<>();
     }
@@ -138,7 +138,7 @@ class SlidingTilesBoardManager implements Serializable {
      *
      * @return the current board.
      */
-    SlidingTilesBoard getBoard() {
+    Board getBoard() {
         return board;
     }
 
