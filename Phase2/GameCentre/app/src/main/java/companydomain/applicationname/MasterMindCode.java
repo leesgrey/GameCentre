@@ -58,9 +58,17 @@ class MasterMindCode {
         Arrays.sort(codeSorted);
         int[] answerCodeSorted = answerCode.clone();
         Arrays.sort(answerCodeSorted);
-        for(int i = 0; i < codeSorted.length; i++) {
-            if(codeSorted[i] == answerCodeSorted[i]) {
+        int i = 0;
+        int j = 0;
+        while(i < codeSorted.length && j < answerCodeSorted.length) {
+            if(codeSorted[i] < answerCodeSorted[j]) {
+                i++;
+            } else if(codeSorted[i] > answerCodeSorted[j]) {
+                j++;
+            } else {
                 this.correctness[1]++;
+                i++;
+                j++;
             }
         }
     }
