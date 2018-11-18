@@ -117,4 +117,13 @@ class MasterMind implements Serializable {
     boolean gameWon() {
         return this.answer.equals(this.previousGuesses.get(this.previousGuesses.size() - 1));
     }
+
+    /**
+     * Return the answer code.
+     *
+     * @return the answer code
+     */
+    int[] getAnswerCode() {
+        return this.answer.getCode();
+    }
 }
