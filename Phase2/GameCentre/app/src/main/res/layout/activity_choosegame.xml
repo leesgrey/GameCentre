@@ -79,18 +79,20 @@
                 android:text="Sliding Tiles" />
 
             <Button
-                android:id="@+id/Game2Button"
+                android:id="@+id/MatchingButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:layout_weight="1"
-                android:text="Game 2 (Coming Soon)" />
+                android:backgroundTint="@color/colorAccent"
+                android:text="Matching" />
 
             <Button
-                android:id="@+id/Game3Button"
+                android:id="@+id/MastermindButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:layout_weight="1"
-                android:text="Game 3 (Coming Soon)" />
+                android:backgroundTint="@color/colorAccent"
+                android:text="Mastermind" />
 
         </LinearLayout>
 

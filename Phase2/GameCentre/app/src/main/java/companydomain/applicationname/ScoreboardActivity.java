@@ -143,7 +143,7 @@ public class ScoreboardActivity extends AppCompatActivity {
      */
 
     private void switchToSelectGame() {
-        Intent tmp = new Intent(this, StartingActivity.class);
+        Intent tmp = new Intent(this, SlidingTilesMenuActivity.class);
         tmp.putExtra("currentUser", currentUser);
         startActivity(tmp);
     }

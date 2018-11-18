@@ -111,7 +111,7 @@ public class SlidingTilesActivity extends AppCompatActivity implements Observer 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadBoardManagerFromFile(StartingActivity.TEMP_SAVE_FILENAME);
+        loadBoardManagerFromFile(SlidingTilesMenuActivity.TEMP_SAVE_FILENAME);
         createTileButtons(this);
         setContentView(R.layout.activity_main);
         this.gameSaveStates = GameSaveStates.loadGameSaveStates(this);
@@ -222,7 +222,7 @@ public class SlidingTilesActivity extends AppCompatActivity implements Observer 
     @Override
     protected void onPause() {
         super.onPause();
-        saveBoardManagerToFile(StartingActivity.TEMP_SAVE_FILENAME);
+        saveBoardManagerToFile(SlidingTilesMenuActivity.TEMP_SAVE_FILENAME);
     }
 
     /**
@@ -270,7 +270,7 @@ public class SlidingTilesActivity extends AppCompatActivity implements Observer 
 
     @Override
     public void onBackPressed() {
-        Intent tmp = new Intent(this, StartingActivity.class);
+        Intent tmp = new Intent(this, SlidingTilesMenuActivity.class);
         tmp.putExtra("currentUser", currentUser);
         startActivity(tmp);
     }

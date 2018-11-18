@@ -44,8 +44,8 @@ public class ChooseGameActivity extends AppCompatActivity {
      */
     private void addListeners() {
         addSlidingTilesButtonListener();
-        addGame2ButtonListener();
-        addGame3ButtonListener();
+        addMatchingButtonListener();
+        addMastermindButtonListener();
         addLogoutButtonListener();
     }
 
@@ -87,9 +87,9 @@ public class ChooseGameActivity extends AppCompatActivity {
     /**
      * Activate the Game2 button.
      */
-    private void addGame2ButtonListener() {
-        Button Game2Button = findViewById(R.id.Game2Button);
-        Game2Button.setOnClickListener(new View.OnClickListener() {
+    private void addMatchingButtonListener() {
+        Button MatchingButton = findViewById(R.id.MatchingButton);
+        MatchingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switchToMatching();
@@ -100,9 +100,9 @@ public class ChooseGameActivity extends AppCompatActivity {
     /**
      * Activate the Game3 button.
      */
-    private void addGame3ButtonListener() {
-        Button Game3Button = findViewById(R.id.Game3Button);
-        Game3Button.setOnClickListener(new View.OnClickListener() {
+    private void addMastermindButtonListener() {
+        Button MastermindButton = findViewById(R.id.MastermindButton);
+        MastermindButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             }
@@ -113,7 +113,7 @@ public class ChooseGameActivity extends AppCompatActivity {
      * Go to the sliding tiles starting screen.
      */
     private void switchToSlidingTilesStarting() {
-        Intent tmp = new Intent(this, StartingActivity.class);
+        Intent tmp = new Intent(this, SlidingTilesMenuActivity.class);
         tmp.putExtra("currentUser", currentUser);
         startActivity(tmp);
     }

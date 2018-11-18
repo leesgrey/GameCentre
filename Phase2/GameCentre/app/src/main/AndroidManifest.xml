@@ -18,7 +18,7 @@
         </activity>
         <activity android:name="companydomain.applicationname.SignUpActivity"></activity>
         <activity android:name="companydomain.applicationname.SlidingTilesActivity"></activity>
-        <activity android:name="companydomain.applicationname.StartingActivity"></activity>
+        <activity android:name="companydomain.applicationname.SlidingTilesMenuActivity"></activity>
         <activity android:name="companydomain.applicationname.ChooseGameActivity"></activity>
         <activity android:name="companydomain.applicationname.ScoreboardActivity"></activity>
         <activity android:name="companydomain.applicationname.MatchingActivity"></activity>

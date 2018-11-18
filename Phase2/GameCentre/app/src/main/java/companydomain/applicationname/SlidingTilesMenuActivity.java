@@ -19,7 +19,7 @@ import java.io.ObjectOutputStream;
 /**
  * The initial activity for the sliding puzzle tile game.
  */
-public class StartingActivity extends AppCompatActivity {
+public class SlidingTilesMenuActivity extends AppCompatActivity {
 
     /**
      * A temporary save file.
@@ -57,7 +57,7 @@ public class StartingActivity extends AppCompatActivity {
         boardManager = new SlidingTilesBoardManager();
         saveBoardManagerToFile(TEMP_SAVE_FILENAME);
 
-        setContentView(R.layout.activity_starting_);
+        setContentView(R.layout.activity_slidingtilesmenu);
 
         Intent i = getIntent();
 
@@ -216,7 +216,7 @@ public class StartingActivity extends AppCompatActivity {
      */
     private void switchToGame() {
         Intent tmp = new Intent(this, SlidingTilesActivity.class);
-        saveBoardManagerToFile(StartingActivity.TEMP_SAVE_FILENAME);
+        saveBoardManagerToFile(SlidingTilesMenuActivity.TEMP_SAVE_FILENAME);
         tmp.putExtra("currentUser", currentUser);
         startActivity(tmp);
     }

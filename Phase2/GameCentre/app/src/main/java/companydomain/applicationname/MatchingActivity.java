@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MatchingActivity extends AppCompatActivity implements Observer {
     /**
@@ -25,6 +27,11 @@ public class MatchingActivity extends AppCompatActivity implements Observer {
      * Text container that shows the current score of the game
      */
     private TextView scoreCounter;
+
+    /**
+     * The username of the current user.
+     */
+    private String currentUser;
 
     /**
      * The buttons to refresh.
@@ -42,7 +49,7 @@ public class MatchingActivity extends AppCompatActivity implements Observer {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //loadBoardManagerFromFile(StartingActivity.TEMP_SAVE_FILENAME);
+        //loadBoardManagerFromFile(SlidingTilesMenuActivity.TEMP_SAVE_FILENAME);
         boardManager = new MatchingBoardManager(3,4);
         createTileButtons(this);
         setContentView(R.layout.activity_matching);
@@ -53,7 +60,7 @@ public class MatchingActivity extends AppCompatActivity implements Observer {
         Intent i = getIntent();
 
         TextView currUser = findViewById(R.id.currentuserText);
-        //currUser.setText(String.format("Player: %s", currentUser));
+        currUser.setText(String.format("Player: %s", currentUser));
 
         addView();
         establishLayout();
@@ -104,6 +111,9 @@ public class MatchingActivity extends AppCompatActivity implements Observer {
         scoreCounter.setText(scoreCounterString);
         updateTileButtons();
         gridView.setAdapter(new CustomAdapter(tileButtons, columnWidth, columnHeight));
+        if (boardManager.puzzleSolved()) {
+            endgame();
+        }
     }
 
     /**
@@ -135,6 +145,27 @@ public class MatchingActivity extends AppCompatActivity implements Observer {
             tmp.setBackgroundResource(board.getTile(position).getBackground());
             this.tileButtons.add(tmp);
         }
+    }
+
+    /**
+     * Execute processes for a game that has ended.
+     */
+    private void endgame() {
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                switchToChooseGame();
+            }
+        }, 2000);
+    }
+
+    /**
+     * Switch to the scoreboard page.
+     */
+    private void switchToChooseGame() {
+        Intent tmp = new Intent(this, ChooseGameActivity.class);
+        tmp.putExtra("currentUser", currentUser);
+        startActivity(tmp);
     }
 
     public void update(Observable o, Object arg){
