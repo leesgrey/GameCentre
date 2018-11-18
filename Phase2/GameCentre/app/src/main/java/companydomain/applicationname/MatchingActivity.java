@@ -83,7 +83,7 @@ public class MatchingActivity extends AppCompatActivity implements Observer {
         //scoreCounter.setText(boardManager.getScoreCounter());
         int nextPos = 0;
         for (Button b : tileButtons) {
-            b.setBackgroundResource(board.getTile(nextPos).getBackground());
+            b.setBackgroundResource(R.drawable.flipped);
             nextPos++;
         }
     }
