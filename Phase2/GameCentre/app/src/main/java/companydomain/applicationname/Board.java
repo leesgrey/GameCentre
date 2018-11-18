@@ -103,7 +103,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         notifyObservers();
     }
 
-    void flipCard(int position) {
+    void flipCard() {
         setChanged();
         notifyObservers();
     }

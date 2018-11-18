@@ -22,6 +22,11 @@ public class MatchingActivity extends AppCompatActivity implements Observer {
     private MatchingBoardManager boardManager;
 
     /**
+     * Text container that shows the current score of the game
+     */
+    private TextView scoreCounter;
+
+    /**
      * The buttons to refresh.
      */
     private ArrayList<Button> tileButtons;
@@ -37,17 +42,34 @@ public class MatchingActivity extends AppCompatActivity implements Observer {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //loadBoardManagerFromFile(StartingActivity.TEMP_SAVE_FILENAME);
         boardManager = new MatchingBoardManager(3,4);
         createTileButtons(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_matching);
         Toast.makeText(this, "aaaaaaaa", Toast.LENGTH_SHORT).show();
-        gridView = findViewById(R.id.grid);
-        gridView.setNumColumns(boardManager.getBoard().getNumCols());
-        gridView.setBoardManager(boardManager);
-        boardManager.getBoard().addObserver(this);
+
+        //this.gameSaveStates = GameSaveStates.loadGameSaveStates(this);
+        //this.scoreBoard = SlidingTilesScoreBoard.loadSlidingTilesScoreBoard(this);
+        Intent i = getIntent();
+
+        TextView currUser = findViewById(R.id.currentuserText);
+        //currUser.setText(String.format("Player: %s", currentUser));
+
+        addView();
         establishLayout();
     }
 
+
+    /**
+     * Adds views and button listeners to activity.
+     */
+    private void addView() {
+        gridView = findViewById(R.id.grid);
+        scoreCounter = findViewById(R.id.scoreCounter);
+        gridView.setNumColumns(boardManager.getBoard().getNumCols());
+        gridView.setBoardManager(boardManager);
+        boardManager.getBoard().addObserver(this);
+    }
     /**
      * Sets up desired dimensions and refreshes display.
      */
@@ -78,6 +100,8 @@ public class MatchingActivity extends AppCompatActivity implements Observer {
      * Also save the current game state and check for a win.
      */
     public void refresh() {
+        String scoreCounterString = Integer.toString(boardManager.getScoreCounter());
+        scoreCounter.setText(scoreCounterString);
         updateTileButtons();
         gridView.setAdapter(new CustomAdapter(tileButtons, columnWidth, columnHeight));
     }

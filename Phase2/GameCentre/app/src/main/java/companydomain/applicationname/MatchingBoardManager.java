@@ -6,10 +6,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MatchingBoardManager extends BoardManager {
 
+    /**
+     * This keeping track of the score for the game
+     */
+    private int scoreCounter = 0;
     Board board;
 
     List<Tile> unmatched;
@@ -50,14 +56,24 @@ public class MatchingBoardManager extends BoardManager {
             selected.add(this.board.getTile(position));
         }
         else{
+            this.scoreCounter += 1;
             selected.add(this.board.getTile(position));
             if(selected.get(0).getId() == selected.get(1).getId()){
                 this.unmatched.remove(selected.get(0));
                 this.unmatched.remove(selected.get(1));
                 this.selected.clear();
             }
+            else{
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        selected.clear();
+                    }
+                }, 5);
+
+            }
         }
-        this.board.flipCard(position);
+        board.flipCard();
     }
 
     /**
@@ -67,6 +83,14 @@ public class MatchingBoardManager extends BoardManager {
      */
     Board getBoard() {
         return board;
+    }
+    /**
+     * Return the current score.
+     *
+     * @return the current score
+     */
+    int getScoreCounter() {
+        return scoreCounter;
     }
 
     public boolean puzzleSolved() {
