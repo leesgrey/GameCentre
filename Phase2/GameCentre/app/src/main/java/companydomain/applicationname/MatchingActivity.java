@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -25,6 +26,11 @@ public class MatchingActivity extends AppCompatActivity implements Observer {
      */
     private ArrayList<Button> tileButtons;
 
+    /**
+     * The buttons that have already been seen.
+     */
+    private ArrayList<Button> revealedButtons;
+
     // Grid View and calculated column height and width based on device size
     private GestureDetectGridView gridView;
     private static int columnWidth, columnHeight;
@@ -38,6 +44,7 @@ public class MatchingActivity extends AppCompatActivity implements Observer {
         gridView = findViewById(R.id.grid);
         gridView.setNumColumns(boardManager.getBoard().getNumCols());
         gridView.setBoardManager(boardManager);
+        boardManager.getBoard().addObserver(this);
         establishLayout();
     }
 
@@ -80,14 +87,21 @@ public class MatchingActivity extends AppCompatActivity implements Observer {
      */
     private void updateTileButtons() {
         Board board = boardManager.getBoard();
-        //scoreCounter.setText(boardManager.getScoreCounter());
+        List<Tile> unmatched = this.boardManager.getUnmatched();
+        List<Tile> selected = this.boardManager.getSelected();
+
         int nextPos = 0;
         for (Button b : tileButtons) {
-            b.setBackgroundResource(R.drawable.flipped);
+            // if not in unmatched or selecte
+            if(!unmatched.contains(board.getTile(nextPos)) || selected.contains(board.getTile(nextPos))){
+                b.setBackgroundResource(board.getTile(nextPos).getBackground());
+            }
+            else{
+                b.setBackgroundResource(R.drawable.flipped);
+            }
             nextPos++;
         }
     }
-
 
     private void createTileButtons(Context context) {
         Board board = boardManager.getBoard();
@@ -100,6 +114,6 @@ public class MatchingActivity extends AppCompatActivity implements Observer {
     }
 
     public void update(Observable o, Object arg){
-
+        refresh();
     }
 }

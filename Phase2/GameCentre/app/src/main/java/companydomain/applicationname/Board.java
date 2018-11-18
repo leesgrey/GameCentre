@@ -30,6 +30,8 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      */
     private Tile[] tiles;
 
+    private Tile[] hiddenTiles;
+
     /**
      * A new board of tiles in row-major order.
      * Precondition: len(tiles) == numRows * numCols
@@ -97,6 +99,11 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         this.tiles[position1] = this.tiles[position2];
         this.tiles[position2] = swapping_tile;
 
+        setChanged();
+        notifyObservers();
+    }
+
+    void flipCard(int position) {
         setChanged();
         notifyObservers();
     }
