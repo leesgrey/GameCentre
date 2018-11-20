@@ -68,4 +68,36 @@ public class MasterMindTest {
         masterMind.makeGuess(masterMind.getAnswerCode());
         assertTrue(masterMind.gameWon());
     }
+
+
+    /**
+     * Test getLastNGuesses() method.
+     */
+    @Test
+    public void getLastNGuesses() {
+        setupMasterMind(4, 8, 5);
+        int[] guessCode0 = createRandomCode(4, 8);
+        int[] guessCode1 = createRandomCode(4, 8);
+        masterMind.makeGuess(guessCode0);
+        masterMind.makeGuess(guessCode1);
+        int[][] testGuesses = {guessCode1, guessCode0};
+        int[][] actualGuesses = {masterMind.getLastNGuesses(2)[0].getCode(),
+                masterMind.getLastNGuesses(2)[1].getCode()};
+
+        assertArrayEquals(testGuesses, actualGuesses);
+
+
+    }
+
+
+
+    @Test
+    public void getScore() {
+    }
+
+
+
+    @Test
+    public void getAnswerCode() {
+    }
 }
