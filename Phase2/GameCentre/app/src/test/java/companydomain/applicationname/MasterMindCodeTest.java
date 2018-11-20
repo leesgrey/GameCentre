@@ -21,7 +21,7 @@ public class MasterMindCodeTest {
 
 
     /**
-     * Initializes the MasterMinCode instances, i.e. answer, guess1, and guess2.
+     * Initializes the MasterMindCode instances, i.e. answer, guess1, and guess2.
      */
     @Before
     public void setUp(){
@@ -46,7 +46,7 @@ public class MasterMindCodeTest {
     }
 
     /**
-     * Test the getCorectness() method.
+     * Test the getCorrectness() method.
      */
     @Test
     public void getCorrectness() {
