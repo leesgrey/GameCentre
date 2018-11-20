@@ -2,7 +2,6 @@ package companydomain.applicationname;
 
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.Collections;
 
 /**
  * A MasterMind code combination.
@@ -95,7 +94,7 @@ class MasterMindCode implements Serializable {
     @Override
     public boolean equals(Object o) {
         if(o instanceof MasterMindCode) {
-            return (((MasterMindCode) o).getCode() == this.code);
+            return (Arrays.equals(((MasterMindCode) o).getCode(), this.code));
         }
         return false;
     }
