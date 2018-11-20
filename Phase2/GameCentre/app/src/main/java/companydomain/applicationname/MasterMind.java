@@ -131,4 +131,14 @@ class MasterMind implements Serializable {
     int[] getAnswerCode() {
         return this.answer.getCode();
     }
+
+
+    /**
+     * Set the answer code.
+     *
+     */
+    void setAnswerCode(MasterMindCode answerCode)
+    {
+        this.answer = answerCode;
+    }
 }
