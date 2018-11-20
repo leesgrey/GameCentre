@@ -31,11 +31,11 @@ public class MasterMindCodeTest {
     @Test
     public void equalsTest() {
         setUp();
-        assertTrue(answer.equals(new MasterMindCode(new int[] {1, 1, 4, 5, 5, 6})));
-        assertTrue(guess1.equals(new MasterMindCode(new int[] {1, 1, 1, 1, 1, 1})));
-        assertTrue(guess2.equals(new MasterMindCode(new int[] {4, 1, 3, 2, 3, 5}, answer)));
-        assertFalse(answer.equals(guess1));
-        assertFalse(answer.equals(guess2));
-        assertFalse(guess1.equals(guess2));
+        assertEquals(answer,new MasterMindCode(new int[] {4, 1, 1, 6, 5, 5}));
+        assertEquals(guess1, new MasterMindCode(new int[] {1, 1, 1, 1, 1, 1}));
+        assertEquals(guess2, new MasterMindCode(new int[] {3, 1, 4, 5, 3, 2}, answer));
+        assertNotEquals(answer, guess1);
+        assertNotEquals(answer, guess2);
+        assertNotEquals(guess1, guess2);
     }
 }
