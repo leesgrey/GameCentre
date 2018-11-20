@@ -16,7 +16,7 @@ class MasterMind implements Serializable {
     private MasterMindCode answer;
 
     /**
-     * Keep track of previous guesses. The first element is the oldest guess on record.
+     * Keep track of previous guesses. The first element is the newest guess on record.
      */
     private ArrayList<MasterMindCode> previousGuesses;
 
@@ -79,17 +79,17 @@ class MasterMind implements Serializable {
      */
     void makeGuess(int[] guessCode) {
         MasterMindCode guess = new MasterMindCode(guessCode, this.answer);
-        this.previousGuesses.add(guess);
-        this.previousGuesses.remove(0);
+        this.previousGuesses.add(0, guess);
+        this.previousGuesses.remove(this.previousGuesses.size() - 1);
     }
 
     /**
-     * Return an ArrayList of arrays of ints representing the last n guesses.
+     * Return an ArrayList of arrays of ints representing the last n guesses, from newest to oldest.
      *
      * Precondition: n <= this.numPreviousGuesses
      *
      * @param n the number of previous guesses wanted
-     * @return an array of MasterMindCodes representing the last n guesses
+     * @return an array of MasterMindCodes representing the last n guesses, from newest to oldest
      * (guesses filled with zeroes are default values when not enough guesses have been made)
      */
     MasterMindCode[] getLastNGuesses(int n) {
