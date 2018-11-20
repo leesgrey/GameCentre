@@ -81,10 +81,7 @@ class MasterMind implements Serializable {
         MasterMindCode guess = new MasterMindCode(guessCode, this.answer);
         this.previousGuesses.add(0, guess);
         this.previousGuesses.remove(this.previousGuesses.size() - 1);
-        if(guess.equals(this.answer))
-        {
-            this.scoreCounter++;
-        }
+        this.scoreCounter++;
     }
 
     /**
