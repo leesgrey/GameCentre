@@ -46,7 +46,7 @@ public class MasterMindCodeTest {
     }
 
     /**
-     * Test the getCorectness() method.
+     * Test the getCorrectness() method.
      */
     @Test
     public void getCorrectness() {
