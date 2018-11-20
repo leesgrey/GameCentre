@@ -74,7 +74,7 @@ public class MasterMindTest {
      * Test getLastNGuesses() method.
      */
     @Test
-    public void getLastNGuesses() {
+    public void getLastNGuessesTest() {
         setupMasterMind(4, 8, 5);
         int[] guessCode0 = createRandomCode(4, 8);
         int[] guessCode1 = createRandomCode(4, 8);
@@ -90,14 +90,26 @@ public class MasterMindTest {
     }
 
 
+    /**
+     * Test getScore() method.
+     */
 
     @Test
-    public void getScore() {
+    public void getScoreTest() {
+        setupMasterMind(4, 8, 5);
+        masterMind.makeGuess(masterMind.getAnswerCode());
+        assertEquals(1, masterMind.getScore());
     }
 
-
+    /**
+     * Test getAnswerCode() method.
+     */
 
     @Test
-    public void getAnswerCode() {
+    public void getAnswerCodeTest() {
+        setupMasterMind(4, 8, 5);
+        masterMind.setAnswerCode(new MasterMindCode(new int[]{1, 2, 3}));
+        assertArrayEquals(new int[]{1, 2, 3}, masterMind.getAnswerCode());
+
     }
 }
