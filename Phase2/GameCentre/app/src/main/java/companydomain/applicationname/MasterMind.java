@@ -30,6 +30,7 @@ class MasterMind implements Serializable {
      * and a score of 0.
      *
      * Precondition: numColours >= numSlots
+     * Precondition: numPreviousGuesses > 0
      *
      * @param numSlots the number of slots in the answer
      * @param numColours the number of "colours" that could be in each slot

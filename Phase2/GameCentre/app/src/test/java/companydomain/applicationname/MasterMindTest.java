@@ -7,56 +7,65 @@ import java.util.Random;
 import static org.junit.Assert.*;
 
 public class MasterMindTest {
-    /** The mastermind manager for testing. */
-    MasterMind mastermind;
 
+    /**
+     * The masterMind manager for testing.
+     */
+    private MasterMind masterMind;
 
-    /** Returns a random code for a game with 4 slots and 8 colours.*/
-    private int[] createCode() {
+    /**
+     * Returns a random code for a game with numSlots slots and numColours colours.
+     *
+     * @param numSlots the number of slots in the code
+     * @param numColours the number of possible colours in each slot
+     * @return a random code for a game with numSlots slots and numColours colours
+     */
+    private int[] createRandomCode(int numSlots, int numColours) {
         Random randomIntGenerator = new Random();
-        int[] randomCode = new int[4];
-        for(int i = 0; i < 4; i++) {
-            randomCode[i] = randomIntGenerator.nextInt(8) + 1;
+        int[] code = new int[numSlots];
+        for(int i = 0; i < numSlots; i++) {
+            code[i] = randomIntGenerator.nextInt(numColours) + 1;
         }
-        return randomCode;
+        return code;
     }
 
 
-    /** Setup mastermind manager with 4 slots, 8 colours, and 0 guesses. */
-    private void setupMastermind()
-    {this.mastermind = new MasterMind(4,8,0);
-
+    /**
+     * Initialize the MasterMind instance.
+     *
+     * @param numSlots the number of slots in the code
+     * @param numColours the number of possible colours in each slot
+     * @param numPreviousGuesses the number of guesses that should be stored
+     */
+    private void setupMasterMind(int numSlots, int numColours, int numPreviousGuesses) {
+        this.masterMind = new MasterMind(numSlots, numColours, numPreviousGuesses);
     }
 
-
+    /**
+     * Test that makeGuess correctly stores guesses.
+     */
     @Test
-    public void testMakeGuess() {
-        setupMastermind();
-        int[] guess = createCode();
-        mastermind.makeGuess(guess);
-        int[] guessedCode =  mastermind.getLastNGuesses(1)[0].getCode();
-        assertArrayEquals(guess, guessedCode);
+    public void makeGuessTest() {
+        setupMasterMind(4, 8, 5);
+        int[] guessCode0 = createRandomCode(4, 8);
+        int[] guessCode1 = createRandomCode(4, 8);
+        int[] emptyGuess = new int[4];
+        masterMind.makeGuess(guessCode0);
+        masterMind.makeGuess(guessCode1);
+        MasterMindCode[] lastGuessedCodes = masterMind.getLastNGuesses(3);
+        assertArrayEquals(guessCode0, lastGuessedCodes[2].getCode());
+        assertArrayEquals(guessCode1, lastGuessedCodes[1].getCode());
+        assertArrayEquals(emptyGuess, lastGuessedCodes[0].getCode());
     }
 
+    /**
+     * Test gameWon.
+     */
     @Test
-    public void testgetLastNGuesses() {
-        setupMastermind();
-        int[] guesscode1 = createCode();
-        int[] guesscode2 = createCode();
-        mastermind.makeGuess(guesscode1);
-        mastermind.makeGuess(guesscode2);
-        int[] lastGuessedCode =  mastermind.getLastNGuesses(1)[1].getCode();
-        assertArrayEquals(guesscode2, lastGuessedCode);
-        int[] secondLastGuessedCode =  mastermind.getLastNGuesses(1)[0].getCode();
-        assertArrayEquals(guesscode1, secondLastGuessedCode);
-
-    }
-
-
-    @Test
-    public void testgameWon() {
-        // TODO: might have to change the scope of mastermind's answer instance.
-        setupMastermind();
-
+    public void gameWonTest() {
+        setupMasterMind(4, 8, 5);
+        assertFalse(masterMind.gameWon());
+        masterMind.makeGuess(masterMind.getAnswerCode());
+        assertTrue(masterMind.gameWon());
     }
 }
