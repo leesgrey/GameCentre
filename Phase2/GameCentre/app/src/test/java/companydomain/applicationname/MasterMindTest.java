@@ -53,9 +53,9 @@ public class MasterMindTest {
         masterMind.makeGuess(guessCode0);
         masterMind.makeGuess(guessCode1);
         MasterMindCode[] lastGuessedCodes = masterMind.getLastNGuesses(3);
-        assertArrayEquals(guessCode0, lastGuessedCodes[2].getCode());
-        assertArrayEquals(guessCode1, lastGuessedCodes[1].getCode());
-        assertArrayEquals(emptyGuess, lastGuessedCodes[0].getCode());
+        assertArrayEquals(guessCode1, lastGuessedCodes[0].getCode());
+        assertArrayEquals(guessCode0, lastGuessedCodes[1].getCode());
+        assertArrayEquals(emptyGuess, lastGuessedCodes[2].getCode());
     }
 
     /**
