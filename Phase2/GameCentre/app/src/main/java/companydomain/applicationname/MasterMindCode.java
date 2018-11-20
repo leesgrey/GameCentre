@@ -1,12 +1,13 @@
 package companydomain.applicationname;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 
 /**
  * A MasterMind code combination.
  */
-class MasterMindCode {
+class MasterMindCode implements Serializable {
 
     /**
      * The code combination. All zeroes if it's an empty guess, no zeroes otherwise.
