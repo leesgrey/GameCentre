@@ -36,7 +36,7 @@ public class MasterMindCodeTest {
      */
 
     @Test
-    public void getCode() {
+    public void getCodeTest() {
         setUp();
         assertArrayEquals(new int[] {4, 1, 1, 6, 5, 5}, answer.getCode());
         assertArrayEquals(new int[] {1, 1, 1, 1, 1, 1}, guess1.getCode());
@@ -49,7 +49,7 @@ public class MasterMindCodeTest {
      * Test the getCorrectness() method.
      */
     @Test
-    public void getCorrectness() {
+    public void getCorrectnessTest() {
         setUp();
         assertArrayEquals(new int[] {6, 0}, answer.getCorrectness());
         assertArrayEquals(new int[] {2, 0}, guess1.getCorrectness());
@@ -63,7 +63,7 @@ public class MasterMindCodeTest {
      */
 
     @Test
-    public void equals() {
+    public void equalsTest() {
         setUp();
         assertEquals(answer,new MasterMindCode(new int[] {4, 1, 1, 6, 5, 5}));
         assertEquals(guess1, new MasterMindCode(new int[] {1, 1, 1, 1, 1, 1}));
