@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/currentuserText"
-        android:layout_width="wrap_content"
+        android:layout_width="316dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -17,17 +17,17 @@
         android:text="TextView"
         android:textAlignment="textEnd" />
 
-    <TextView
-        android:id="@+id/textView3"
+    <ImageView
+        android:id="@+id/imageView8"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="156dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="97dp"
-        android:layout_marginEnd="174dp"
-        android:text="matching" />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="54dp"
+        android:layout_marginEnd="15dp"
+        app:srcCompat="@drawable/matching" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -60,29 +60,21 @@
             android:text="Create new game:"
             android:textAlignment="center" />
 
-        <EditText
-            android:id="@+id/numUndoInput"
-            android:layout_width="149dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Number of undos"
-            android:inputType="number" />
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/startThree"
+                android:id="@+id/startTwelve"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorAccent"
-                android:text="3x3" />
+                android:text="3x4" />
 
             <Button
-                android:id="@+id/startFour"
+                android:id="@+id/startSixteen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/GameText"
@@ -92,12 +84,12 @@
                 android:textAlignment="center" />
 
             <Button
-                android:id="@+id/startFive"
+                android:id="@+id/startTwenty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorAccent"
-                android:text="5x5" />
+                android:text="4x5" />
 
         </LinearLayout>
 
@@ -111,7 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/GameText"
-            android:layout_toStartOf="@+id/startFour"
+            android:layout_toStartOf="@+id/startSixteen"
             android:backgroundTint="@color/colorAccent"
             android:text="Load Saved Game" />
 

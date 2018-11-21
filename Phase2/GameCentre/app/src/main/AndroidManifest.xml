@@ -22,6 +22,7 @@
         <activity android:name="companydomain.applicationname.ChooseGameActivity"></activity>
         <activity android:name="companydomain.applicationname.ScoreboardActivity"></activity>
         <activity android:name="companydomain.applicationname.MatchingActivity"></activity>
+        <activity android:name="companydomain.applicationname.MatchingMenuActivity"></activity>
     </application>
 
 </manifest>
