@@ -34,34 +34,10 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     /**
-     * Make a popup saying to enter email/password.
+     * Make a long toast with a custom message.
      */
-    private void makeEmptyToast() {
-        Toast.makeText(this, "Please enter an email and password.",
-                Toast.LENGTH_LONG).show();
-    }
-
-    /**
-     * Make a popup saying the passwords don't match.
-     */
-    private void makeMatchingToast() {
-        Toast.makeText(this, "Passwords do not match, please try again.",
-                Toast.LENGTH_LONG).show();
-    }
-
-    /**
-     * Make a popup saying the account already exists.
-     */
-    private void makeExistToast() {
-        Toast.makeText(this, "Account exists already",
-                Toast.LENGTH_LONG).show();
-    }
-
-    /**
-     * Make a popup saying an account was create.
-     */
-    private void createdAccountToast() {
-        Toast.makeText(this, "Successfully created account, please log in.",
+    private void createToast(String message) {
+        Toast.makeText(this, message,
                 Toast.LENGTH_LONG).show();
     }
 
@@ -82,21 +58,20 @@ public class SignUpActivity extends AppCompatActivity {
                 String repassword = repasswordInput.getText().toString();
 
                 if (email.equals("") || password.equals("") || repassword.equals("")) {
-                    makeEmptyToast();
+                    createToast("Please enter an email and password.");
                 } else if (!password.equals(repassword)) {
-                    makeMatchingToast();
+                    createToast("Passwords do not match, please try again.");
                     passwordInput.getText().clear();
                     repasswordInput.getText().clear();
                 } else if (accountInfo.accountExists(email)) {
-                    makeExistToast();
+                    createToast("Account exists already");
                     emailInput.getText().clear();
                 } else {
-                    createdAccountToast();
+                    createToast("Successfully created account, please log in.");
                     accountInfo.addAccount(email, password);
                     AccountInfo.writeAccountInfo(accountInfo, activity);
                     gameSaveStates.addAccount(email);
                     GameSaveStates.writeGameSaveStates(gameSaveStates, activity);
-                    createdAccountToast();
                     switchToSignIn();
                 }
             }

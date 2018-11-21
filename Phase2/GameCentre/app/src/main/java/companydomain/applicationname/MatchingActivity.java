@@ -53,11 +53,13 @@ public class MatchingActivity extends AppCompatActivity implements Observer {
         boardManager = new MatchingBoardManager(3,4);
         createTileButtons(this);
         setContentView(R.layout.activity_matching);
-        Toast.makeText(this, "aaaaaaaa", Toast.LENGTH_SHORT).show();
 
         //this.gameSaveStates = GameSaveStates.loadGameSaveStates(this);
         //this.scoreBoard = SlidingTilesScoreBoard.loadSlidingTilesScoreBoard(this);
+
         Intent i = getIntent();
+
+        this.currentUser = i.getStringExtra("currentUser");
 
         TextView currUser = findViewById(R.id.currentuserText);
         currUser.setText(String.format("Player: %s", currentUser));
