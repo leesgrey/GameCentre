@@ -30,8 +30,6 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      */
     private Tile[] tiles;
 
-    private Tile[] hiddenTiles;
-
     /**
      * A new board of tiles in row-major order.
      * Precondition: len(tiles) == numRows * numCols
@@ -103,6 +101,10 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         notifyObservers();
     }
 
+
+    /**
+     * Notifies the activity that a card has been flipped.
+     */
     void flipCard() {
         setChanged();
         notifyObservers();
@@ -125,7 +127,6 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         return new BoardIterator();
     }
 
-    // TODO: why do we have this
     /**
      * Returns an int indicating the size of the Sliding Tile board.
      *

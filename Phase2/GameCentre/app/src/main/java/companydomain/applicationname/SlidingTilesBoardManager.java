@@ -33,15 +33,6 @@ class SlidingTilesBoardManager extends BoardManager implements Serializable {
     private LinkedList<Integer> previousMoves;
 
     /**
-     * Manage a board that has been pre-populated, with a default number of allowed undoes.
-     *
-     * @param board the board
-     */
-    SlidingTilesBoardManager(Board board) {
-        this(board, 3);
-    }
-
-    /**
      * Manage a board that has been pre-populated, with a given number of allowed undoes.
      *
      * @param board         the board
