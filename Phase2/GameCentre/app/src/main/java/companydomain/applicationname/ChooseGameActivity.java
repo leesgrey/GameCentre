@@ -1,5 +1,6 @@
 package companydomain.applicationname;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -66,7 +67,7 @@ public class ChooseGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 makeLogoutToast();
-                switchToSignIn();
+                switchToActivity(SignInActivity.class);
             }
         });
     }
@@ -79,7 +80,7 @@ public class ChooseGameActivity extends AppCompatActivity {
         SlidingTilesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToSlidingTilesStarting();
+                switchToActivity(SlidingTilesMenuActivity.class);
             }
         });
     }
@@ -92,7 +93,7 @@ public class ChooseGameActivity extends AppCompatActivity {
         MatchingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToMatching();
+                switchToActivity(MatchingMenuActivity.class);
             }
         });
     }
@@ -110,28 +111,11 @@ public class ChooseGameActivity extends AppCompatActivity {
     }
 
     /**
-     * Go to the sliding tiles starting screen.
+     * Change to the provided activity.
      */
-    private void switchToSlidingTilesStarting() {
-        Intent tmp = new Intent(this, SlidingTilesMenuActivity.class);
+    private void switchToActivity(Class<? extends Activity> next) {
+        Intent tmp = new Intent(this, next);
         tmp.putExtra("currentUser", currentUser);
-        startActivity(tmp);
-    }
-
-    /**
-     * Go to the sliding tiles starting screen.
-     */
-    private void switchToMatching() {
-        Intent tmp = new Intent(this, MatchingActivity.class);
-        tmp.putExtra("currentUser", currentUser);
-        startActivity(tmp);
-    }
-
-    /**
-     * Go to the sign in page.
-     */
-    private void switchToSignIn() {
-        Intent tmp = new Intent(this, SignInActivity.class);
         startActivity(tmp);
     }
 

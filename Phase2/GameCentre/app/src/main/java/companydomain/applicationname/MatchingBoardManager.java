@@ -21,6 +21,10 @@ public class MatchingBoardManager extends BoardManager {
     List<Tile> unmatched;
     List<Tile> selected;
 
+    MatchingBoardManager() {
+        this(3, 4);
+    }
+
     MatchingBoardManager(int numRows, int numCols) {
         List<Tile> tiles = new ArrayList<>();
         selected = new ArrayList<>();
@@ -95,5 +99,9 @@ public class MatchingBoardManager extends BoardManager {
 
     public boolean puzzleSolved() {
         return unmatched.isEmpty();
+    }
+
+    int getSize() {
+        return board.getSize();
     }
 }

@@ -107,7 +107,7 @@ public class SlidingTilesMenuActivity extends AppCompatActivity {
      * Activate the button that starts a 4x4 game.
      */
     private void addStartFourListener() {
-        Button startButton = findViewById(R.id.startFour);
+        Button startButton = findViewById(R.id.startSixteen);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,7 +172,7 @@ public class SlidingTilesMenuActivity extends AppCompatActivity {
                         "slidingTiles")) {
                     makeLoadFailToast();
                 } else {
-                    boardManager = gameSaveStates.getGameSaveState(currentUser,
+                    boardManager = (SlidingTilesBoardManager) gameSaveStates.getGameSaveState(currentUser,
                             "slidingTiles");
                     makeToastLoadedText();
                     switchToGame();

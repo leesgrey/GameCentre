@@ -62,6 +62,25 @@ public class SlidingTilesActivity extends AppCompatActivity implements Observer 
     private GestureDetectGridView gridView;
     private static int columnWidth, columnHeight;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        loadBoardManagerFromFile(SlidingTilesMenuActivity.TEMP_SAVE_FILENAME);
+        createTileButtons(this);
+        setContentView(R.layout.activity_main);
+        this.gameSaveStates = GameSaveStates.loadGameSaveStates(this);
+        this.scoreBoard = SlidingTilesScoreBoard.loadSlidingTilesScoreBoard(this);
+        Intent i = getIntent();
+
+        this.currentUser = i.getStringExtra("currentUser");
+
+        TextView currUser = findViewById(R.id.currentuserText);
+        currUser.setText(String.format("Player: %s", currentUser));
+
+        addView();
+        establishLayout();
+    }
+
     /**
      * Set up the background image for each button based on the master list
      * of positions, and then call the adapter to set the view.
@@ -71,7 +90,6 @@ public class SlidingTilesActivity extends AppCompatActivity implements Observer 
         updateTileButtons();
         String scoreCounterString = Integer.toString(boardManager.getScoreCounter());
         scoreCounter.setText(scoreCounterString);
-        gameSaveStates.addGameSaveState(currentUser, "slidingTiles", this.boardManager);
         GameSaveStates.writeGameSaveStates(gameSaveStates, this);
         gridView.setAdapter(new CustomAdapter(tileButtons, columnWidth, columnHeight));
         if (boardManager.puzzleSolved()) {
@@ -106,25 +124,6 @@ public class SlidingTilesActivity extends AppCompatActivity implements Observer 
         Intent tmp = new Intent(this, ScoreboardActivity.class);
         tmp.putExtra("currentUser", currentUser);
         startActivity(tmp);
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        loadBoardManagerFromFile(SlidingTilesMenuActivity.TEMP_SAVE_FILENAME);
-        createTileButtons(this);
-        setContentView(R.layout.activity_main);
-        this.gameSaveStates = GameSaveStates.loadGameSaveStates(this);
-        this.scoreBoard = SlidingTilesScoreBoard.loadSlidingTilesScoreBoard(this);
-        Intent i = getIntent();
-
-        this.currentUser = i.getStringExtra("currentUser");
-
-        TextView currUser = findViewById(R.id.currentuserText);
-        currUser.setText(String.format("Player: %s", currentUser));
-
-        addView();
-        establishLayout();
     }
 
     /**
