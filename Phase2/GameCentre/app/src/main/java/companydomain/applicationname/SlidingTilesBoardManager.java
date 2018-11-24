@@ -13,38 +13,15 @@ import java.util.LinkedList;
 class SlidingTilesBoardManager extends BoardManager implements Serializable {
 
     /**
-     * The board being managed.
-     */
-    private Board board;
-
-    /**
      * The number of undoes allowed for this game.
      */
     private int allowedUndoes;
-
-    /**
-     * This keeping track of the score for the game
-     */
-    private int scoreCounter = 0;
 
     /**
      * The last allowedUndoes moves, represented by the position of the blank tile.
      */
     private LinkedList<Integer> previousMoves;
 
-    /**
-     * Manage a board that has been pre-populated, with a given number of allowed undoes.
-     *
-     * @param board         the board
-     * @param allowedUndoes the number of allowed undoes
-     */
-    private SlidingTilesBoardManager(Board board, int allowedUndoes) {
-        this.board = board;
-        this.allowedUndoes = allowedUndoes;
-        this.previousMoves = new LinkedList<>();
-    }
-
-    // TODO: we should get rid of this
     /**
      * Manage a new shuffled board, with a default size and number of allowed undoes.
      */
@@ -125,15 +102,6 @@ class SlidingTilesBoardManager extends BoardManager implements Serializable {
     }
 
     /**
-     * Return the current board.
-     *
-     * @return the current board.
-     */
-    Board getBoard() {
-        return board;
-    }
-
-    /**
      * Return whether the tiles are in row-major order.
      *
      * @return true iff the tiles are in row-major order.
@@ -199,22 +167,5 @@ class SlidingTilesBoardManager extends BoardManager implements Serializable {
         this.touchMove(this.previousMoves.removeLast());
         this.previousMoves.removeLast();
         return true;
-    }
-    /**
-     * Return the current score.
-     *
-     * @return the current score
-     */
-    int getScoreCounter() {
-        return scoreCounter;
-    }
-
-    /**
-     * Return the size of the current SlidingTiles game.
-     *
-     * @return the size of the current SlidingTiles game.
-     */
-    int getSize() {
-        return board.getSize();
     }
 }

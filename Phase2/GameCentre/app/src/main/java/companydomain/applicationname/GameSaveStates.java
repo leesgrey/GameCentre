@@ -150,5 +150,4 @@ class GameSaveStates implements Serializable {
         }
         return GameSaveStates.createGameSaveStates(gameSaveStates, activity);
     }
-
 }

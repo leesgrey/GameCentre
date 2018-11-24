@@ -8,17 +8,6 @@ import java.util.TimerTask;
 
 
 public class MatchingBoardManager extends BoardManager {
-
-    /**
-     * The score for the game.
-     */
-    private int scoreCounter = 0;
-
-    /**
-     * The board being managed.
-     */
-    Board board;
-
     /**
      * The list of unmatched tiles.
      */
@@ -118,38 +107,11 @@ public class MatchingBoardManager extends BoardManager {
     }
 
     /**
-     * Return the current board.
-     *
-     * @return the current board.
-     */
-    Board getBoard() {
-        return board;
-    }
-
-    /**
-     * Return the current score.
-     *
-     * @return the current score
-     */
-    int getScoreCounter() {
-        return scoreCounter;
-    }
-
-    /**
      * Return whether every tile is flipped over.
      *
      * @return whether every tile is flipped over.
      */
     public boolean puzzleSolved() {
         return unmatched.isEmpty();
-    }
-
-    /**
-     * Return the size of the current Matching game.
-     *
-     * @return the size of the current Matching game.
-     */
-    int getSize() {
-        return board.getSize();
     }
 }

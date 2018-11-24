@@ -16,14 +16,9 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
 
     // TODO: collapse these two variables
     /**
-     * The number of rows.
+     * The number of rows and the number .
      */
-    private int numRows;
-
-    /**
-     * The number of columns.
-     */
-    private int numCols;
+    private int numRows, numCols;
 
     /**
      * The tiles on the board in row-major order.
@@ -100,7 +95,6 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         setChanged();
         notifyObservers();
     }
-
 
     /**
      * Notifies the activity that a card has been flipped.
