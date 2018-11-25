@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 /**
- * A MasterMind code combination.
+ * A MasterMindManager code combination.
  */
-class MasterMindCode implements Serializable {
+class MasterMindCombination implements Serializable {
 
     /**
      * The code combination. All zeroes if it's an empty guess, no zeroes otherwise.
@@ -20,23 +20,23 @@ class MasterMindCode implements Serializable {
     private int[] correctness;
 
     /**
-     * Initialize an answer MasterMindCode.
+     * Initialize an answer MasterMindCombination.
      *
      * @param code the code combination
      */
-    MasterMindCode(int[] code) {
+    MasterMindCombination(int[] code) {
         this.code = code;
         this.correctness = new int[2];
         this.correctness[0] = code.length;
     }
 
     /**
-     * Initialize a MasterMindCode guess, and compare it to the answer code.
+     * Initialize a MasterMindCombination guess, and compare it to the answer code.
      *
      * @param code the code combination
-     * @param answer the answer MasterMindCode
+     * @param answer the answer MasterMindCombination
      */
-    MasterMindCode(int[] code, MasterMindCode answer) {
+    MasterMindCombination(int[] code, MasterMindCombination answer) {
         this.code = code;
         this.initializeCorrectness(answer.getCode());
     }
@@ -93,8 +93,8 @@ class MasterMindCode implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if(o instanceof MasterMindCode) {
-            return (Arrays.equals(((MasterMindCode) o).getCode(), this.code));
+        if(o instanceof MasterMindCombination) {
+            return (Arrays.equals(((MasterMindCombination) o).getCode(), this.code));
         }
         return false;
     }

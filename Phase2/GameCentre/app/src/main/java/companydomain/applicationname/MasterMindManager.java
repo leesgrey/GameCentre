@@ -6,21 +6,21 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Manage game of MasterMind, including managing the previous guesses, making guesses,
+ * Manage game of MasterMindManager, including managing the previous guesses, making guesses,
  * keeping track of score, and checking if the game has been won.
  */
-class MasterMind implements Serializable {
+class MasterMindManager implements Serializable {
 
     /**
      * Answer key.
      */
-    private MasterMindCode answer;
+    private MasterMindCombination answer;
 
     /**
      * Keep track of a set number of previous guesses.
      * The first element is the newest guess on record.
      */
-    private List<MasterMindCode> previousGuesses;
+    private List<MasterMindCombination> previousGuesses;
 
     /**
      * The current score for the game.
@@ -28,7 +28,7 @@ class MasterMind implements Serializable {
     private int scoreCounter;
 
     /**
-     * Initialize the MasterMind game with a random answer, an empty previousGuesses list,
+     * Initialize the MasterMindManager game with a random answer, an empty previousGuesses list,
      * and a score of 0.
      *
      * Precondition: numColours >= numSlots
@@ -38,7 +38,7 @@ class MasterMind implements Serializable {
      * @param numColours the number of "colours" that could be in each slot
      * @param numPreviousGuesses the number of previous guesses to keep track of
      */
-    MasterMind(int numSlots, int numColours, int numPreviousGuesses) {
+    MasterMindManager(int numSlots, int numColours, int numPreviousGuesses) {
         this.createAnswer(numSlots, numColours);
         this.createEmptyPreviousGuesses(numSlots, numPreviousGuesses);
         this.scoreCounter = 0;
@@ -55,7 +55,7 @@ class MasterMind implements Serializable {
         for(int i = 0; i < numSlots; i++) {
             answerCode[i] = randomIntGenerator.nextInt(numColours) + 1;
         }
-        this.answer = new MasterMindCode(answerCode);
+        this.answer = new MasterMindCombination(answerCode);
     }
 
     /**
@@ -66,7 +66,7 @@ class MasterMind implements Serializable {
     private void createEmptyPreviousGuesses(int numSlots, int numPreviousGuesses) {
         this.previousGuesses = new ArrayList<>();
         int[] emptyGuessCode = new int[numSlots];
-        MasterMindCode emptyGuess = new MasterMindCode(emptyGuessCode, this.answer);
+        MasterMindCombination emptyGuess = new MasterMindCombination(emptyGuessCode, this.answer);
         for(int i = 0; i < numPreviousGuesses; i++) {
             this.previousGuesses.add(emptyGuess);
         }
@@ -80,7 +80,7 @@ class MasterMind implements Serializable {
      * @param guessCode the integers guessed
      */
     void makeGuess(int[] guessCode) {
-        MasterMindCode guess = new MasterMindCode(guessCode, this.answer);
+        MasterMindCombination guess = new MasterMindCombination(guessCode, this.answer);
         this.previousGuesses.add(0, guess);
         this.previousGuesses.remove(this.previousGuesses.size() - 1);
         this.scoreCounter++;
@@ -95,8 +95,8 @@ class MasterMind implements Serializable {
      * @return an array of MasterMindCodes representing the last n guesses, from newest to oldest
      * (guesses filled with zeroes are default values when not enough guesses have been made)
      */
-    MasterMindCode[] getLastNGuesses(int n) {
-        MasterMindCode[] lastNGuesses = new MasterMindCode[n];
+    MasterMindCombination[] getLastNGuesses(int n) {
+        MasterMindCombination[] lastNGuesses = new MasterMindCombination[n];
         for(int i = 0; i < n; i++) {
             lastNGuesses[i] = this.previousGuesses.get(i);
         }
@@ -137,7 +137,7 @@ class MasterMind implements Serializable {
      *
      * @param answerCode the answer code to be set
      */
-    void setAnswerCode(MasterMindCode answerCode)
+    void setAnswerCode(MasterMindCombination answerCode)
     {
         this.answer = answerCode;
     }
@@ -147,6 +147,6 @@ class MasterMind implements Serializable {
      */
     void undoGuess() {
         this.previousGuesses.remove(0);
-        this.previousGuesses.add(new MasterMindCode(new int[this.getAnswerCode().length], this.answer));
+        this.previousGuesses.add(new MasterMindCombination(new int[this.getAnswerCode().length], this.answer));
     }
 }

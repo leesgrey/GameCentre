@@ -6,12 +6,12 @@ import java.util.Random;
 
 import static org.junit.Assert.*;
 
-public class MasterMindTest {
+public class MasterMindManagerTest {
 
     /**
-     * The masterMind manager for testing.
+     * The masterMindManager manager for testing.
      */
-    private MasterMind masterMind;
+    private MasterMindManager masterMindManager;
 
     /**
      * Returns a random code for a game with numSlots slots and numColours colours.
@@ -31,14 +31,14 @@ public class MasterMindTest {
 
 
     /**
-     * Initialize the MasterMind instance.
+     * Initialize the MasterMindManager instance.
      *
      * @param numSlots the number of slots in the code
      * @param numColours the number of possible colours in each slot
      * @param numPreviousGuesses the number of guesses that should be stored
      */
     private void setupMasterMind(int numSlots, int numColours, int numPreviousGuesses) {
-        this.masterMind = new MasterMind(numSlots, numColours, numPreviousGuesses);
+        this.masterMindManager = new MasterMindManager(numSlots, numColours, numPreviousGuesses);
     }
 
     /**
@@ -50,9 +50,9 @@ public class MasterMindTest {
         int[] guessCode0 = createRandomCode(4, 8);
         int[] guessCode1 = createRandomCode(4, 8);
         int[] emptyGuess = new int[4];
-        masterMind.makeGuess(guessCode0);
-        masterMind.makeGuess(guessCode1);
-        MasterMindCode[] lastGuessedCodes = masterMind.getLastNGuesses(3);
+        masterMindManager.makeGuess(guessCode0);
+        masterMindManager.makeGuess(guessCode1);
+        MasterMindCombination[] lastGuessedCodes = masterMindManager.getLastNGuesses(3);
         assertArrayEquals(guessCode1, lastGuessedCodes[0].getCode());
         assertArrayEquals(guessCode0, lastGuessedCodes[1].getCode());
         assertArrayEquals(emptyGuess, lastGuessedCodes[2].getCode());
@@ -64,9 +64,9 @@ public class MasterMindTest {
     @Test
     public void gameWonTest() {
         setupMasterMind(4, 8, 5);
-        assertFalse(masterMind.gameWon());
-        masterMind.makeGuess(masterMind.getAnswerCode());
-        assertTrue(masterMind.gameWon());
+        assertFalse(masterMindManager.gameWon());
+        masterMindManager.makeGuess(masterMindManager.getAnswerCode());
+        assertTrue(masterMindManager.gameWon());
     }
 
 
@@ -78,11 +78,11 @@ public class MasterMindTest {
         setupMasterMind(4, 8, 5);
         int[] guessCode0 = createRandomCode(4, 8);
         int[] guessCode1 = createRandomCode(4, 8);
-        masterMind.makeGuess(guessCode0);
-        masterMind.makeGuess(guessCode1);
+        masterMindManager.makeGuess(guessCode0);
+        masterMindManager.makeGuess(guessCode1);
         int[][] testGuesses = {guessCode1, guessCode0};
-        int[][] actualGuesses = {masterMind.getLastNGuesses(2)[0].getCode(),
-                masterMind.getLastNGuesses(2)[1].getCode()};
+        int[][] actualGuesses = {masterMindManager.getLastNGuesses(2)[0].getCode(),
+                masterMindManager.getLastNGuesses(2)[1].getCode()};
 
         assertArrayEquals(testGuesses, actualGuesses);
 
@@ -97,8 +97,8 @@ public class MasterMindTest {
     @Test
     public void getScoreTest() {
         setupMasterMind(4, 8, 5);
-        masterMind.makeGuess(masterMind.getAnswerCode());
-        assertEquals(1, masterMind.getScore());
+        masterMindManager.makeGuess(masterMindManager.getAnswerCode());
+        assertEquals(1, masterMindManager.getScore());
     }
 
     /**
@@ -108,8 +108,8 @@ public class MasterMindTest {
     @Test
     public void getAnswerCodeTest() {
         setupMasterMind(4, 8, 5);
-        masterMind.setAnswerCode(new MasterMindCode(new int[]{1, 2, 3}));
-        assertArrayEquals(new int[]{1, 2, 3}, masterMind.getAnswerCode());
+        masterMindManager.setAnswerCode(new MasterMindCombination(new int[]{1, 2, 3}));
+        assertArrayEquals(new int[]{1, 2, 3}, masterMindManager.getAnswerCode());
 
     }
 }
