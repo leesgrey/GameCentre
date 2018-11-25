@@ -24,7 +24,7 @@ class SlidingTilesScoreBoard implements Serializable {
     /**
      * A HashMap containing ArrayLists for each size game.
      */
-    private HashMap<Integer, ArrayList<SlidingTilesScore>> scoreBoards;
+    private HashMap<Integer, ArrayList<Score>> scoreBoards;
 
     /**
      * Initialize a SlidingTilesScoreBoard.
@@ -39,9 +39,9 @@ class SlidingTilesScoreBoard implements Serializable {
      *
      * @param score the score to be added
      */
-    void addScore(SlidingTilesScore score) {
+    void addScore(Score score) {
         if (scoreBoards.get(score.getSize()) == null) {
-            scoreBoards.put(score.getSize(), new ArrayList<SlidingTilesScore>());
+            scoreBoards.put(score.getSize(), new ArrayList<Score>());
         }
         scoreBoards.get(score.getSize()).add(score);
         Collections.sort(scoreBoards.get(score.getSize()));
@@ -53,11 +53,11 @@ class SlidingTilesScoreBoard implements Serializable {
      * @param n    the number of scores to be returned
      * @param size the size of the board for which we're looking at scores
      */
-    ArrayList<SlidingTilesScore> topNScores(int n, int size) {
-        ArrayList<SlidingTilesScore> topScores = new ArrayList<>();
+    ArrayList<Score> topNScores(int n, int size) {
+        ArrayList<Score> topScores = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             if (scoreBoards.get(size) == null || i >= scoreBoards.get(size).size()) {
-                topScores.add(new SlidingTilesScore("Default", 9999, size));
+                topScores.add(new Score("Default", 9999, size));
             } else {
                 topScores.add(scoreBoards.get(size).get(i));
             }
@@ -72,14 +72,14 @@ class SlidingTilesScoreBoard implements Serializable {
      * @param size     the size of the board for which we're looking at scores
      * @param username the username for which we're looking for scores
      */
-    ArrayList<SlidingTilesScore> topNUserScores(int n, int size, String username) {
-        ArrayList<SlidingTilesScore> topScores = new ArrayList<>();
+    ArrayList<Score> topNUserScores(int n, int size, String username) {
+        ArrayList<Score> topScores = new ArrayList<>();
         int numberOfScoresFound = 0;
         int scoresCheckedSoFar = 0;
         while (numberOfScoresFound < n) {
             // if there are no more scores for this user
             if (scoreBoards.get(size) == null || scoresCheckedSoFar >= scoreBoards.get(size).size()) {
-                topScores.add(new SlidingTilesScore("Default", 9999, size));
+                topScores.add(new Score("Default", 9999, size));
                 numberOfScoresFound++;
                 // if the next score is one of the user's
             } else if (username.equals(scoreBoards.get(size).get(scoresCheckedSoFar).getUsername())) {
