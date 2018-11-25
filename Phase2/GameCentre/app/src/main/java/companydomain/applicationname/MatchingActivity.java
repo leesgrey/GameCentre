@@ -119,6 +119,7 @@ public class MatchingActivity extends AppCompatActivity implements Observer {
     private void switchToScoreboard() {
         Intent tmp = new Intent(this, ScoreboardActivity.class);
         tmp.putExtra("currentUser", currentUser);
+        tmp.putExtra("previousGame", "mastermind");
         startActivity(tmp);
     }
 
