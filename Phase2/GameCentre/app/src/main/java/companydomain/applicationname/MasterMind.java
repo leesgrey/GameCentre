@@ -2,6 +2,7 @@ package companydomain.applicationname;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -16,9 +17,10 @@ class MasterMind implements Serializable {
     private MasterMindCode answer;
 
     /**
-     * Keep track of previous guesses. The first element is the newest guess on record.
+     * Keep track of a set number of previous guesses.
+     * The first element is the newest guess on record.
      */
-    private ArrayList<MasterMindCode> previousGuesses;
+    private List<MasterMindCode> previousGuesses;
 
     /**
      * The current score for the game.
@@ -129,13 +131,22 @@ class MasterMind implements Serializable {
         return this.answer.getCode();
     }
 
-
+    // TODO: only used for testing
     /**
      * Set the answer code.
      *
+     * @param answerCode the answer code to be set
      */
     void setAnswerCode(MasterMindCode answerCode)
     {
         this.answer = answerCode;
+    }
+
+    /**
+     * Undo the most recent guess.
+     */
+    void undoGuess() {
+        this.previousGuesses.remove(0);
+        this.previousGuesses.add(new MasterMindCode(new int[this.getAnswerCode().length], this.answer));
     }
 }
