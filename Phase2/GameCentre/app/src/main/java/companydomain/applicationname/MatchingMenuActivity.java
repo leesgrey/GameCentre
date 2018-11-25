@@ -198,6 +198,7 @@ public class MatchingMenuActivity extends AppCompatActivity {
     private void switchToScoreboard() {
         Intent tmp = new Intent(this, ScoreboardActivity.class);
         tmp.putExtra("currentUser", currentUser);
+        tmp.putExtra("previousGame", "matching");
         startActivity(tmp);
     }
 
