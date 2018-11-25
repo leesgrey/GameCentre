@@ -93,15 +93,15 @@ public class SlidingTilesActivity extends AppCompatActivity implements Observer 
         GameSaveStates.writeGameSaveStates(gameSaveStates, this);
         gridView.setAdapter(new CustomAdapter(tileButtons, columnWidth, columnHeight));
         if (boardManager.puzzleSolved()) {
-            endgame();
+            endGame();
         }
     }
 
     /**
      * Execute processes for a game that has ended.
      */
-    private void endgame() {
-        SlidingTilesScore score = new SlidingTilesScore(currentUser,
+    private void endGame() {
+        Score score = new Score(currentUser,
                 boardManager.getScoreCounter(), boardManager.getSize());
         if (!currentUser.equals("Guest")) {
             gameSaveStates.removeGame(currentUser, "slidingTiles");

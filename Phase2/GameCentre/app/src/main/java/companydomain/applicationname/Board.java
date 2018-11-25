@@ -15,7 +15,6 @@ import java.util.List;
  */
 public class Board extends Observable implements Serializable, Iterable<Tile> {
 
-    // TODO: collapse these two variables
     /**
      * The number of rows and the number .
      */
@@ -75,9 +74,11 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
     /**
      * Take the List of tiles and sort them by id, but with 0 at the end.
      */
-    private void sortTilesWithZeroLast(List<Tile> tiles) {
+    private static void sortTilesWithZeroLast(List<Tile> tiles) {
         Collections.sort(tiles);
-        tiles.add(tiles.remove(0));
+        if(tiles.get(0).getId() == 0) {
+            tiles.add(tiles.remove(0));
+        }
     }
 
     /**

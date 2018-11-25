@@ -2,7 +2,7 @@ package companydomain.applicationname;
 
 import java.io.Serializable;
 
-public class SlidingTilesScore implements Comparable<SlidingTilesScore>, Serializable {
+public class Score implements Comparable<Score>, Serializable {
 
     /**
      * The username associated with this score.
@@ -20,13 +20,13 @@ public class SlidingTilesScore implements Comparable<SlidingTilesScore>, Seriali
     private int size;
 
     /**
-     * A new SlidingTilesScore.
+     * A new Score.
      *
      * @param username the username associated with this score
      * @param score    the score they achieved
      * @param size     the size of the game this score was achieved on
      */
-    SlidingTilesScore(String username, int score, int size) {
+    Score(String username, int score, int size) {
         this.username = username;
         this.score = score;
         this.size = size;
@@ -45,12 +45,7 @@ public class SlidingTilesScore implements Comparable<SlidingTilesScore>, Seriali
     }
 
     @Override
-    public int compareTo(SlidingTilesScore slidingTilesScore) {
-        if (slidingTilesScore.getScore() < this.score) {
-            return 1;
-        } else if (slidingTilesScore.getScore() > this.score) {
-            return -1;
-        }
-        return 0;
+    public int compareTo(Score o) {
+        return this.score - o.score;
     }
 }
