@@ -33,14 +33,14 @@ public class MatchingScoreboardActivity extends AppCompatActivity {
     /**
      * The scoreboard for Matching.
      */
-    private SlidingTilesScoreBoard scoreBoard;
+    private ScoreBoard scoreBoard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_scoreboard);
         super.onCreate(savedInstanceState);
 
-        scoreBoard = SlidingTilesScoreBoard.loadSlidingTilesScoreBoard(this);
+        scoreBoard = ScoreBoard.loadScoreBoard("matching", this);
 
         Intent i = getIntent();
 

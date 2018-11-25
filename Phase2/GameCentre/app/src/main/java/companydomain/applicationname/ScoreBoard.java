@@ -14,12 +14,12 @@ import java.util.*;
 
 import static android.content.Context.MODE_PRIVATE;
 
-class SlidingTilesScoreBoard implements Serializable {
+class ScoreBoard implements Serializable {
 
     /**
-     * A file containing the instance of SlidingTilesScoreBoard we will be using.
+     * A file containing the instance of ScoreBoard we will be using.
      */
-    private static String slidingTilesScoreBoardFile = "sliding_tiles_score_board.ser";
+    private String scoreBoardFile;
 
     /**
      * A HashMap containing ArrayLists for each size game.
@@ -27,10 +27,11 @@ class SlidingTilesScoreBoard implements Serializable {
     private HashMap<Integer, ArrayList<Score>> scoreBoards;
 
     /**
-     * Initialize a SlidingTilesScoreBoard.
+     * Initialize a ScoreBoard.
      */
     @SuppressLint("UseSparseArrays")
-    private SlidingTilesScoreBoard() {
+    private ScoreBoard(String fileLocation) {
+        scoreBoardFile = fileLocation;
         scoreBoards = new HashMap<>();
     }
 
@@ -45,6 +46,16 @@ class SlidingTilesScoreBoard implements Serializable {
         }
         scoreBoards.get(score.getSize()).add(score);
         Collections.sort(scoreBoards.get(score.getSize()));
+    }
+
+    // TODO: probably get rid of this
+    /**
+     * Return the file in which this Scoreboard is being stored.
+     *
+     * @return the file in which this Scoreboard is being stored
+     */
+    private String getScoreBoardFile() {
+        return scoreBoardFile;
     }
 
     /**
@@ -94,32 +105,28 @@ class SlidingTilesScoreBoard implements Serializable {
     }
 
     /**
-     * Create, save, and return a SlidingTilesScoreBoard if one does not already exist.
+     * Create, save, and return a ScoreBoard.
      *
-     * @param slidingTilesScoreBoard either a SlidingTilesScoreBoard or null
-     * @param activity               an AppCompatActivity that we will use to do file writing
+     * @param game the String "slidingTiles", "matching", or "masterMind"
+     * @param activity an AppCompatActivity that we will use to do file writing
      */
-    static private SlidingTilesScoreBoard createSlidingTilesScoreBoard(
-            SlidingTilesScoreBoard slidingTilesScoreBoard, AppCompatActivity activity) {
-        if (slidingTilesScoreBoard == null) {
-            slidingTilesScoreBoard = new SlidingTilesScoreBoard();
-            writeSlidingTilesScoreBoard(slidingTilesScoreBoard, activity);
-        }
-        return slidingTilesScoreBoard;
+    static private ScoreBoard createScoreBoard(String game, AppCompatActivity activity) {
+        ScoreBoard scoreBoard;
+        scoreBoard = new ScoreBoard(getFileLocation(game));
+        scoreBoard.writeScoreBoard(activity);
+        return scoreBoard;
     }
 
     /**
-     * Write the SlidingTilesScoreBoard to the file.
+     * Write the ScoreBoard to the file.
      *
-     * @param slidingTilesScoreBoard the SlidingTilesScoreBoard we're writing to the file
-     * @param activity               an AppCompatActivity that we will use to do file writing
+     * @param activity an AppCompatActivity that we will use to do file writing
      */
-    static void writeSlidingTilesScoreBoard(SlidingTilesScoreBoard slidingTilesScoreBoard,
-                                            AppCompatActivity activity) {
+    void writeScoreBoard(AppCompatActivity activity) {
         try {
             ObjectOutputStream outputStream = new ObjectOutputStream(
-                    activity.openFileOutput(slidingTilesScoreBoardFile, MODE_PRIVATE));
-            outputStream.writeObject(slidingTilesScoreBoard);
+                    activity.openFileOutput(this.scoreBoardFile, MODE_PRIVATE));
+            outputStream.writeObject(this);
             outputStream.close();
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
@@ -127,17 +134,19 @@ class SlidingTilesScoreBoard implements Serializable {
     }
 
     /**
-     * Return the SlidingTilesScoreBoard contained in the file.
+     * Return the ScoreBoard contained in the file.
      *
-     * @return the SlidingTilesScoreBoard contained in the file
+     * @param game the String "slidingTiles", "matching", or "masterMind"
+     * @return the ScoreBoard contained in the file
      */
-    static SlidingTilesScoreBoard loadSlidingTilesScoreBoard(AppCompatActivity activity) {
-        SlidingTilesScoreBoard slidingTilesScoreBoard = null;
+    static ScoreBoard loadScoreBoard(String game, AppCompatActivity activity) {
+        ScoreBoard scoreBoard = null;
+        String scoreBoardFile = getFileLocation(game);
         try {
-            InputStream inputStream = activity.openFileInput(slidingTilesScoreBoardFile);
+            InputStream inputStream = activity.openFileInput(scoreBoardFile);
             if (inputStream != null) {
                 ObjectInputStream input = new ObjectInputStream(inputStream);
-                slidingTilesScoreBoard = (SlidingTilesScoreBoard) input.readObject();
+                scoreBoard = (ScoreBoard) input.readObject();
                 inputStream.close();
             }
         } catch (FileNotFoundException e) {
@@ -147,8 +156,28 @@ class SlidingTilesScoreBoard implements Serializable {
         } catch (ClassNotFoundException e) {
             Log.e("login activity", "File contained unexpected data type: " + e.toString());
         }
-        return SlidingTilesScoreBoard.createSlidingTilesScoreBoard(slidingTilesScoreBoard, activity);
+        if(scoreBoard == null) {
+            return ScoreBoard.createScoreBoard(game, activity);
+        }
+        return scoreBoard;
     }
 
-
+    /**
+     * Return the file location of the ScoreBoard corresponding to the game.
+     *
+     * @param game the String "slidingTiles", "matching", or "masterMind"
+     * @return the file location of the ScoreBoard corresponding to the game
+     */
+    private static String getFileLocation(String game) {
+        switch (game) {
+            case "slidingTiles":
+                return "sliding_tiles_score_board.ser";
+            case "matching":
+                return "matching_score_board.ser";
+            case "masterMind":
+                return "masterMind_score_board.ser";
+            default:
+                return "default_score_board.ser";
+        }
+    }
 }

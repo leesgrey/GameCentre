@@ -51,7 +51,7 @@ public class MatchingActivity extends AppCompatActivity implements Observer {
     /**
      * The scoreboard.
      */
-    private SlidingTilesScoreBoard scoreBoard;
+    private ScoreBoard scoreBoard;
 
     // Grid View and calculated column height and width based on device size
     private GestureDetectGridView gridView;
@@ -64,7 +64,7 @@ public class MatchingActivity extends AppCompatActivity implements Observer {
         createTileButtons(this);
         setContentView(R.layout.activity_matching);
         this.gameSaveStates = GameSaveStates.loadGameSaveStates(this);
-        this.scoreBoard = SlidingTilesScoreBoard.loadSlidingTilesScoreBoard(this);
+        this.scoreBoard = ScoreBoard.loadScoreBoard("matching", this);
 
         Intent i = getIntent();
 
@@ -104,7 +104,7 @@ public class MatchingActivity extends AppCompatActivity implements Observer {
             GameSaveStates.writeGameSaveStates(gameSaveStates, this);
         }
         scoreBoard.addScore(score);
-        SlidingTilesScoreBoard.writeSlidingTilesScoreBoard(scoreBoard, this);
+        scoreBoard.writeScoreBoard(this);
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {

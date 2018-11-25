@@ -33,14 +33,15 @@ public class ScoreboardActivity extends AppCompatActivity {
     /**
      * The scoreboard for Sliding Tiles.
      */
-    private SlidingTilesScoreBoard scoreBoard;
+    private ScoreBoard scoreBoard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_scoreboard);
         super.onCreate(savedInstanceState);
 
-        scoreBoard = SlidingTilesScoreBoard.loadSlidingTilesScoreBoard(this);
+        //TODO: make the string variable
+        scoreBoard = ScoreBoard.loadScoreBoard("slidingTiles", this);
 
         Intent i = getIntent();
 
