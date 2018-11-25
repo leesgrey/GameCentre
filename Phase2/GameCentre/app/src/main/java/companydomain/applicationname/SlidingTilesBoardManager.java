@@ -55,7 +55,7 @@ class SlidingTilesBoardManager extends BoardManager implements Serializable {
 
         do {
             Collections.shuffle(tiles);
-        } while (SlidingTilesBoardManager.isSolvable(tiles, numRows));
+        } while (!SlidingTilesBoardManager.isSolvable(tiles, numRows));
         this.board = new Board(tiles, numRows, numCols);
         this.allowedUndoes = allowedUndoes;
         this.previousMoves = new LinkedList<>();
@@ -65,12 +65,19 @@ class SlidingTilesBoardManager extends BoardManager implements Serializable {
      * Check to see if a list of tiles represents a solvable game.
      *
      * @param tiles the list of tiles we are checking for solvability
+     * @param numCols the number of columns in the board
      */
-    private static boolean isSolvable(List<Tile> tiles, int numRows) {
+    private static boolean isSolvable(List<Tile> tiles, int numCols) {
         // https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html
         int inversions = 0;
         for(int i = 0; i < tiles.size() - 1; i++) {
+            if(tiles.get(i).getId() == 0) {
+                continue;
+            }
             for(int j = i + 1; j < tiles.size(); j++) {
+                if(tiles.get(j).getId() == 0) {
+                    continue;
+                }
                 if(tiles.get(i).getId() > tiles.get(j).getId()) {
                     inversions++;
                 }
@@ -83,7 +90,7 @@ class SlidingTilesBoardManager extends BoardManager implements Serializable {
             while(tiles.get(blankPosition).getId() != 0) {
                 blankPosition++;
             }
-            return (blankPosition / numRows) % 2 != inversions % 2;
+            return (blankPosition / numCols) % 2 != inversions % 2;
         }
     }
 
