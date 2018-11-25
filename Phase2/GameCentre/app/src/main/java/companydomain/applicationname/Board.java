@@ -132,12 +132,18 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
     }
 
     /**
-     * Returns an int indicating the size of the Sliding Tile board.
+     * Returns an int indicating the size of the board.
      *
      * @return the size of the Sliding Tile board.
      */
     public int getSize() {
-        return this.numCols;
+        if(numCols == 3 || numRows == 3) {
+            return 3;
+        }
+        if(numCols == 5 || numRows == 5) {
+            return 5;
+        }
+        return 4;
     }
 
     /**
