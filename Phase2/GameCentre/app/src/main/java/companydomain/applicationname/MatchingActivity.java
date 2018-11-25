@@ -230,7 +230,7 @@ public class MatchingActivity extends AppCompatActivity implements Observer {
     @Override
     protected void onPause() {
         super.onPause();
-        saveBoardManagerToFile(SlidingTilesMenuActivity.TEMP_SAVE_FILENAME);
+        saveBoardManagerToFile(MatchingMenuActivity.TEMP_SAVE_FILENAME);
     }
 
     public void update(Observable o, Object arg){
