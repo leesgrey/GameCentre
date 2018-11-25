@@ -1,10 +1,8 @@
 package companydomain.applicationname;
 
-import android.support.annotation.NonNull;
-
 import java.io.Serializable;
 
-public class Score implements Comparable<Score>, Serializable {
+public class SlidingTilesScore implements Comparable<SlidingTilesScore>, Serializable {
 
     /**
      * The username associated with this score.
@@ -22,13 +20,13 @@ public class Score implements Comparable<Score>, Serializable {
     private int size;
 
     /**
-     * A new Score.
+     * A new SlidingTilesScore.
      *
      * @param username the username associated with this score
      * @param score    the score they achieved
      * @param size     the size of the game this score was achieved on
      */
-    Score(String username, int score, int size) {
+    SlidingTilesScore(String username, int score, int size) {
         this.username = username;
         this.score = score;
         this.size = size;
@@ -47,7 +45,12 @@ public class Score implements Comparable<Score>, Serializable {
     }
 
     @Override
-    public int compareTo(@NonNull Score score) {
-        return this.score - score.score;
+    public int compareTo(SlidingTilesScore slidingTilesScore) {
+        if (slidingTilesScore.getScore() < this.score) {
+            return 1;
+        } else if (slidingTilesScore.getScore() > this.score) {
+            return -1;
+        }
+        return 0;
     }
 }

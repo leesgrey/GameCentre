@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -97,7 +98,7 @@ public class MatchingActivity extends AppCompatActivity implements Observer {
      * Execute processes for a game that has ended.
      */
     private void endgame() {
-        Score score = new Score(currentUser,
+        SlidingTilesScore score = new SlidingTilesScore(currentUser,
                 boardManager.getScoreCounter(), boardManager.getSize());
         if (!currentUser.equals("Guest")) {
             gameSaveStates.removeGame(currentUser, "matching");

@@ -101,7 +101,7 @@ public class SlidingTilesActivity extends AppCompatActivity implements Observer 
      * Execute processes for a game that has ended.
      */
     private void endGame() {
-        Score score = new Score(currentUser,
+        SlidingTilesScore score = new SlidingTilesScore(currentUser,
                 boardManager.getScoreCounter(), boardManager.getSize());
         if (!currentUser.equals("Guest")) {
             gameSaveStates.removeGame(currentUser, "slidingTiles");

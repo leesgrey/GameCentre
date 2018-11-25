@@ -83,7 +83,7 @@ public class ScoreboardActivity extends AppCompatActivity {
      */
     private StringBuilder getScoreboardValues(int size, boolean is_global) {
         StringBuilder output = new StringBuilder();
-        ArrayList<Score> scores;
+        ArrayList<SlidingTilesScore> scores;
 
         if (is_global) {
             scores = scoreBoard.topNScores(3, size);
@@ -91,7 +91,7 @@ public class ScoreboardActivity extends AppCompatActivity {
             scores = scoreBoard.topNUserScores(3, size, currentUser);
         }
         int i = 1;
-        for (Score score : scores) {
+        for (SlidingTilesScore score : scores) {
             output.append(String.format("%o. %s: %s\n", i, score.getUsername(), Integer.toString(score.getScore())));
             i++;
         }
