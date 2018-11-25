@@ -139,6 +139,6 @@ public class Tile implements Comparable<Tile>, Serializable {
 
     @Override
     public int compareTo(@NonNull Tile o) {
-        return o.id - this.id;
+        return this.id - o.id;
     }
 }
