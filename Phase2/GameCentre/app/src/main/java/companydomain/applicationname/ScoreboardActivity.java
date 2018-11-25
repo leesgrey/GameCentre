@@ -30,6 +30,7 @@ public class ScoreboardActivity extends AppCompatActivity {
     TextView userFourScoreOutput;
     TextView userFiveScoreOutput;
 
+    String previousGame;
     /**
      * The scoreboard for Sliding Tiles.
      */
@@ -40,12 +41,13 @@ public class ScoreboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scoreboard);
         super.onCreate(savedInstanceState);
 
-        //TODO: make the string variable
-        scoreBoard = ScoreBoard.loadScoreBoard("slidingTiles", this);
-
         Intent i = getIntent();
 
         currentUser = i.getStringExtra("currentUser");
+        previousGame = i.getStringExtra("previousGame");
+
+        //TODO: make the string variable
+        scoreBoard = ScoreBoard.loadScoreBoard(previousGame, this);
 
         currentUserText = findViewById(R.id.currentuserText);
         currentUserText.setText(String.format("Player: %s", currentUser));
