@@ -2,6 +2,7 @@ package companydomain.applicationname;
 
 import android.support.annotation.NonNull;
 
+import java.util.Collections;
 import java.util.Observable;
 
 import java.io.Serializable;
@@ -69,6 +70,14 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      */
     int getNumCols() {
         return this.numCols;
+    }
+
+    /**
+     * Take the List of tiles and sort them by id, but with 0 at the end.
+     */
+    private void sortTilesWithZeroLast(List<Tile> tiles) {
+        Collections.sort(tiles);
+        tiles.add(tiles.remove(0));
     }
 
     /**
