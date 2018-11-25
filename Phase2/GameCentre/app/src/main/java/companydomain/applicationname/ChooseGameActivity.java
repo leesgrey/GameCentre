@@ -44,6 +44,7 @@ public class ChooseGameActivity extends AppCompatActivity {
      * Add the listeners to this activity.
      */
     private void addListeners() {
+
         addSlidingTilesButtonListener();
         addMatchingButtonListener();
         addMastermindButtonListener();

@@ -14,22 +14,16 @@ import java.util.List;
  */
 public class Board extends Observable implements Serializable, Iterable<Tile> {
 
+    // TODO: collapse these two variables
     /**
-     * The number of rows.
+     * The number of rows and the number .
      */
-    private int numRows;
-
-    /**
-     * The number of columns.
-     */
-    private int numCols;
+    private int numRows, numCols;
 
     /**
      * The tiles on the board in row-major order.
      */
     private Tile[] tiles;
-    // TODO: what is this?
-    private Tile[] hiddenTiles;
 
     /**
      * A new board of tiles in row-major order.
@@ -102,6 +96,9 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         notifyObservers();
     }
 
+    /**
+     * Notifies the activity that a card has been flipped.
+     */
     void flipCard() {
         setChanged();
         notifyObservers();
@@ -124,7 +121,6 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         return new BoardIterator();
     }
 
-    // TODO: why do we have this
     /**
      * Returns an int indicating the size of the Sliding Tile board.
      *

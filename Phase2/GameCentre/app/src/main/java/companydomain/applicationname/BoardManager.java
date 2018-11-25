@@ -7,19 +7,21 @@ abstract class BoardManager implements Serializable {
     /**
      * The board being managed.
      */
-    private Board board;
+    Board board;
 
     /**
      * This keeps track of the score for the game
      */
-    private int scoreCounter = 0;
+    int scoreCounter = 0;
 
     /**
      * Return the current board.
      *
      * @return the current board.
      */
-    abstract Board getBoard();
+    Board getBoard() {
+        return board;
+    }
 
     /**
      * Return whether the tiles are in row-major order.

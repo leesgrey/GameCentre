@@ -35,6 +35,8 @@ public class SignUpActivity extends AppCompatActivity {
 
     /**
      * Make a long toast with a custom message.
+     *
+     * @param message the message to be displayed
      */
     private void createToast(String message) {
         Toast.makeText(this, message,

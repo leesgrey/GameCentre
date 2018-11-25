@@ -59,6 +59,8 @@ public class SignInActivity extends AppCompatActivity {
     }
     /**
      * Make a long toast with a custom message.
+     *
+     * @param message the message to be displayed
      */
     private void createToast(String message) {
         Toast.makeText(this, message,
@@ -67,6 +69,8 @@ public class SignInActivity extends AppCompatActivity {
 
     /**
      * Change to the provided activity.
+     *
+     * @param next the next activity to display
      */
     private void switchToActivity(Class<? extends Activity> next) {
         Intent tmp = new Intent(this, next);
