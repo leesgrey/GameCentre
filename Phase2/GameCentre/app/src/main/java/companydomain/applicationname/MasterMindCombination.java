@@ -74,7 +74,7 @@ class MasterMindCombination implements Serializable {
     }
 
     /**
-     * Return code.
+     * Accessor method for the answer to the mastermind game.
      *
      * @return code
      */
