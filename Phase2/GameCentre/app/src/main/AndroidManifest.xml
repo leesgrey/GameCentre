@@ -24,6 +24,7 @@
         <activity android:name="companydomain.applicationname.MatchingActivity"></activity>
         <activity android:name="companydomain.applicationname.MatchingMenuActivity"></activity>
         <activity android:name="companydomain.applicationname.MasterMindMenuActivity"></activity>
+        <activity android:name="companydomain.applicationname.MasterMindGameActivity"></activity>
     </application>
 
 </manifest>

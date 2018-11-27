@@ -55,6 +55,11 @@ public class MasterMindMenuActivity extends AppCompatActivity {
 
         currentUserText = findViewById(R.id.currentuserText);
         currentUserText.setText(String.format("Player: %s", currentUser));
+
+        addStartThreeListener();
+        addStartFourListener();
+        addStartFiveListener();
+        addScoreboardButtonListener();
     }
 
     /**
@@ -69,14 +74,14 @@ public class MasterMindMenuActivity extends AppCompatActivity {
         boardManager = new MatchingBoardManager(rows, columns);
         switchToGame();
         */
+        switchToGame();
     }
 
     /**
      * Activate the button that starts a 3x4 game.
      */
-    private void addStartTwelveListener() {
-        //TODO: buttons for each difficulty of Mastermind, rename R.ids to match XML button ids
-        Button startButton = findViewById(R.id.startTwelve);
+    private void addStartThreeListener() {
+        Button startButton = findViewById(R.id.startThreeButton);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +93,7 @@ public class MasterMindMenuActivity extends AppCompatActivity {
     /**
      * Activate the button that starts a 4x4 game.
      */
-    private void addStartSixteenListener() {
+    private void addStartFourListener() {
         Button startButton = findViewById(R.id.startFourButton);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,8 +106,8 @@ public class MasterMindMenuActivity extends AppCompatActivity {
     /**
      * Activate the button that starts a 5x5 game.
      */
-    private void addStartTwentyListener() {
-        Button startButton = findViewById(R.id.startTwenty);
+    private void addStartFiveListener() {
+        Button startButton = findViewById(R.id.startFiveButton);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -175,15 +180,13 @@ public class MasterMindMenuActivity extends AppCompatActivity {
     }
 
     /**
-     * Switch to the SlidingTilesActivity view to play the game.
+     * Switch to the MasterMindGameActivity view to play the game.
      */
     private void switchToGame() {
-        /*
-        Intent tmp = new Intent(this, MatchingActivity.class);
-        saveBoardManagerToFile(MatchingMenuActivity.TEMP_SAVE_FILENAME);
+        Intent tmp = new Intent(this, MasterMindGameActivity.class);
+        //saveBoardManagerToFile(MatchingMenuActivity.TEMP_SAVE_FILENAME);
         tmp.putExtra("currentUser", currentUser);
         startActivity(tmp);
-        */
     }
 
     /**
