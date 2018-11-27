@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -97,7 +96,7 @@ public class MatchingMenuActivity extends AppCompatActivity {
      * Activate the button that starts a 4x4 game.
      */
     private void addStartSixteenListener() {
-        Button startButton = findViewById(R.id.startSixteen);
+        Button startButton = findViewById(R.id.startFourButton);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

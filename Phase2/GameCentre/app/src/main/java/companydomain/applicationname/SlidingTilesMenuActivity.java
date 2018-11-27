@@ -107,7 +107,7 @@ public class SlidingTilesMenuActivity extends AppCompatActivity {
      * Activate the button that starts a 4x4 game.
      */
     private void addStartFourListener() {
-        Button startButton = findViewById(R.id.startSixteen);
+        Button startButton = findViewById(R.id.startFourButton);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

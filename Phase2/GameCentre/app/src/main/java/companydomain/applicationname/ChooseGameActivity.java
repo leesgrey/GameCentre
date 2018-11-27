@@ -100,13 +100,14 @@ public class ChooseGameActivity extends AppCompatActivity {
     }
 
     /**
-     * Activate the Game3 button.
+     * Activate the Mastermind button.
      */
     private void addMastermindButtonListener() {
         Button MastermindButton = findViewById(R.id.MastermindButton);
         MastermindButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                switchToActivity(MasterMindMenuActivity.class);
             }
         });
     }
