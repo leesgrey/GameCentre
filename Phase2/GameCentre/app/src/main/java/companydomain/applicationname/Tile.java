@@ -136,7 +136,17 @@ public class Tile implements Comparable<Tile>, Serializable {
                 background = R.drawable.tile_0;
         }
     }
+/*
 
+/* Equality test for two tiles.
+ */
+    @Override
+    public boolean equals(Object o) {
+        if(o instanceof Tile) {
+            return ((Tile)o).getId() == this.id;
+        }
+        return false;
+    }
     @Override
     public int compareTo(@NonNull Tile o) {
         return this.id - o.id;
