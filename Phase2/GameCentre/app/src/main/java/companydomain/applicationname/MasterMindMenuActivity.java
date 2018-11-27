@@ -3,17 +3,11 @@ package companydomain.applicationname;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 public class MasterMindMenuActivity extends AppCompatActivity {
 
@@ -63,21 +57,6 @@ public class MasterMindMenuActivity extends AppCompatActivity {
     }
 
     /**
-     * Changes to a game of provided size given a valid undo input.
-     *
-     * @param rows the number of rows in the puzzle
-     * @param columns the number of columns in the puzzle
-     */
-    private void initializeGame(int rows, int columns) {
-        //TODO: create a MastermindBoardManager, then set all instances of MatchingBoardManager to MastermindBoardManager
-        /*
-        boardManager = new MatchingBoardManager(rows, columns);
-        switchToGame();
-        */
-        switchToGame();
-    }
-
-    /**
      * Activate the button that starts a 3x4 game.
      */
     private void addStartThreeListener() {
@@ -85,7 +64,7 @@ public class MasterMindMenuActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initializeGame(3, 4);
+                switchToGame(3);
             }
         });
     }
@@ -98,7 +77,7 @@ public class MasterMindMenuActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initializeGame(4, 4);
+                switchToGame(4);
             }
         });
     }
@@ -111,7 +90,7 @@ public class MasterMindMenuActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initializeGame(4, 5);
+                switchToGame(5);
             }
         });
     }
@@ -143,7 +122,7 @@ public class MasterMindMenuActivity extends AppCompatActivity {
                 } else {
                     //boardManager = gameSaveStates.getGameSaveState(currentUser, "slidingTiles");
                     makeToastLoadedText();
-                    switchToGame();
+                    switchToGame(3);
                 }
             }
         });
@@ -182,10 +161,11 @@ public class MasterMindMenuActivity extends AppCompatActivity {
     /**
      * Switch to the MasterMindGameActivity view to play the game.
      */
-    private void switchToGame() {
+    private void switchToGame(int size) {
         Intent tmp = new Intent(this, MasterMindGameActivity.class);
         //saveBoardManagerToFile(MatchingMenuActivity.TEMP_SAVE_FILENAME);
         tmp.putExtra("currentUser", currentUser);
+        tmp.putExtra("size", size);
         startActivity(tmp);
     }
 

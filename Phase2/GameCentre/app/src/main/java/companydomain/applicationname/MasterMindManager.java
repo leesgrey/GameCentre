@@ -35,11 +35,10 @@ class MasterMindManager implements Serializable {
      * Precondition: numPreviousGuesses > 0
      *
      * @param numSlots the number of slots in the answer
-     * @param numColours the number of "colours" that could be in each slot
      * @param numPreviousGuesses the number of previous guesses to keep track of
      */
-    MasterMindManager(int numSlots, int numColours, int numPreviousGuesses) {
-        this.createAnswer(numSlots, numColours);
+    MasterMindManager(int numSlots, int numPreviousGuesses) {
+        this.createAnswer(numSlots);
         this.createEmptyPreviousGuesses(numSlots, numPreviousGuesses);
         this.scoreCounter = 0;
     }
@@ -47,13 +46,12 @@ class MasterMindManager implements Serializable {
     /**
      * Create a random answer key.
      * @param numSlots the number of slots in the answer
-     * @param numColours the number of "colours" that could be in each slot
      */
-    private void createAnswer(int numSlots, int numColours) {
+    private void createAnswer(int numSlots) {
         Random randomIntGenerator = new Random();
         int[] answerCode = new int[numSlots];
         for(int i = 0; i < numSlots; i++) {
-            answerCode[i] = randomIntGenerator.nextInt(numColours) + 1;
+            answerCode[i] = randomIntGenerator.nextInt(10);
         }
         this.answer = new MasterMindCombination(answerCode);
     }
