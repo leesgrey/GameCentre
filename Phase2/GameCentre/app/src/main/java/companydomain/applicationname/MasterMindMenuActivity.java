@@ -64,14 +64,18 @@ public class MasterMindMenuActivity extends AppCompatActivity {
      * @param columns the number of columns in the puzzle
      */
     private void initializeGame(int rows, int columns) {
+        //TODO: create a MastermindBoardManager, then set all instances of MatchingBoardManager to MastermindBoardManager
+        /*
         boardManager = new MatchingBoardManager(rows, columns);
         switchToGame();
+        */
     }
 
     /**
      * Activate the button that starts a 3x4 game.
      */
     private void addStartTwelveListener() {
+        //TODO: buttons for each difficulty of Mastermind, rename R.ids to match XML button ids
         Button startButton = findViewById(R.id.startTwelve);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,10 +178,12 @@ public class MasterMindMenuActivity extends AppCompatActivity {
      * Switch to the SlidingTilesActivity view to play the game.
      */
     private void switchToGame() {
+        /*
         Intent tmp = new Intent(this, MatchingActivity.class);
         saveBoardManagerToFile(MatchingMenuActivity.TEMP_SAVE_FILENAME);
         tmp.putExtra("currentUser", currentUser);
         startActivity(tmp);
+        */
     }
 
     /**
@@ -186,7 +192,7 @@ public class MasterMindMenuActivity extends AppCompatActivity {
     private void switchToScoreboard() {
         Intent tmp = new Intent(this, ScoreboardActivity.class);
         tmp.putExtra("currentUser", currentUser);
-        tmp.putExtra("previousGame", "matching");
+        tmp.putExtra("previousGame", "mastermind");
         startActivity(tmp);
     }
 
@@ -196,6 +202,7 @@ public class MasterMindMenuActivity extends AppCompatActivity {
      * @param fileName the name of the file
      */
     private void loadBoardManagerFromFile(String fileName) {
+        /*
 
         try {
             InputStream inputStream = this.openFileInput(fileName);
@@ -211,6 +218,7 @@ public class MasterMindMenuActivity extends AppCompatActivity {
         } catch (ClassNotFoundException e) {
             Log.e("login activity", "File contained unexpected data type: " + e.toString());
         }
+        */
     }
 
     /**
@@ -219,6 +227,7 @@ public class MasterMindMenuActivity extends AppCompatActivity {
      * @param fileName the name of the file
      */
     public void saveBoardManagerToFile(String fileName) {
+        /*
         try {
             ObjectOutputStream outputStream = new ObjectOutputStream(
                     this.openFileOutput(fileName, MODE_PRIVATE));
@@ -227,6 +236,7 @@ public class MasterMindMenuActivity extends AppCompatActivity {
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
         }
+        */
     }
 
     @Override
