@@ -26,20 +26,19 @@ class SlidingTilesBoardManager extends BoardManager implements Serializable {
      * Manage a new shuffled board, with a given size and number of allowed undoes.
      *
      * @param allowedUndoes the number of allowed undoes
-     * @param numRows       the number of rows
-     * @param numCols       the number of columns
+     * @param size the number of rows/columns
      */
-    SlidingTilesBoardManager(int allowedUndoes, int numRows, int numCols) {
+    SlidingTilesBoardManager(int allowedUndoes, int size) {
         List<Tile> tiles = new ArrayList<>();
-        int numTiles = numRows * numCols;
+        int numTiles = size * size;
         for (int tileNum = 0; tileNum != numTiles; tileNum++) {
             tiles.add(new Tile(tileNum));
         }
 
         do {
             Collections.shuffle(tiles);
-        } while (!SlidingTilesBoardManager.isSolvable(tiles, numRows));
-        this.board = new Board(tiles, numRows, numCols);
+        } while (!SlidingTilesBoardManager.isSolvable(tiles, size));
+        this.board = new Board(tiles, size, size);
         this.allowedUndoes = allowedUndoes;
         this.previousMoves = new LinkedList<>();
     }

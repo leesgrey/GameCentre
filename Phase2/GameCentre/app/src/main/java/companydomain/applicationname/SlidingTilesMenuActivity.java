@@ -83,7 +83,7 @@ public class SlidingTilesMenuActivity extends AppCompatActivity {
         if (undoes == -1) {
             makeEmptyUndoToast();
         } else {
-            boardManager = new SlidingTilesBoardManager(getNumberOfUndoes(), size, size);
+            boardManager = new SlidingTilesBoardManager(getNumberOfUndoes(), size);
             switchToGame();
         }
     }
