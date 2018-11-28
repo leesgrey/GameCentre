@@ -84,10 +84,29 @@ public class MasterMindManagerTest {
                 masterMindManager.getLastNGuesses(2)[1].getCode()};
 
         assertArrayEquals(testGuesses, actualGuesses);
-
-
     }
 
+    /**
+     * Test undoMove() method.
+     */
+    @Test
+    public void undoMoveTest() {
+        setupMasterMind(4, 5);
+        int[] guessCode0 = createRandomCode(4, 8);
+        int[] guessCode1 = createRandomCode(4, 8);
+        masterMindManager.makeGuess(guessCode0);
+        masterMindManager.makeGuess(guessCode1);
+        int[][] testGuesses = {guessCode1, guessCode0};
+        int[][] actualGuesses = {masterMindManager.getLastNGuesses(2)[0].getCode(),
+                masterMindManager.getLastNGuesses(2)[1].getCode()};
+        assertArrayEquals(testGuesses, actualGuesses);
+        assertEquals(masterMindManager.getScore(), 2);
+        masterMindManager.undoMove();
+        int[][] testGuesses2 = {guessCode0};
+        int[][] actualGuesses2 = {masterMindManager.getLastNGuesses(1)[0].getCode()};
+        assertArrayEquals(testGuesses2, actualGuesses2);
+        assertEquals(masterMindManager.getScore(), 1);
+    }
 
     /**
      * Test getScore() method.
