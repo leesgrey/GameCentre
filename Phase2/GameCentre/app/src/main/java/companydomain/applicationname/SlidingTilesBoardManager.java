@@ -23,23 +23,6 @@ class SlidingTilesBoardManager extends BoardManager implements Serializable {
     private LinkedList<Integer> previousMoves;
 
     /**
-     * Manage a new shuffled board, with a default size and number of allowed undoes.
-     */
-    SlidingTilesBoardManager() {
-        this(4, 4);
-    }
-
-    /**
-     * Manage a new shuffled board, with a given size and a default number of allowed undoes.
-     *
-     * @param num_rows the number of rows
-     * @param num_cols the number of columns
-     */
-    private SlidingTilesBoardManager(int num_rows, int num_cols) {
-        this(3, num_rows, num_cols);
-    }
-
-    /**
      * Manage a new shuffled board, with a given size and number of allowed undoes.
      *
      * @param allowedUndoes the number of allowed undoes

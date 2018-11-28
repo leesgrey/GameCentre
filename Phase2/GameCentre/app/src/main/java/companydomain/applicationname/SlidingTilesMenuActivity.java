@@ -54,7 +54,6 @@ public class SlidingTilesMenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boardManager = new SlidingTilesBoardManager();
         saveBoardManagerToFile(TEMP_SAVE_FILENAME);
 
         setContentView(R.layout.activity_slidingtilesmenu);
