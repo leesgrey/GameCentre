@@ -34,11 +34,10 @@ public class MasterMindManagerTest {
      * Initialize the MasterMindManager instance.
      *
      * @param numSlots the number of slots in the code
-     * @param numColours the number of possible colours in each slot
      * @param numPreviousGuesses the number of guesses that should be stored
      */
-    private void setupMasterMind(int numSlots, int numColours, int numPreviousGuesses) {
-        this.masterMindManager = new MasterMindManager(numSlots, numColours, numPreviousGuesses);
+    private void setupMasterMind(int numSlots, int numPreviousGuesses) {
+        this.masterMindManager = new MasterMindManager(numSlots, numPreviousGuesses);
     }
 
     /**
@@ -46,7 +45,7 @@ public class MasterMindManagerTest {
      */
     @Test
     public void makeGuessTest() {
-        setupMasterMind(4, 8, 5);
+        setupMasterMind(4,  5);
         int[] guessCode0 = createRandomCode(4, 8);
         int[] guessCode1 = createRandomCode(4, 8);
         int[] emptyGuess = new int[4];
@@ -63,7 +62,7 @@ public class MasterMindManagerTest {
      */
     @Test
     public void gameWonTest() {
-        setupMasterMind(4, 8, 5);
+        setupMasterMind(4,  5);
         assertFalse(masterMindManager.gameWon());
         masterMindManager.makeGuess(masterMindManager.getAnswerCode());
         assertTrue(masterMindManager.gameWon());
@@ -75,7 +74,7 @@ public class MasterMindManagerTest {
      */
     @Test
     public void getLastNGuessesTest() {
-        setupMasterMind(4, 8, 5);
+        setupMasterMind(4, 5);
         int[] guessCode0 = createRandomCode(4, 8);
         int[] guessCode1 = createRandomCode(4, 8);
         masterMindManager.makeGuess(guessCode0);
@@ -96,7 +95,7 @@ public class MasterMindManagerTest {
 
     @Test
     public void getScoreTest() {
-        setupMasterMind(4, 8, 5);
+        setupMasterMind(4,  5);
         masterMindManager.makeGuess(masterMindManager.getAnswerCode());
         assertEquals(1, masterMindManager.getScore());
     }
@@ -107,7 +106,7 @@ public class MasterMindManagerTest {
 
     @Test
     public void getAnswerCodeTest() {
-        setupMasterMind(4, 8, 5);
+        setupMasterMind(4,  5);
         masterMindManager.setAnswerCode(new MasterMindCombination(new int[]{1, 2, 3}));
         assertArrayEquals(new int[]{1, 2, 3}, masterMindManager.getAnswerCode());
 
