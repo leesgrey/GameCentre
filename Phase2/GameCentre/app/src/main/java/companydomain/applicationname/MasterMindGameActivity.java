@@ -145,11 +145,6 @@ public class MasterMindGameActivity extends AppCompatActivity {
         this.manager.makeGuess(this.answer);
         resetText();
         displayResult();
-        this.guess1.setText("");
-        this.guess2.setText("");
-        this.guess3.setText("");
-        this.guess4.setText("");
-        this.guess5.setText("");
     }
 
     void displayResult(){
@@ -177,16 +172,48 @@ public class MasterMindGameActivity extends AppCompatActivity {
         this.text6.setText(String.valueOf(last[0]));
         this.text7.setText(String.valueOf(last[1]));
         this.text8.setText(String.valueOf(last[2]));
-        this.correct1.setText(String.valueOf(lastCorrect[0]));
-        this.correct2.setText(String.valueOf(lastCorrect[1]));
-
+        this.correct3.setText(String.valueOf(lastCorrect[0]));
+        this.correct4.setText(String.valueOf(lastCorrect[1]));
     }
 
     void displayFour(MasterMindCombination[] lastNGuesses){
+        int[] secondLast = lastNGuesses[1].getCode();
+        int[] secondCorrect = lastNGuesses[1].getCorrectness();
+        this.text1.setText(String.valueOf(secondLast[0]));
+        this.text2.setText(String.valueOf(secondLast[1]));
+        this.text3.setText(String.valueOf(secondLast[2]));
+        this.text4.setText(String.valueOf(secondLast[3]));
+        this.correct1.setText(String.valueOf(secondCorrect[0]));
+        this.correct2.setText(String.valueOf(secondCorrect[1]));
+        int[] last = lastNGuesses[0].getCode();
+        int[] lastCorrect = lastNGuesses[0].getCorrectness();
+        this.text6.setText(String.valueOf(last[0]));
+        this.text7.setText(String.valueOf(last[1]));
+        this.text8.setText(String.valueOf(last[2]));
+        this.text9.setText(String.valueOf(last[3]));
+        this.correct3.setText(String.valueOf(lastCorrect[0]));
+        this.correct4.setText(String.valueOf(lastCorrect[1]));
     }
 
     void displayFive(MasterMindCombination[] lastNGuesses){
-
+        int[] secondLast = lastNGuesses[1].getCode();
+        int[] secondCorrect = lastNGuesses[1].getCorrectness();
+        this.text1.setText(String.valueOf(secondLast[0]));
+        this.text2.setText(String.valueOf(secondLast[1]));
+        this.text3.setText(String.valueOf(secondLast[2]));
+        this.text4.setText(String.valueOf(secondLast[3]));
+        this.text5.setText(String.valueOf(secondLast[3]));
+        this.correct1.setText(String.valueOf(secondCorrect[0]));
+        this.correct2.setText(String.valueOf(secondCorrect[1]));
+        int[] last = lastNGuesses[0].getCode();
+        int[] lastCorrect = lastNGuesses[0].getCorrectness();
+        this.text6.setText(String.valueOf(last[0]));
+        this.text7.setText(String.valueOf(last[1]));
+        this.text8.setText(String.valueOf(last[2]));
+        this.text9.setText(String.valueOf(last[3]));
+        this.text10.setText(String.valueOf(last[4]));
+        this.correct3.setText(String.valueOf(lastCorrect[0]));
+        this.correct4.setText(String.valueOf(lastCorrect[1]));
 
     }
 
@@ -195,9 +222,14 @@ public class MasterMindGameActivity extends AppCompatActivity {
         undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: take the corresponding value and append to the guesses
+                undoMove();
             }
         });
+    }
+
+    void undoMove(){
+        this.manager.undoMove();
+        this.score.setText(String.valueOf(this.manager.getScore()));
     }
 
     void clearListener(){
