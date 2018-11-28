@@ -12,15 +12,12 @@ public class BoardTest {
 
      */
     Board testBoard;
-    int numRows;
-    int numCols;
 
     /*
     Setup board.
      */
     private void setupBoard(List<Tile> tiles, int numRows, int numCols)
-    {   this.numRows = numRows;
-        this.numCols = numCols;
+    {
         testBoard = new Board(tiles, numRows, numCols);
     }
 
@@ -38,6 +35,9 @@ public class BoardTest {
         return tiles;
     }
 
+    /*
+   Test numTiles() method.
+    */
     @Test
     public void numTilesTest() {
         List<Tile> tiles = makeOrderedTiles(3,3);
@@ -47,6 +47,9 @@ public class BoardTest {
         assertEquals(expetedNumTiles, actualNumTiles);
     }
 
+    /*
+  Test getNumRows() method.
+   */
     @Test
     public void getNumRowsTest() {
         List<Tile> tiles = makeOrderedTiles(3,3);
@@ -56,6 +59,9 @@ public class BoardTest {
         assertEquals(expectedRows, actualRows);
     }
 
+    /*
+  Test getNumCols() method.
+   */
     @Test
     public void getNumColsTest() {
         List<Tile> tiles = makeOrderedTiles(3,3);
@@ -65,6 +71,9 @@ public class BoardTest {
         assertEquals(expectedCols, actualCols);
     }
 
+    /*
+  Test getTile() method.
+   */
     @Test
     public void getTileTest() {
         List<Tile> tiles = makeOrderedTiles(3,3);
@@ -74,6 +83,9 @@ public class BoardTest {
         assertEquals(expectedTile, actualTile);
     }
 
+    /*
+  Test swapTiles() method.
+   */
     @Test
     public void swapTilesTest() {
         List<Tile> tiles = makeOrderedTiles(3,3);
@@ -87,7 +99,10 @@ public class BoardTest {
     }
 
 
-    @Test
+     /*
+   Test flipCard() method.
+    */
+     @Test
     public void flipCardTest() {
         List<Tile> tiles = makeOrderedTiles(3,3);
         setupBoard(tiles, 3,3);
