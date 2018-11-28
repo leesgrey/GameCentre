@@ -55,7 +55,6 @@ public class Tile implements Comparable<Tile>, Serializable {
      */
     Tile(int backgroundId) {
         id = backgroundId;
-        // This looks so ugly.
         switch (id) {
             case 0:
                 background = R.drawable.tile_0;
@@ -136,10 +135,7 @@ public class Tile implements Comparable<Tile>, Serializable {
                 background = R.drawable.tile_0;
         }
     }
-/*
 
-/* Equality test for two tiles.
- */
     @Override
     public boolean equals(Object o) {
         if(o instanceof Tile) {

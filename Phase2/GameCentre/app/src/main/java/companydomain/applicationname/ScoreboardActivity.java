@@ -23,12 +23,12 @@ public class ScoreboardActivity extends AppCompatActivity {
     /**
      * The text fields for the various scoreboards.
      */
-    TextView threeScoreOutput;
-    TextView fourScoreOutput;
-    TextView fiveScoreOutput;
-    TextView userThreeScoreOutput;
-    TextView userFourScoreOutput;
-    TextView userFiveScoreOutput;
+    TextView firstGlobalScore;
+    TextView secondGlobalScore;
+    TextView thirdGlobalScore;
+    TextView firstUserScore;
+    TextView secondUserScore;
+    TextView thirdUserScore;
 
     String previousGame;
     /**
@@ -46,7 +46,6 @@ public class ScoreboardActivity extends AppCompatActivity {
         currentUser = i.getStringExtra("currentUser");
         previousGame = i.getStringExtra("previousGame");
 
-        //TODO: make the string variable
         scoreBoard = ScoreBoard.loadScoreBoard(previousGame, this);
 
         currentUserText = findViewById(R.id.currentuserText);
@@ -62,19 +61,19 @@ public class ScoreboardActivity extends AppCompatActivity {
      * Fills in the scoreboard fields with scoreboard entries.
      */
     private void populateScoreboard() {
-        threeScoreOutput = findViewById(R.id.threescoreOutput);
-        fourScoreOutput = findViewById(R.id.fourscoreOutput);
-        fiveScoreOutput = findViewById(R.id.fivescoreOutput);
-        userThreeScoreOutput = findViewById(R.id.uthreescoreOutput);
-        userFourScoreOutput = findViewById(R.id.ufourscoreOutput);
-        userFiveScoreOutput = findViewById(R.id.ufivescoreOutput);
+        firstGlobalScore = findViewById(R.id.threescoreOutput);
+        secondGlobalScore = findViewById(R.id.fourscoreOutput);
+        thirdGlobalScore = findViewById(R.id.fivescoreOutput);
+        firstUserScore = findViewById(R.id.uthreescoreOutput);
+        secondUserScore = findViewById(R.id.ufourscoreOutput);
+        thirdUserScore = findViewById(R.id.ufivescoreOutput);
 
-        threeScoreOutput.setText(getScoreboardValues(3, true));
-        fourScoreOutput.setText(getScoreboardValues(4, true));
-        fiveScoreOutput.setText(getScoreboardValues(5, true));
-        userThreeScoreOutput.setText(getScoreboardValues(3, false));
-        userFourScoreOutput.setText(getScoreboardValues(4, false));
-        userFiveScoreOutput.setText(getScoreboardValues(5, false));
+        firstGlobalScore.setText(getScoreboardValues(3, true));
+        secondGlobalScore.setText(getScoreboardValues(4, true));
+        thirdGlobalScore.setText(getScoreboardValues(5, true));
+        firstUserScore.setText(getScoreboardValues(3, false));
+        secondUserScore.setText(getScoreboardValues(4, false));
+        thirdUserScore.setText(getScoreboardValues(5, false));
     }
 
     /**
