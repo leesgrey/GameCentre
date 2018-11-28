@@ -18,6 +18,8 @@ public class MatchingBoardManager extends BoardManager {
      */
     List<Tile> selected;
 
+    private List<Tile> shuffledTiles;
+
     /**
      * Manage a board that has been pre-populated with a default size.
      */
@@ -27,6 +29,7 @@ public class MatchingBoardManager extends BoardManager {
 
     /**
      * Manage a board that has been pre-populated with a given size.
+     *
      * @param numRows the number of rows
      * @param numCols the number of columns
      */
@@ -35,7 +38,7 @@ public class MatchingBoardManager extends BoardManager {
         selected = new ArrayList<>();
         unmatched = new ArrayList<>();
         int numTiles = numRows * numCols;
-        for (int tileNum = 0; tileNum != numTiles/2; tileNum++) {
+        for (int tileNum = 0; tileNum != numTiles / 2; tileNum++) {
             Tile firstOfPair = new Tile(tileNum + 1);
             Tile secondOfPair = new Tile(tileNum + 1);
             tiles.add(firstOfPair);
@@ -45,14 +48,16 @@ public class MatchingBoardManager extends BoardManager {
         }
         Collections.shuffle(tiles);
         this.board = new Board(tiles, numRows, numCols);
+        shuffledTiles = tiles;
     }
+
 
     /**
      * Return the unmatched tiles in the current game.
      *
      * @return tne unmatched tiles in the current game.
      */
-    public List<Tile> getUnmatched(){
+    public List<Tile> getUnmatched() {
         return unmatched;
     }
 
@@ -61,7 +66,7 @@ public class MatchingBoardManager extends BoardManager {
      *
      * @return the selected tiles for the current guess.
      */
-    public List<Tile> getSelected(){
+    public List<Tile> getSelected() {
         return selected;
     }
 
@@ -71,7 +76,8 @@ public class MatchingBoardManager extends BoardManager {
      * @param position the tile to check
      * @return whether the tile is un-flipped and selectable.
      */
-    public boolean isValidTap(int position){
+    public boolean isValidTap(int position) {
+
         Tile id = this.board.getTile(position);
         return unmatched.contains(id) && !(selected.contains(id));
     }
@@ -82,18 +88,16 @@ public class MatchingBoardManager extends BoardManager {
      * @param position the position
      */
     public void touchMove(int position) {
-        if (selected.size() <1){
+        if (selected.size() < 1) {
             selected.add(this.board.getTile(position));
-        }
-        else{
+        } else {
             this.scoreCounter += 1;
             selected.add(this.board.getTile(position));
-            if(selected.get(0).getId() == selected.get(1).getId()){
+            if (selected.get(0).getId() == selected.get(1).getId()) {
                 this.unmatched.remove(selected.get(0));
                 this.unmatched.remove(selected.get(1));
                 this.selected.clear();
-            }
-            else{
+            } else {
                 new Timer().schedule(new TimerTask() {
                     @Override
                     public void run() {
@@ -113,5 +117,29 @@ public class MatchingBoardManager extends BoardManager {
      */
     public boolean puzzleSolved() {
         return unmatched.isEmpty();
+    }
+
+
+    /* getter for shuffledTiles
+     */
+    public List<Tile> getShuffledTiles() {
+        return this.shuffledTiles;
+    }
+
+
+    /*returns the position of id's match.
+     */
+    public int getAnswerPosition(Tile id) {
+        int c = 0, k = 0;
+        for (Tile tile : this.shuffledTiles) {
+            if (tile.getId() == id.getId()) {
+                c++;
+                if (c == 2) {
+                    return k;
+                }
+            }
+            k++;
+        }
+        return -1;
     }
 }
