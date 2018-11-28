@@ -43,8 +43,8 @@ class SlidingTilesBoardManager extends BoardManager implements Serializable {
      * Manage a new shuffled board, with a given size and number of allowed undoes.
      *
      * @param allowedUndoes the number of allowed undoes
-     * @param numRows      the number of rows
-     * @param numCols      the number of columns
+     * @param numRows       the number of rows
+     * @param numCols       the number of columns
      */
     SlidingTilesBoardManager(int allowedUndoes, int numRows, int numCols) {
         List<Tile> tiles = new ArrayList<>();
@@ -64,30 +64,30 @@ class SlidingTilesBoardManager extends BoardManager implements Serializable {
     /**
      * Check to see if a list of tiles represents a solvable game.
      *
-     * @param tiles the list of tiles we are checking for solvability
+     * @param tiles   the list of tiles we are checking for solvability
      * @param numCols the number of columns in the board
      */
     private static boolean isSolvable(List<Tile> tiles, int numCols) {
         // https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html
         int inversions = 0;
-        for(int i = 0; i < tiles.size() - 1; i++) {
-            if(tiles.get(i).getId() == 0) {
+        for (int i = 0; i < tiles.size() - 1; i++) {
+            if (tiles.get(i).getId() == 0) {
                 continue;
             }
-            for(int j = i + 1; j < tiles.size(); j++) {
-                if(tiles.get(j).getId() == 0) {
+            for (int j = i + 1; j < tiles.size(); j++) {
+                if (tiles.get(j).getId() == 0) {
                     continue;
                 }
-                if(tiles.get(i).getId() > tiles.get(j).getId()) {
+                if (tiles.get(i).getId() > tiles.get(j).getId()) {
                     inversions++;
                 }
             }
         }
-        if(tiles.size() % 2 == 1) {
+        if (tiles.size() % 2 == 1) {
             return inversions % 2 == 0;
         } else {
             int blankPosition = 0;
-            while(tiles.get(blankPosition).getId() != 0) {
+            while (tiles.get(blankPosition).getId() != 0) {
                 blankPosition++;
             }
             return (blankPosition / numCols) % 2 != inversions % 2;

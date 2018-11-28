@@ -57,6 +57,7 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
     }
+
     /**
      * Make a long toast with a custom message.
      *
