@@ -144,6 +144,8 @@ class MasterMindManager implements Serializable {
      * Undo the most recent guess.
      */
     void undoMove() {
+        this.previousGuesses.remove(0);
+        this.previousGuesses.add(new MasterMindCombination(new int[this.getAnswerCode().length], this.answer));
         this.scoreCounter -= 1;
     }
 }

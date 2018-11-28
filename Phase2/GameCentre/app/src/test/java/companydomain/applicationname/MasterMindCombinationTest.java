@@ -71,5 +71,6 @@ public class MasterMindCombinationTest {
         assertNotEquals(answer, guess1);
         assertNotEquals(answer, guess2);
         assertNotEquals(guess1, guess2);
+        assertNotEquals(answer, "");
     }
 }
