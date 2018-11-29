@@ -23,40 +23,22 @@ class SlidingTilesBoardManager extends BoardManager implements Serializable {
     private LinkedList<Integer> previousMoves;
 
     /**
-     * Manage a new shuffled board, with a default size and number of allowed undoes.
-     */
-    SlidingTilesBoardManager() {
-        this(4, 4);
-    }
-
-    /**
-     * Manage a new shuffled board, with a given size and a default number of allowed undoes.
-     *
-     * @param num_rows the number of rows
-     * @param num_cols the number of columns
-     */
-    private SlidingTilesBoardManager(int num_rows, int num_cols) {
-        this(3, num_rows, num_cols);
-    }
-
-    /**
      * Manage a new shuffled board, with a given size and number of allowed undoes.
      *
      * @param allowedUndoes the number of allowed undoes
-     * @param numRows       the number of rows
-     * @param numCols       the number of columns
+     * @param size the number of rows/columns
      */
-    SlidingTilesBoardManager(int allowedUndoes, int numRows, int numCols) {
+    SlidingTilesBoardManager(int allowedUndoes, int size) {
         List<Tile> tiles = new ArrayList<>();
-        int numTiles = numRows * numCols;
+        int numTiles = size * size;
         for (int tileNum = 0; tileNum != numTiles; tileNum++) {
             tiles.add(new Tile(tileNum));
         }
 
         do {
             Collections.shuffle(tiles);
-        } while (!SlidingTilesBoardManager.isSolvable(tiles, numRows));
-        this.board = new Board(tiles, numRows, numCols);
+        } while (!SlidingTilesBoardManager.isSolvable(tiles, size));
+        this.board = new Board(tiles, size, size);
         this.allowedUndoes = allowedUndoes;
         this.previousMoves = new LinkedList<>();
     }
@@ -171,6 +153,7 @@ class SlidingTilesBoardManager extends BoardManager implements Serializable {
         if (this.previousMoves.size() == 0) {
             return false;
         }
+        this.scoreCounter -= 2;
         this.touchMove(this.previousMoves.removeLast());
         this.previousMoves.removeLast();
         return true;

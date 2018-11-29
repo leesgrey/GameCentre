@@ -48,7 +48,6 @@ public class MatchingMenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boardManager = new MatchingBoardManager();
         saveBoardManagerToFile(TEMP_SAVE_FILENAME);
 
         setContentView(R.layout.activity_matchingmenu);
