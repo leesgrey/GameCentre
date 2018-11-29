@@ -64,6 +64,9 @@ class MasterMindManager implements Serializable {
     private void createEmptyPreviousGuesses(int numSlots, int numPreviousGuesses) {
         this.previousGuesses = new ArrayList<>();
         int[] emptyGuessCode = new int[numSlots];
+        for(int i = 0; i < numSlots; i++) {
+            emptyGuessCode[i] = -1;
+        }
         MasterMindCombination emptyGuess = new MasterMindCombination(emptyGuessCode, this.answer);
         for(int i = 0; i < numPreviousGuesses; i++) {
             this.previousGuesses.add(emptyGuess);
