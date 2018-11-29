@@ -229,6 +229,7 @@ public class MasterMindGameActivity extends AppCompatActivity {
 
     void undoMove(){
         this.manager.undoMove();
+        displayResult();
         this.score.setText(String.valueOf(this.manager.getScore()));
     }
 
