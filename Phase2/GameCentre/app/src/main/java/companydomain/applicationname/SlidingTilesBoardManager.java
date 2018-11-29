@@ -153,6 +153,7 @@ class SlidingTilesBoardManager extends BoardManager implements Serializable {
         if (this.previousMoves.size() == 0) {
             return false;
         }
+        this.scoreCounter -= 2;
         this.touchMove(this.previousMoves.removeLast());
         this.previousMoves.removeLast();
         return true;
