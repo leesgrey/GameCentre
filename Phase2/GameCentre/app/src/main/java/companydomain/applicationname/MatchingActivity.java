@@ -168,8 +168,8 @@ public class MatchingActivity extends AppCompatActivity implements Observer {
 
         int nextPos = 0;
         for (Button b : tileButtons) {
-            // if not in unmatched or selecte
-            if(!unmatched.contains(board.getTile(nextPos)) || selected.contains(board.getTile(nextPos))){
+            // if not in unmatched or selected
+            if((!unmatched.contains(board.getTile(nextPos))) || selected.contains(board.getTile(nextPos))){
                 b.setBackgroundResource(board.getTile(nextPos).getBackground());
             }
             else{
