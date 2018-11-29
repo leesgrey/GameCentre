@@ -16,16 +16,7 @@ public class MatchingBoardManager extends BoardManager {
     /**
      * The list of selected tiles for the current guess.
      */
-    List<Tile> selected;
-
-    private List<Tile> shuffledTiles;
-
-    /**
-     * Manage a board that has been pre-populated with a default size.
-     */
-    MatchingBoardManager() {
-        this(3, 4);
-    }
+    private List<Tile> selected;
 
     /**
      * Manage a board that has been pre-populated with a given size.
@@ -48,16 +39,14 @@ public class MatchingBoardManager extends BoardManager {
         }
         Collections.shuffle(tiles);
         this.board = new Board(tiles, numRows, numCols);
-        shuffledTiles = tiles;
     }
-
 
     /**
      * Return the unmatched tiles in the current game.
      *
-     * @return tne unmatched tiles in the current game.
+     * @return the unmatched tiles in the current game.
      */
-    public List<Tile> getUnmatched() {
+    List<Tile> getUnmatched() {
         return unmatched;
     }
 
@@ -66,7 +55,7 @@ public class MatchingBoardManager extends BoardManager {
      *
      * @return the selected tiles for the current guess.
      */
-    public List<Tile> getSelected() {
+    List<Tile> getSelected() {
         return selected;
     }
 
@@ -77,7 +66,6 @@ public class MatchingBoardManager extends BoardManager {
      * @return whether the tile is un-flipped and selectable.
      */
     public boolean isValidTap(int position) {
-
         Tile id = this.board.getTile(position);
         return unmatched.contains(id) && !(selected.contains(id));
     }
@@ -104,7 +92,6 @@ public class MatchingBoardManager extends BoardManager {
                         selected.clear();
                     }
                 }, 5);
-
             }
         }
         board.flipCard();
@@ -117,29 +104,5 @@ public class MatchingBoardManager extends BoardManager {
      */
     public boolean puzzleSolved() {
         return unmatched.isEmpty();
-    }
-
-
-    /* getter for shuffledTiles
-     */
-    public List<Tile> getShuffledTiles() {
-        return this.shuffledTiles;
-    }
-
-
-    /*returns the position of id's match.
-     */
-    public int getAnswerPosition(Tile id) {
-        int c = 0, k = 0;
-        for (Tile tile : this.shuffledTiles) {
-            if (tile.getId() == id.getId()) {
-                c++;
-                if (c == 2) {
-                    return k;
-                }
-            }
-            k++;
-        }
-        return -1;
     }
 }

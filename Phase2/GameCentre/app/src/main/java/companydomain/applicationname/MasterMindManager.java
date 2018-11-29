@@ -117,7 +117,7 @@ class MasterMindManager implements Serializable {
      * @return true iff the game has been won
      */
     boolean gameWon() {
-        return this.answer.equals(this.previousGuesses.get(this.previousGuesses.size() - 1));
+        return this.answer.equals(this.previousGuesses.get(0));
     }
 
     /**
@@ -144,6 +144,8 @@ class MasterMindManager implements Serializable {
      * Undo the most recent guess.
      */
     void undoMove() {
+        this.previousGuesses.remove(0);
+        this.previousGuesses.add(new MasterMindCombination(new int[this.getAnswerCode().length], this.answer));
         this.scoreCounter -= 1;
     }
 }

@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class MasterMindManagerCodeTest {
+public class MasterMindCombinationTest {
     /**
      * The MasterMindCombination answer.
      */
@@ -71,5 +71,6 @@ public class MasterMindManagerCodeTest {
         assertNotEquals(answer, guess1);
         assertNotEquals(answer, guess2);
         assertNotEquals(guess1, guess2);
+        assertNotEquals(answer, "");
     }
 }
