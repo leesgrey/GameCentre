@@ -49,25 +49,20 @@ public class MasterMindManagerTest {
         int[] guessCode0 = createRandomCode(4, 8);
         int[] guessCode1 = createRandomCode(4, 8);
         int[] emptyGuess = new int[4];
+        for(int i = 0; i < emptyGuess.length; i++) {
+            emptyGuess[i] = -1;
+        }
+        int[] wrongGuess = masterMindManager.getAnswerCode().clone();
+        wrongGuess[0]++;
         masterMindManager.makeGuess(guessCode0);
         masterMindManager.makeGuess(guessCode1);
         MasterMindCombination[] lastGuessedCodes = masterMindManager.getLastNGuesses(3);
         assertArrayEquals(guessCode1, lastGuessedCodes[0].getCode());
         assertArrayEquals(guessCode0, lastGuessedCodes[1].getCode());
         assertArrayEquals(emptyGuess, lastGuessedCodes[2].getCode());
+        assertFalse(masterMindManager.makeGuess(wrongGuess));
+        assertTrue(masterMindManager.makeGuess(masterMindManager.getAnswerCode()));
     }
-
-    /**
-     * Test gameWon.
-     */
-    @Test
-    public void gameWonTest() {
-        setupMasterMind(4,  5);
-        assertFalse(masterMindManager.gameWon());
-        masterMindManager.makeGuess(masterMindManager.getAnswerCode());
-        assertTrue(masterMindManager.gameWon());
-    }
-
 
     /**
      * Test getLastNGuesses() method.
