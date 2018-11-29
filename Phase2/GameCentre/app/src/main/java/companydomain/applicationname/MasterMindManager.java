@@ -2,6 +2,7 @@ package companydomain.applicationname;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -74,17 +75,19 @@ class MasterMindManager implements Serializable {
     }
 
     /**
-     * Make a guess.
+     * Make a guess. Return if it was correct.
      *
      * Precondition: guess is of the right length and has the right "colours".
      *
      * @param guessCode the integers guessed
+     * @return if the guess was correct
      */
-    void makeGuess(int[] guessCode) {
+    boolean makeGuess(int[] guessCode) {
         MasterMindCombination guess = new MasterMindCombination(guessCode, this.answer);
         this.previousGuesses.add(0, guess);
         this.previousGuesses.remove(this.previousGuesses.size() - 1);
         this.scoreCounter++;
+        return Arrays.equals(this.answer.getCode(), guessCode);
     }
 
     /**
@@ -113,16 +116,6 @@ class MasterMindManager implements Serializable {
         return this.scoreCounter;
     }
 
-    // TODO: potentially collapse this into makeGuess
-    /**
-     * Return if the game has been won.
-     *
-     * @return true iff the game has been won
-     */
-    boolean gameWon() {
-        return this.answer.equals(this.previousGuesses.get(0));
-    }
-
     /**
      * Return the answer code.
      *
@@ -132,7 +125,6 @@ class MasterMindManager implements Serializable {
         return this.answer.getCode();
     }
 
-    // TODO: only used for testing
     /**
      * Set the answer code.
      *
