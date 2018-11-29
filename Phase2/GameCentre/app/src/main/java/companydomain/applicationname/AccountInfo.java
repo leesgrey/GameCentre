@@ -26,7 +26,14 @@ class AccountInfo implements Serializable {
     /**
      * The set of all accountInfo (email and password pairs).
      */
-    private HashMap<String, String> loginInfo = new HashMap<>();
+    private HashMap<String, String> loginInfo;
+
+    /**
+     * Create an AccountInfo.
+     */
+    private AccountInfo() {
+        loginInfo = new HashMap<>();
+    }
 
     /**
      * Return whether or not this email address has an account associated to it.
