@@ -85,11 +85,12 @@ public class MatchingBoardManagerTest {
         assertArrayEquals(selectedTest.toArray(), selectedActual.toArray());
         assertArrayEquals(unMatchedTest.toArray(), unMatchedActual.toArray());
 
+        matchingBoardManager.board.sortTilesWithZeroLast();
 
         Tile id = matchingBoardManager.board.getTile(3);
 
-        matchingBoardManager.touchMove(3);
-        matchingBoardManager.touchMove(matchingBoardManager.getAnswerPosition(id));
+        matchingBoardManager.touchMove(0);
+        matchingBoardManager.touchMove(1);
 
         assertEquals(unMatchedTest.size()-2,  unMatchedActual.size());
 
@@ -114,16 +115,15 @@ public class MatchingBoardManagerTest {
     @Test
     public void puzzleSolvedTest() {
         setupMatchingBoard(3, 4);
-        List<Tile> shuffledTiles = matchingBoardManager.getShuffledTiles();
         assertFalse(matchingBoardManager.puzzleSolved());
-        int c = 0;
-        for (Tile tile : shuffledTiles) {
-            if (matchingBoardManager.getUnmatched().contains(tile)) {
-                matchingBoardManager.touchMove(c);
-                matchingBoardManager.touchMove(matchingBoardManager.getAnswerPosition(tile));
+        matchingBoardManager.board.sortTilesWithZeroLast();
+
+        System.out.println();
+        for (int i = 0; i < matchingBoardManager.board.numTiles() ; i++) {
+            matchingBoardManager.touchMove(i);
+            matchingBoardManager.touchMove(i);
             }
-            c++;
-        }
         assertTrue(matchingBoardManager.puzzleSolved());
     }
-}
+
+    }
