@@ -13,6 +13,8 @@ import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MasterMindGameActivity extends AppCompatActivity {
     private MasterMindManager manager;
@@ -23,6 +25,7 @@ public class MasterMindGameActivity extends AppCompatActivity {
     private int[] answer;
     private TextView text1, text2, text3, text4, text5, text6, text7, text8, text9, text10,
             guess1, guess2, guess3, guess4, guess5, correct1, correct2, correct3, correct4, score;
+    private ScoreBoard scoreBoard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +57,7 @@ public class MasterMindGameActivity extends AppCompatActivity {
         //Generating the game itself
         this.manager = new MasterMindManager(this.size, 5);
         this.answer = new int[this.size];
-
+        this.scoreBoard = ScoreBoard.loadScoreBoard("masterMind", this);
     }
 
     /**
@@ -142,9 +145,32 @@ public class MasterMindGameActivity extends AppCompatActivity {
     }
 
     void submitAnswer(){
-        this.manager.makeGuess(this.answer);
-        resetText();
-        displayResult();
+        if(this.manager.makeGuess(this.answer)){
+            endGame();
+        } else{
+            resetText();
+            displayResult();
+        }
+    }
+
+    void endGame(){
+        Score score = new Score(currentUser,
+                this.manager.getScore(), this.size);
+        this.scoreBoard.addScore(score);
+        this.scoreBoard.writeScoreBoard(this);
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                switchToScoreboard();
+            }
+        }, 2000);
+    }
+
+    private void switchToScoreboard() {
+        Intent tmp = new Intent(this, ScoreboardActivity.class);
+        tmp.putExtra("currentUser", currentUser);
+        tmp.putExtra("previousGame", "masterMind");
+        startActivity(tmp);
     }
 
     void displayResult(){
