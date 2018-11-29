@@ -80,7 +80,7 @@ public class BoardTest {
         setupBoard(tiles, 3,3);
         Tile expectedTile = new Tile(5);
         Tile actualTile = testBoard.getTile(4);
-        assertEquals(expectedTile, actualTile);
+        assertEquals(expectedTile.getId(), actualTile.getId());
     }
 
     /*
@@ -90,27 +90,15 @@ public class BoardTest {
     public void swapTilesTest() {
         List<Tile> tiles = makeOrderedTiles(3,3);
         setupBoard(tiles, 3,3);
-        assertEquals(testBoard.getTile(2),new Tile(3));
-        assertEquals(testBoard.getTile(3),new Tile(4));
+        assertEquals(testBoard.getTile(2).getId(),new Tile(3).getId());
+        assertEquals(testBoard.getTile(3).getId(),new Tile(4).getId());
         testBoard.swapTiles(2,3);
-        assertEquals(testBoard.getTile(2),new Tile(4));
-        assertEquals(testBoard.getTile(3), new Tile(3));
+        assertEquals(testBoard.getTile(2).getId(),new Tile(4).getId());
+        assertEquals(testBoard.getTile(3).getId(), new Tile(3).getId());
 
     }
 
 
-     /*
-   Test flipCard() method.
-    */
-     @Test
-    public void flipCardTest() {
-        List<Tile> tiles = makeOrderedTiles(3,3);
-        setupBoard(tiles, 3,3);
-        assertFalse(testBoard.hasChanged());
-        testBoard.flipCard();
-        assertTrue(testBoard.hasChanged());
-
-    }
 
 
 }
