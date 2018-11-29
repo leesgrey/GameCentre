@@ -36,17 +36,6 @@ public class TileTest {
 
     }
 
-    @Test
-    public void equalsTest() {
-        setupTile(5);
-        Tile testTile1 = new Tile(6);
-        boolean expectedFalse = testTile == testTile1;
-        assertEquals(expectedFalse,false);
-        Tile testTile2 = new Tile(5);
-        boolean expectedTrue = testTile.equals(testTile2);
-        assertEquals(expectedTrue, true);
-
-    }
 
     @Test
     public void compareTo() {
