@@ -53,7 +53,6 @@ public class ScoreboardActivity extends AppCompatActivity {
 
         populateScoreboard();
 
-        addContinueButtonListener();
         addChangeGameButtonListener();
     }
 
@@ -119,33 +118,10 @@ public class ScoreboardActivity extends AppCompatActivity {
     }
 
     /**
-     * Listener for continue button
-     */
-    private void addContinueButtonListener() {
-        Button signInButton = findViewById(R.id.continueButton);
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToSelectGame();
-            }
-        });
-    }
-
-    /**
      * Switch to choose game activity
      */
     private void switchToChooseGame() {
         Intent tmp = new Intent(this, ChooseGameActivity.class);
-        tmp.putExtra("currentUser", currentUser);
-        startActivity(tmp);
-    }
-
-    /**
-     * Switch to Starting activity
-     */
-
-    private void switchToSelectGame() {
-        Intent tmp = new Intent(this, SlidingTilesMenuActivity.class);
         tmp.putExtra("currentUser", currentUser);
         startActivity(tmp);
     }
