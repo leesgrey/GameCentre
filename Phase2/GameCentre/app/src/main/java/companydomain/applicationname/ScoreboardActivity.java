@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ScoreboardActivity extends AppCompatActivity {
     /**
@@ -89,7 +90,7 @@ public class ScoreboardActivity extends AppCompatActivity {
      */
     private StringBuilder getScoreboardValues(int size, boolean is_global) {
         StringBuilder output = new StringBuilder();
-        ArrayList<Score> scores;
+        List<Score> scores;
 
         if (is_global) {
             scores = scoreBoard.topNScores(3, size);

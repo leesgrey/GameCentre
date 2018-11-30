@@ -19,11 +19,6 @@ import java.util.ArrayList;
  */
 public class SlidingTilesMenuActivity extends MenuActivity {
 
-    /**
-     * The inputted allowed number of undoes.
-     */
-    EditText numUndoesEditText;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_slidingtilesmenu);
@@ -93,7 +88,7 @@ public class SlidingTilesMenuActivity extends MenuActivity {
      * @return the number of undoes specified in the text input area
      */
     private int getNumberOfUndoes() {
-        numUndoesEditText = findViewById(R.id.numUndoInput);
+        EditText numUndoesEditText = findViewById(R.id.numUndoInput);
         String undoesInput = numUndoesEditText.getText().toString();
         if (undoesInput.equals("")) {
             return -1;

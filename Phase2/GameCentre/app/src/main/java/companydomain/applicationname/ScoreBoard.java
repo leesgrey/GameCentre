@@ -24,7 +24,7 @@ class ScoreBoard implements Serializable {
     /**
      * A HashMap containing ArrayLists for each size game.
      */
-    private HashMap<Integer, ArrayList<Score>> scoreBoards;
+    private Map<Integer, List<Score>> scoreBoards;
 
     /**
      * Initialize a ScoreBoard.
@@ -54,7 +54,7 @@ class ScoreBoard implements Serializable {
      * @param n    the number of scores to be returned
      * @param size the size of the board for which we're looking at scores
      */
-    ArrayList<Score> topNScores(int n, int size) {
+    List<Score> topNScores(int n, int size) {
         ArrayList<Score> topScores = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             if (scoreBoards.get(size) == null || i >= scoreBoards.get(size).size()) {
@@ -73,7 +73,7 @@ class ScoreBoard implements Serializable {
      * @param size     the size of the board for which we're looking at scores
      * @param username the username for which we're looking for scores
      */
-    ArrayList<Score> topNUserScores(int n, int size, String username) {
+    List<Score> topNUserScores(int n, int size, String username) {
         ArrayList<Score> topScores = new ArrayList<>();
         int numberOfScoresFound = 0;
         int scoresCheckedSoFar = 0;
