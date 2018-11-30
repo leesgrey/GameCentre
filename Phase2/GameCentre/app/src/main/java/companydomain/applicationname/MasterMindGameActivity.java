@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -210,6 +212,11 @@ public class MasterMindGameActivity extends AppCompatActivity {
         Intent tmp = new Intent(this, ScoreboardActivity.class);
         tmp.putExtra("currentUser", currentUser);
         tmp.putExtra("previousGame", "masterMind");
+        ArrayList<String> difficulties = new ArrayList<>();
+        difficulties.add("3");
+        difficulties.add("4");
+        difficulties.add("5");
+        tmp.putStringArrayListExtra("difficulties", difficulties);
         startActivity(tmp);
     }
 
