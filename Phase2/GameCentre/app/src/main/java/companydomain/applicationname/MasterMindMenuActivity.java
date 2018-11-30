@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 
 public class MasterMindMenuActivity extends AppCompatActivity {
 
@@ -103,6 +105,11 @@ public class MasterMindMenuActivity extends AppCompatActivity {
         Intent tmp = new Intent(this, ScoreboardActivity.class);
         tmp.putExtra("currentUser", currentUser);
         tmp.putExtra("previousGame", "masterMind");
+        ArrayList<String> difficulties = new ArrayList<>();
+        difficulties.add("3");
+        difficulties.add("4");
+        difficulties.add("5");
+        tmp.putStringArrayListExtra("difficulties", difficulties);
         startActivity(tmp);
     }
 
