@@ -47,7 +47,7 @@ public class MasterMindGameActivity extends AppCompatActivity {
 
     /**
      *
-     * Code that sets up the MasterMindGame UI.
+     * Code that sets up the MasterMindGame UI. a
      * @param savedInstanceState
      */
     @Override
