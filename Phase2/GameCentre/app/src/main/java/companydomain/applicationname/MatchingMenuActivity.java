@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 /**
  * The initial activity for the sliding puzzle tile game.
@@ -199,6 +200,11 @@ public class MatchingMenuActivity extends AppCompatActivity {
         Intent tmp = new Intent(this, ScoreboardActivity.class);
         tmp.putExtra("currentUser", currentUser);
         tmp.putExtra("previousGame", "matching");
+        ArrayList<String> difficulties = new ArrayList<>();
+        difficulties.add("3x4");
+        difficulties.add("4x4");
+        difficulties.add("4x5");
+        tmp.putStringArrayListExtra("difficulties", difficulties);
         startActivity(tmp);
     }
 

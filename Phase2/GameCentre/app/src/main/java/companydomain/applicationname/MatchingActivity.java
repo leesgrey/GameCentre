@@ -121,6 +121,11 @@ public class MatchingActivity extends AppCompatActivity implements Observer {
         Intent tmp = new Intent(this, ScoreboardActivity.class);
         tmp.putExtra("currentUser", currentUser);
         tmp.putExtra("previousGame", "matching");
+        ArrayList<String> difficulties = new ArrayList<>();
+        difficulties.add("3x4");
+        difficulties.add("4x4");
+        difficulties.add("4x5");
+        tmp.putStringArrayListExtra("difficulties", difficulties);
         startActivity(tmp);
     }
 

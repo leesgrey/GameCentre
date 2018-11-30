@@ -30,7 +30,26 @@ public class ScoreboardActivity extends AppCompatActivity {
     TextView secondUserScore;
     TextView thirdUserScore;
 
+    /**
+     * The text fields for game difficulties.
+     */
+    TextView firstGlobal;
+    TextView secondGlobal;
+    TextView thirdGlobal;
+    TextView firstUser;
+    TextView secondUser;
+    TextView thirdUser;
+
+    /**
+     * The game previously opened.
+     */
     String previousGame;
+
+    /**
+     * The difficulties of the previous game.
+     */
+    ArrayList<String> difficulties;
+
     /**
      * The scoreboard for Sliding Tiles.
      */
@@ -45,6 +64,9 @@ public class ScoreboardActivity extends AppCompatActivity {
 
         currentUser = i.getStringExtra("currentUser");
         previousGame = i.getStringExtra("previousGame");
+        difficulties = i.getStringArrayListExtra("difficulties");
+
+        displayDifficulties(difficulties);
 
         scoreBoard = ScoreBoard.loadScoreBoard(previousGame, this);
 
@@ -54,6 +76,22 @@ public class ScoreboardActivity extends AppCompatActivity {
         populateScoreboard();
 
         addChangeGameButtonListener();
+    }
+
+    void displayDifficulties(ArrayList<String> difficulties){
+        firstGlobal = findViewById(R.id.firstGlobal);
+        firstUser = findViewById(R.id.firstUser);
+        secondGlobal = findViewById(R.id.secondGlobal);
+        secondUser = findViewById(R.id.secondUser);
+        thirdGlobal = findViewById(R.id.thirdGlobal);
+        thirdUser = findViewById(R.id.thirdUser);
+
+        firstGlobal.setText(difficulties.get(0));
+        firstUser.setText(difficulties.get(0));
+        secondGlobal.setText(difficulties.get(1));
+        secondUser.setText(difficulties.get(1));
+        thirdGlobal.setText(difficulties.get(2));
+        thirdUser.setText(difficulties.get(2));
     }
 
     /**

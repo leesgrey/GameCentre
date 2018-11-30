@@ -124,6 +124,11 @@ public class SlidingTilesActivity extends AppCompatActivity implements Observer 
         Intent tmp = new Intent(this, ScoreboardActivity.class);
         tmp.putExtra("currentUser", currentUser);
         tmp.putExtra("previousGame", "slidingTiles");
+        ArrayList<String> difficulties = new ArrayList<>();
+        difficulties.add("3x3");
+        difficulties.add("4x4");
+        difficulties.add("5x5");
+        tmp.putStringArrayListExtra("difficulties", difficulties);
         startActivity(tmp);
     }
 
