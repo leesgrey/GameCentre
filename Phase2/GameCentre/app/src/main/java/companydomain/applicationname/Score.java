@@ -32,14 +32,29 @@ public class Score implements Comparable<Score>, Serializable {
         this.size = size;
     }
 
+    /**
+     * Returns the score value.
+     *
+     * @return the core
+     */
     int getScore() {
         return score;
     }
 
+    /**
+     * Returns the username of the score.
+     *
+     * @return the username
+     */
     String getUsername() {
         return username;
     }
 
+    /**
+     * Returns the size of the score's game.
+     *
+     * @return the game size
+     */
     public int getSize() {
         return size;
     }

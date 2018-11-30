@@ -17,66 +17,31 @@ import android.widget.Button;
 import java.util.ArrayList;
 
 public class CustomAdapter extends BaseAdapter {
-
-    /**
-     * A list of buttons.
-     */
     private ArrayList<Button> mButtons;
-
-    /**
-     * The width and height of each button TODO: i dont really know what these do
-     */
     private int mColumnWidth, mColumnHeight;
 
-    /**
-     *
-     *
-     * @param buttons dsfsfs
-     * @param columnWidth sdfsd
-     * @param columnHeight dsfdsfsd
-     */
     CustomAdapter(ArrayList<Button> buttons, int columnWidth, int columnHeight) {
         mButtons = buttons;
         mColumnWidth = columnWidth;
         mColumnHeight = columnHeight;
     }
 
-    /**
-     * Return the number of buttons.
-     *
-     * @return the number of buttons.
-     */
     @Override
     public int getCount() {
         return mButtons.size();
     }
 
-    /**
-     * Return the button at the given position.
-     *
-     * @param position the button position to return.
-     * @return the number of buttons.
-     */
+    @Override
     public Object getItem(int position) {
         return mButtons.get(position);
     }
 
-    /**
-     * Return the position of the position specified.
-     * @param position the position to return
-     * @return position of the position specified
-     */
+    @Override
     public long getItemId(int position) {
         return position;
     }
 
-    /**
-     * Return the current view
-     * @param position
-     * @param convertView
-     * @param parent
-     * @return
-     */
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Button button;
 
