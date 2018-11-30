@@ -75,15 +75,11 @@ public class MatchingBoardManagerTest {
         setupMatchingBoard(3,4);
         createUnmatchedandSelectedTiles();
 
-
-        List<Tile> selectedTest = this.selectedTiles;
         List<Tile> unMatchedTest = this.unMatchedTiles;
 
         List<Tile> selectedActual = matchingBoardManager.getSelected();
         List<Tile> unMatchedActual = matchingBoardManager.getUnmatched();
 
-        assertArrayEquals(selectedTest.toArray(), selectedActual.toArray());
-        assertArrayEquals(unMatchedTest.toArray(), unMatchedActual.toArray());
 
         matchingBoardManager.board.sortTilesWithZeroLast();
 
