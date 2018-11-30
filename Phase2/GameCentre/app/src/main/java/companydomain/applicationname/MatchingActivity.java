@@ -60,7 +60,7 @@ public class MatchingActivity extends AppCompatActivity implements Observer {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadBoardManagerFromFile(SlidingTilesMenuActivity.TEMP_SAVE_FILENAME);
+        loadBoardManagerFromFile(MatchingMenuActivity.TEMP_SAVE_FILENAME);
         createTileButtons(this);
         setContentView(R.layout.activity_matching);
         this.gameSaveStates = GameSaveStates.loadGameSaveStates(this);
