@@ -13,42 +13,7 @@ public class ScoreboardActivity extends AppCompatActivity {
     /**
      * The current user.
      */
-    String currentUser;
-
-    /**
-     * The visual output of the current user.
-     */
-    TextView currentUserText;
-
-    /**
-     * The text fields for the various scoreboards.
-     */
-    TextView firstGlobalScore;
-    TextView secondGlobalScore;
-    TextView thirdGlobalScore;
-    TextView firstUserScore;
-    TextView secondUserScore;
-    TextView thirdUserScore;
-
-    /**
-     * The text fields for game difficulties.
-     */
-    TextView firstGlobal;
-    TextView secondGlobal;
-    TextView thirdGlobal;
-    TextView firstUser;
-    TextView secondUser;
-    TextView thirdUser;
-
-    /**
-     * The game previously opened.
-     */
-    String previousGame;
-
-    /**
-     * The difficulties of the previous game.
-     */
-    ArrayList<String> difficulties;
+    private String currentUser;
 
     /**
      * The scoreboard for Sliding Tiles.
@@ -63,14 +28,14 @@ public class ScoreboardActivity extends AppCompatActivity {
         Intent i = getIntent();
 
         currentUser = i.getStringExtra("currentUser");
-        previousGame = i.getStringExtra("previousGame");
-        difficulties = i.getStringArrayListExtra("difficulties");
+        String previousGame = i.getStringExtra("previousGame");
+        ArrayList<String> previousGameDifficulties = i.getStringArrayListExtra("difficulties");
 
-        displayDifficulties(difficulties);
+        displayDifficulties(previousGameDifficulties);
 
         scoreBoard = ScoreBoard.loadScoreBoard(previousGame, this);
 
-        currentUserText = findViewById(R.id.currentuserText);
+        TextView currentUserText = findViewById(R.id.currentuserText);
         currentUserText.setText(String.format("Player: %s", currentUser));
 
         populateScoreboard();
@@ -79,12 +44,13 @@ public class ScoreboardActivity extends AppCompatActivity {
     }
 
     void displayDifficulties(ArrayList<String> difficulties){
-        firstGlobal = findViewById(R.id.firstGlobal);
-        firstUser = findViewById(R.id.firstUser);
-        secondGlobal = findViewById(R.id.secondGlobal);
-        secondUser = findViewById(R.id.secondUser);
-        thirdGlobal = findViewById(R.id.thirdGlobal);
-        thirdUser = findViewById(R.id.thirdUser);
+        // The text fields for game difficulties.
+        TextView firstGlobal = findViewById(R.id.firstGlobal);
+        TextView firstUser = findViewById(R.id.firstUser);
+        TextView secondGlobal = findViewById(R.id.secondGlobal);
+        TextView secondUser = findViewById(R.id.secondUser);
+        TextView thirdGlobal = findViewById(R.id.thirdGlobal);
+        TextView thirdUser = findViewById(R.id.thirdUser);
 
         firstGlobal.setText(difficulties.get(0));
         firstUser.setText(difficulties.get(0));
@@ -98,12 +64,13 @@ public class ScoreboardActivity extends AppCompatActivity {
      * Fills in the scoreboard fields with scoreboard entries.
      */
     private void populateScoreboard() {
-        firstGlobalScore = findViewById(R.id.threescoreOutput);
-        secondGlobalScore = findViewById(R.id.fourscoreOutput);
-        thirdGlobalScore = findViewById(R.id.fivescoreOutput);
-        firstUserScore = findViewById(R.id.uthreescoreOutput);
-        secondUserScore = findViewById(R.id.ufourscoreOutput);
-        thirdUserScore = findViewById(R.id.ufivescoreOutput);
+        // The text fields for the various scoreboards.
+        TextView firstGlobalScore = findViewById(R.id.threescoreOutput);
+        TextView secondGlobalScore = findViewById(R.id.fourscoreOutput);
+        TextView thirdGlobalScore = findViewById(R.id.fivescoreOutput);
+        TextView firstUserScore = findViewById(R.id.uthreescoreOutput);
+        TextView secondUserScore = findViewById(R.id.ufourscoreOutput);
+        TextView thirdUserScore = findViewById(R.id.ufivescoreOutput);
 
         firstGlobalScore.setText(getScoreboardValues(3, true));
         secondGlobalScore.setText(getScoreboardValues(4, true));
