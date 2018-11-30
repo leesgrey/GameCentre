@@ -134,10 +134,12 @@ public class MatchingMenuActivity extends AppCompatActivity {
      * Activate the load button.
      */
     private void addLoadButtonListener() {
+        final AppCompatActivity activity = this;
         Button loadButton = findViewById(R.id.LoadButton);
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                gameSaveStates = GameSaveStates.loadGameSaveStates(activity);
                 if (currentUser.equals("Guest") || !gameSaveStates.gameSaveStateExists(currentUser,
                         "matching")) {
                     makeLoadFailToast();
