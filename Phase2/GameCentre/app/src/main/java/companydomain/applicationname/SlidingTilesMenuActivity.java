@@ -1,48 +1,80 @@
 package companydomain.applicationname;
 
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 /**
  * The initial activity for the sliding puzzle tile game.
  */
-public class SlidingTilesMenuActivity extends MenuActivity {
+public class SlidingTilesMenuActivity extends AppCompatActivity {
 
     /**
-     * The inputted allowed number of undoes.
+     * A temporary save file.
      */
-    EditText numUndoesEditText;
+    public static final String TEMP_SAVE_FILENAME = "save_file_tmp.ser";
+
+    /**
+     * The board manager.
+     */
+    private SlidingTilesBoardManager boardManager;
+
+    /**
+     * The game save states.
+     */
+    private GameSaveStates gameSaveStates;
+
+    /**
+     * The current user.
+     */
+    private String currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_slidingtilesmenu);
         super.onCreate(savedInstanceState);
-        addLoadButtonListener("slidingTiles");
+        saveBoardManagerToFile(TEMP_SAVE_FILENAME);
+
+        setContentView(R.layout.activity_slidingtilesmenu);
+
+        Intent i = getIntent();
+
+        currentUser = i.getStringExtra("currentUser");
+
+        TextView currentUserText = findViewById(R.id.currentuserText);
+        currentUserText.setText(String.format("Player: %s", currentUser));
+
+        addStartThreeListener();
+        addStartFourListener();
+        addStartFiveListener();
+        addLoadButtonListener();
+        addScoreboardButtonListener();
+        this.gameSaveStates = GameSaveStates.loadGameSaveStates(this);
     }
 
     /**
      * Changes to a game of provided size given a valid undo input.
      *
-     * @param rows the rows of the puzzle
-     * @param cols the columns of the puzzle
+     * @param size the size of the puzzle
      */
-    void initializeGame(int rows, int cols) {
+    private void initializeGame(int size) {
         int undoes = getNumberOfUndoes();
         if (undoes == -1) {
             makeEmptyUndoToast();
         } else {
-            boardManager = new SlidingTilesBoardManager(getNumberOfUndoes(), rows);
+            boardManager = new SlidingTilesBoardManager(getNumberOfUndoes(), size);
             switchToGame();
         }
     }
@@ -50,12 +82,12 @@ public class SlidingTilesMenuActivity extends MenuActivity {
     /**
      * Activate the button that starts a 3x3 game.
      */
-    void addStartFirstListener() {
-        Button startButton = findViewById(R.id.startFirst);
+    private void addStartThreeListener() {
+        Button startButton = findViewById(R.id.startThree);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initializeGame(3, 3);
+                initializeGame(3);
             }
         });
 
@@ -64,12 +96,12 @@ public class SlidingTilesMenuActivity extends MenuActivity {
     /**
      * Activate the button that starts a 4x4 game.
      */
-    void addStartSecondListener() {
-        Button startButton = findViewById(R.id.startSecond);
+    private void addStartFourListener() {
+        Button startButton = findViewById(R.id.startFourButton);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initializeGame(4, 4);
+                initializeGame(4);
             }
         });
     }
@@ -77,12 +109,12 @@ public class SlidingTilesMenuActivity extends MenuActivity {
     /**
      * Activate the button that starts a 5x5 game.
      */
-    void addStartThirdListener() {
-        Button startButton = findViewById(R.id.startThird);
+    private void addStartFiveListener() {
+        Button startButton = findViewById(R.id.startFive);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initializeGame(5, 5);
+                initializeGame(5);
             }
         });
     }
@@ -93,7 +125,7 @@ public class SlidingTilesMenuActivity extends MenuActivity {
      * @return the number of undoes specified in the text input area
      */
     private int getNumberOfUndoes() {
-        numUndoesEditText = findViewById(R.id.numUndoInput);
+        EditText numUndoesEditText = findViewById(R.id.numUndoInput);
         String undoesInput = numUndoesEditText.getText().toString();
         if (undoesInput.equals("")) {
             return -1;
@@ -106,6 +138,54 @@ public class SlidingTilesMenuActivity extends MenuActivity {
     }
 
     /**
+     * Activate the scoreboard button.
+     */
+    private void addScoreboardButtonListener() {
+        Button scoreboardButton = findViewById(R.id.scoreboardButton);
+        scoreboardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToScoreboard();
+            }
+        });
+    }
+
+    /**
+     * Activate the load button.
+     */
+    private void addLoadButtonListener() {
+        Button loadButton = findViewById(R.id.LoadButton);
+        loadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentUser.equals("Guest") || !gameSaveStates.gameSaveStateExists(currentUser,
+                        "slidingTiles")) {
+                    makeLoadFailToast();
+                } else {
+                    boardManager = (SlidingTilesBoardManager) gameSaveStates.getGameSaveState(currentUser,
+                            "slidingTiles");
+                    makeToastLoadedText();
+                    switchToGame();
+                }
+            }
+        });
+    }
+
+    /**
+     * Make a popup that says that there are no saved games.
+     */
+    private void makeLoadFailToast() {
+        Toast.makeText(this, "You have no saves", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Display that a game was loaded successfully.
+     */
+    private void makeToastLoadedText() {
+        Toast.makeText(this, "Loaded Game", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
      * Notify the user to provide a number of undos.
      */
     private void makeEmptyUndoToast() {
@@ -113,9 +193,18 @@ public class SlidingTilesMenuActivity extends MenuActivity {
     }
 
     /**
+     * Read the temporary board from disk.
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadBoardManagerFromFile(TEMP_SAVE_FILENAME);
+    }
+
+    /**
      * Switch to the SlidingTilesActivity view to play the game.
      */
-    void switchToGame() {
+    private void switchToGame() {
         Intent tmp = new Intent(this, SlidingTilesActivity.class);
         saveBoardManagerToFile(SlidingTilesMenuActivity.TEMP_SAVE_FILENAME);
         tmp.putExtra("currentUser", currentUser);
@@ -125,7 +214,7 @@ public class SlidingTilesMenuActivity extends MenuActivity {
     /**
      * Switch to the ScoreBoard page.
      */
-    void switchToScoreboard() {
+    private void switchToScoreboard() {
         Intent tmp = new Intent(this, ScoreboardActivity.class);
         tmp.putExtra("currentUser", currentUser);
         tmp.putExtra("previousGame", "slidingTiles");
@@ -142,7 +231,7 @@ public class SlidingTilesMenuActivity extends MenuActivity {
      *
      * @param fileName the name of the file
      */
-    void loadBoardManagerFromFile(String fileName) {
+    private void loadBoardManagerFromFile(String fileName) {
 
         try {
             InputStream inputStream = this.openFileInput(fileName);
@@ -157,6 +246,22 @@ public class SlidingTilesMenuActivity extends MenuActivity {
             Log.e("login activity", "Can not read file: " + e.toString());
         } catch (ClassNotFoundException e) {
             Log.e("login activity", "File contained unexpected data type: " + e.toString());
+        }
+    }
+
+    /**
+     * Save the board manager to fileName.
+     *
+     * @param fileName the name of the file
+     */
+    public void saveBoardManagerToFile(String fileName) {
+        try {
+            ObjectOutputStream outputStream = new ObjectOutputStream(
+                    this.openFileOutput(fileName, MODE_PRIVATE));
+            outputStream.writeObject(boardManager);
+            outputStream.close();
+        } catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
         }
     }
 

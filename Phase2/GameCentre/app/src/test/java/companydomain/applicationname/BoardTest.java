@@ -1,104 +1,98 @@
 package companydomain.applicationname;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.*;
 
 public class BoardTest {
-    /**
-     * A test board
-     */
-    Board testBoard;
 
     /**
-     * Setup board.
+     * A Board to test.
      */
-    private void setupBoard(List<Tile> tiles, int numRows, int numCols)
-    {
-        testBoard = new Board(tiles, numRows, numCols);
-    }
+    Board slidingTileBoard, matchingBoard;
 
-    /**
-    * Make a set of tiles that are in order.
-    * @return a set of tiles that are in order
-    */
-    private List<Tile> makeOrderedTiles(int numRows, int numCols) {
-        List<Tile> tiles = new ArrayList<>();
-        int numTiles = numRows * numCols;
-        for (int tileNum = 0; tileNum != numTiles; tileNum++) {
-            tiles.add(new Tile(tileNum + 1, tileNum));
+    @Before
+    public void setUp() {
+        List<Tile> slidingTiles = new ArrayList<>();
+        List<Tile> matchingTiles = new ArrayList<>();
+        for(int i = 0; i < 9; i++) {
+            slidingTiles.add(new Tile(i));
         }
-
-        return tiles;
+        for(int i = 2; i < 14; i++) {
+            matchingTiles.add(new Tile(i / 2));
+        }
+        Collections.shuffle(slidingTiles);
+        Collections.shuffle(matchingTiles);
+        slidingTileBoard = new Board(slidingTiles, 3, 3);
+        matchingBoard = new Board(matchingTiles, 3, 4);
     }
 
-    /*
-   Test numTiles() method.
-    */
     @Test
-    public void numTilesTest() {
-        List<Tile> tiles = makeOrderedTiles(3,3);
-        setupBoard(tiles, 3,3);
-        int expetedNumTiles = 3*3;
-        int actualNumTiles = testBoard.numTiles();
-        assertEquals(expetedNumTiles, actualNumTiles);
+    public void numTiles() {
+        assertEquals(slidingTileBoard.numTiles(), 9);
+        assertEquals(matchingBoard.numTiles(), 12);
     }
 
-    /*
-  Test getNumRows() method.
-   */
     @Test
-    public void getNumRowsTest() {
-        List<Tile> tiles = makeOrderedTiles(3,3);
-        setupBoard(tiles, 3,3);
-        int expectedRows = 3;
-        int actualRows = testBoard.getNumRows();
-        assertEquals(expectedRows, actualRows);
+    public void getNumRows() {
+        assertEquals(slidingTileBoard.getNumRows(), 3);
+        assertEquals(matchingBoard.getNumRows(), 3);
     }
 
-    /*
-  Test getNumCols() method.
-   */
     @Test
-    public void getNumColsTest() {
-        List<Tile> tiles = makeOrderedTiles(3,3);
-        setupBoard(tiles, 3,3);
-        int expectedCols = 3;
-        int actualCols = testBoard.getNumRows();
-        assertEquals(expectedCols, actualCols);
+    public void getNumCols() {
+        assertEquals(slidingTileBoard.getNumCols(), 3);
+        assertEquals(matchingBoard.getNumCols(), 4);
     }
 
-    /*
-  Test getTile() method.
-   */
     @Test
-    public void getTileTest() {
-        List<Tile> tiles = makeOrderedTiles(3,3);
-        setupBoard(tiles, 3,3);
-        Tile expectedTile = new Tile(5);
-        Tile actualTile = testBoard.getTile(4);
-        assertEquals(expectedTile.getId(), actualTile.getId());
+    public void sortTilesWithZeroLast() {
+        slidingTileBoard.sortTilesWithZeroLast();
+        matchingBoard.sortTilesWithZeroLast();
+        for(int i = 0; i < 8; i++) {
+            assertEquals(slidingTileBoard.getTile(i).getId(), i + 1);
+        }
+        assertEquals(slidingTileBoard.getTile(8).getId(), 0);
+        int counter = 2;
+        for(Tile tile: matchingBoard) {
+            assertEquals(tile.getId(), counter / 2);
+            counter++;
+        }
     }
 
-    /*
-  Test swapTiles() method.
-   */
     @Test
-    public void swapTilesTest() {
-        List<Tile> tiles = makeOrderedTiles(3,3);
-        setupBoard(tiles, 3,3);
-        assertEquals(testBoard.getTile(2).getId(),new Tile(3).getId());
-        assertEquals(testBoard.getTile(3).getId(),new Tile(4).getId());
-        testBoard.swapTiles(2,3);
-        assertEquals(testBoard.getTile(2).getId(),new Tile(4).getId());
-        assertEquals(testBoard.getTile(3).getId(), new Tile(3).getId());
-
+    public void getTile() {
+        slidingTileBoard.sortTilesWithZeroLast();
+        matchingBoard.sortTilesWithZeroLast();
+        int counter = 0;
+        for(Tile tile: slidingTileBoard) {
+            assertEquals(tile, slidingTileBoard.getTile(counter));
+            counter++;
+        }
+        counter = 0;
+        for(Tile tile: matchingBoard) {
+            assertEquals(tile, matchingBoard.getTile(counter));
+            counter++;
+        }
     }
 
+    @Test
+    public void swapTiles() {
+        Tile tile5 = matchingBoard.getTile(5);
+        Tile tile7 = matchingBoard.getTile(7);
+        matchingBoard.swapTiles(5, 7);
+        assertEquals(matchingBoard.getTile(5), tile7);
+        assertEquals(matchingBoard.getTile(7), tile5);
+    }
 
-
-
+    @Test
+    public void getSize() {
+        assertEquals(slidingTileBoard.getSize(), 3);
+        assertEquals(matchingBoard.getSize(), 3);
+    }
 }

@@ -15,11 +15,6 @@ import android.widget.Toast;
 public class ChooseGameActivity extends AppCompatActivity {
 
     /**
-     * The GUI component showing who the current user of the application is
-     */
-    public TextView currUser;
-
-    /**
      * The String object that keeps track of the email/username of the current user
      */
     private String currentUser;
@@ -33,7 +28,7 @@ public class ChooseGameActivity extends AppCompatActivity {
 
         currentUser = i.getStringExtra("currentUser");
 
-        currUser = findViewById(R.id.welcomeText);
+        TextView currUser = findViewById(R.id.welcomeText);
         String welcomeText = "Welcome, " + currentUser;
         currUser.setText(welcomeText);
 

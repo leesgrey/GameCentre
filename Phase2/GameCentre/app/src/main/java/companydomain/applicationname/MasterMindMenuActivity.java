@@ -13,12 +13,7 @@ public class MasterMindMenuActivity extends AppCompatActivity {
     /**
      * The current user.
      */
-    String currentUser;
-
-    /**
-     * Text field to show who the current user is
-     */
-    TextView currentUserText;
+    private String currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +25,7 @@ public class MasterMindMenuActivity extends AppCompatActivity {
 
         currentUser = i.getStringExtra("currentUser");
 
-        currentUserText = findViewById(R.id.currentuserText);
+        TextView currentUserText = findViewById(R.id.currentuserText);
         currentUserText.setText(String.format("Player: %s", currentUser));
 
         addStartThreeListener();

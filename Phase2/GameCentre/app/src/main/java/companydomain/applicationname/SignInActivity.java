@@ -17,7 +17,7 @@ public class SignInActivity extends AppCompatActivity {
     /**
      * The current user.
      */
-    String currentUser;
+    private String currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
