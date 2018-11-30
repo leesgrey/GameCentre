@@ -78,7 +78,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/startFirst"
+                android:id="@+id/startThreeButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -96,7 +96,7 @@
                 android:textAlignment="center" />
 
             <Button
-                android:id="@+id/startThird"
+                android:id="@+id/startFiveButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

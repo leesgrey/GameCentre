@@ -51,7 +51,7 @@ public class SlidingTilesMenuActivity extends MenuActivity {
      * Activate the button that starts a 3x3 game.
      */
     void addStartFirstListener() {
-        Button startButton = findViewById(R.id.startFirst);
+        Button startButton = findViewById(R.id.startThreeButton);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +65,7 @@ public class SlidingTilesMenuActivity extends MenuActivity {
      * Activate the button that starts a 4x4 game.
      */
     void addStartSecondListener() {
-        Button startButton = findViewById(R.id.startSecond);
+        Button startButton = findViewById(R.id.startFourButton);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +78,7 @@ public class SlidingTilesMenuActivity extends MenuActivity {
      * Activate the button that starts a 5x5 game.
      */
     void addStartThirdListener() {
-        Button startButton = findViewById(R.id.startThird);
+        Button startButton = findViewById(R.id.startFiveButton);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
