@@ -66,7 +66,7 @@
                     android:textSize="24sp" />
 
                 <TextView
-                    android:id="@+id/threebythreeText"
+                    android:id="@+id/firstGlobal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="3x3"
@@ -85,7 +85,7 @@
                     android:layout_height="10dp" />
 
                 <TextView
-                    android:id="@+id/fourbyfourText"
+                    android:id="@+id/secondGlobal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="4x4"
@@ -104,7 +104,7 @@
                     android:layout_height="10dp" />
 
                 <TextView
-                    android:id="@+id/textView29"
+                    android:id="@+id/thirdGlobal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="5x5"
@@ -146,7 +146,7 @@
                     android:textSize="24sp" />
 
                 <TextView
-                    android:id="@+id/uthreebythreeText"
+                    android:id="@+id/firstUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="3x3"
@@ -165,7 +165,7 @@
                     android:layout_height="10dp" />
 
                 <TextView
-                    android:id="@+id/ufourbyfourText"
+                    android:id="@+id/secondUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="4x4"
@@ -184,7 +184,7 @@
                     android:layout_height="10dp" />
 
                 <TextView
-                    android:id="@+id/utextView29"
+                    android:id="@+id/thirdUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="5x5"
