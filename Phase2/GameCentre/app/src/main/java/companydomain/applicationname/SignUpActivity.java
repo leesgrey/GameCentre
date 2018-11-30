@@ -13,24 +13,12 @@ import android.widget.EditText;
  */
 public class SignUpActivity extends AppCompatActivity {
 
-    /**
-     * The account info.
-     */
-    AccountInfo accountInfo;
-
-    /**
-     * The game save states.
-     */
-    GameSaveStates gameSaveStates;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_signup);
         addSignUpButtonListener();
-        this.accountInfo = AccountInfo.loadAccountInfo(this);
-        this.gameSaveStates = GameSaveStates.loadGameSaveStates(this);
     }
 
     /**
@@ -59,6 +47,8 @@ public class SignUpActivity extends AppCompatActivity {
                 String password = passwordInput.getText().toString();
                 String repassword = repasswordInput.getText().toString();
 
+                AccountInfo accountInfo = AccountInfo.loadAccountInfo(activity);
+
                 if (email.equals("") || password.equals("") || repassword.equals("")) {
                     createToast("Please enter an email and password.");
                 } else if (!password.equals(repassword)) {
@@ -69,6 +59,7 @@ public class SignUpActivity extends AppCompatActivity {
                     createToast("Account exists already");
                     emailInput.getText().clear();
                 } else {
+                    GameSaveStates gameSaveStates = GameSaveStates.loadGameSaveStates(activity);
                     createToast("Successfully created account, please log in.");
                     accountInfo.addAccount(email, password);
                     AccountInfo.writeAccountInfo(accountInfo, activity);

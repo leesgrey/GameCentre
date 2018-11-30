@@ -40,17 +40,7 @@ public class SlidingTilesMenuActivity extends AppCompatActivity {
     /**
      * The current user.
      */
-    String currentUser;
-
-    /**
-     * The inputted allowed number of undoes.
-     */
-    EditText numUndoesEditText;
-
-    /**
-     * Text field to show who the current user is
-     */
-    TextView currentUserText;
+    private String currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +53,7 @@ public class SlidingTilesMenuActivity extends AppCompatActivity {
 
         currentUser = i.getStringExtra("currentUser");
 
-        currentUserText = findViewById(R.id.currentuserText);
+        TextView currentUserText = findViewById(R.id.currentuserText);
         currentUserText.setText(String.format("Player: %s", currentUser));
 
         addStartThreeListener();
@@ -135,7 +125,7 @@ public class SlidingTilesMenuActivity extends AppCompatActivity {
      * @return the number of undoes specified in the text input area
      */
     private int getNumberOfUndoes() {
-        numUndoesEditText = findViewById(R.id.numUndoInput);
+        EditText numUndoesEditText = findViewById(R.id.numUndoInput);
         String undoesInput = numUndoesEditText.getText().toString();
         if (undoesInput.equals("")) {
             return -1;
