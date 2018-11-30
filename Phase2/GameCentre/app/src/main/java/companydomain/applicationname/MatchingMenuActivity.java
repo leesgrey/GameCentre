@@ -1,66 +1,29 @@
 package companydomain.applicationname;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 /**
  * The initial activity for the sliding puzzle tile game.
  */
-public class MatchingMenuActivity extends AppCompatActivity {
-
-    /**
-     * A temporary save file.
-     */
-    public static final String TEMP_SAVE_FILENAME = "save_file_temp.ser";
-
-    /**
-     * The board manager.
-     */
-    private MatchingBoardManager boardManager;
-
-    /**
-     * The game save states.
-     */
-    private GameSaveStates gameSaveStates;
-
-    /**
-     * The current user.
-     */
-    private String currentUser;
+public class MatchingMenuActivity extends MenuActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        saveBoardManagerToFile(TEMP_SAVE_FILENAME);
-
         setContentView(R.layout.activity_matchingmenu);
-
-        Intent i = getIntent();
-
-        currentUser = i.getStringExtra("currentUser");
-
-        TextView currentUserText = findViewById(R.id.currentuserText);
-        currentUserText.setText(String.format("Player: %s", currentUser));
-
-        addStartTwelveListener();
-        addStartSixteenListener();
-        addStartTwentyListener();
-        addLoadButtonListener();
-        addScoreboardButtonListener();
-        this.gameSaveStates = GameSaveStates.loadGameSaveStates(this);
+        super.onCreate(savedInstanceState);
+        addLoadButtonListener("matching");
     }
 
     /**
@@ -69,7 +32,7 @@ public class MatchingMenuActivity extends AppCompatActivity {
      * @param rows the number of rows in the puzzle
      * @param columns the number of columns in the puzzle
      */
-    private void initializeGame(int rows, int columns) {
+    void initializeGame(int rows, int columns) {
         boardManager = new MatchingBoardManager(rows, columns);
         switchToGame();
     }
@@ -77,8 +40,8 @@ public class MatchingMenuActivity extends AppCompatActivity {
     /**
      * Activate the button that starts a 3x4 game.
      */
-    private void addStartTwelveListener() {
-        Button startButton = findViewById(R.id.startTwelve);
+    void addStartFirstListener() {
+        Button startButton = findViewById(R.id.startFirst);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,8 +53,8 @@ public class MatchingMenuActivity extends AppCompatActivity {
     /**
      * Activate the button that starts a 4x4 game.
      */
-    private void addStartSixteenListener() {
-        Button startButton = findViewById(R.id.startFourButton);
+    void addStartSecondListener() {
+        Button startButton = findViewById(R.id.startSecond);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,70 +66,14 @@ public class MatchingMenuActivity extends AppCompatActivity {
     /**
      * Activate the button that starts a 5x5 game.
      */
-    private void addStartTwentyListener() {
-        Button startButton = findViewById(R.id.startTwenty);
+    void addStartThirdListener() {
+        Button startButton = findViewById(R.id.startThird);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 initializeGame(4, 5);
             }
         });
-    }
-
-    /**
-     * Activate the scoreboard button.
-     */
-    private void addScoreboardButtonListener() {
-        Button scoreboardButton = findViewById(R.id.scoreboardButton);
-        scoreboardButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToScoreboard();
-            }
-        });
-    }
-
-    /**
-     * Activate the load button.
-     */
-    private void addLoadButtonListener() {
-        final AppCompatActivity activity = this;
-        Button loadButton = findViewById(R.id.LoadButton);
-        loadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                gameSaveStates = GameSaveStates.loadGameSaveStates(activity);
-                if (currentUser.equals("Guest") || !gameSaveStates.gameSaveStateExists(currentUser,
-                        "matching")) {
-                    makeLoadFailToast();
-                } else {
-                    boardManager = (MatchingBoardManager) gameSaveStates.getGameSaveState(currentUser, "matching");
-                    makeToastLoadedText();
-                    switchToGame();
-                }
-            }
-        });
-    }
-
-    /**
-     * Make a popup that says that there are no saved games.
-     */
-    private void makeLoadFailToast() {
-        Toast.makeText(this, "You have no saves", Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * Display that a game was loaded successfully.
-     */
-    private void makeToastLoadedText() {
-        Toast.makeText(this, "Loaded Game", Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * Notify the user to provide a number of undos.
-     */
-    private void makeEmptyUndoToast() {
-        Toast.makeText(this, "Provide a maximum number of undos.", Toast.LENGTH_LONG).show();
     }
 
     /**
@@ -181,7 +88,7 @@ public class MatchingMenuActivity extends AppCompatActivity {
     /**
      * Switch to the SlidingTilesActivity view to play the game.
      */
-    private void switchToGame() {
+    void switchToGame() {
         Intent tmp = new Intent(this, MatchingActivity.class);
         saveBoardManagerToFile(MatchingMenuActivity.TEMP_SAVE_FILENAME);
         tmp.putExtra("currentUser", currentUser);
@@ -191,7 +98,7 @@ public class MatchingMenuActivity extends AppCompatActivity {
     /**
      * Switch to the ScoreBoard page.
      */
-    private void switchToScoreboard() {
+    void switchToScoreboard() {
         Intent tmp = new Intent(this, ScoreboardActivity.class);
         tmp.putExtra("currentUser", currentUser);
         tmp.putExtra("previousGame", "matching");
@@ -208,7 +115,7 @@ public class MatchingMenuActivity extends AppCompatActivity {
      *
      * @param fileName the name of the file
      */
-    private void loadBoardManagerFromFile(String fileName) {
+    void loadBoardManagerFromFile(String fileName) {
 
         try {
             InputStream inputStream = this.openFileInput(fileName);
@@ -223,22 +130,6 @@ public class MatchingMenuActivity extends AppCompatActivity {
             Log.e("login activity", "Can not read file: " + e.toString());
         } catch (ClassNotFoundException e) {
             Log.e("login activity", "File contained unexpected data type: " + e.toString());
-        }
-    }
-
-    /**
-     * Save the board manager to fileName.
-     *
-     * @param fileName the name of the file
-     */
-    public void saveBoardManagerToFile(String fileName) {
-        try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(boardManager);
-            outputStream.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
         }
     }
 

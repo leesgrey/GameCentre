@@ -91,32 +91,21 @@ public abstract class MenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (currentUser.equals("Guest") || !gameSaveStates.gameSaveStateExists(currentUser,
                         previous)) {
-                    makeLoadFailToast();
+                    makeToast("You have no saves");
                 } else {
                     boardManager = (SlidingTilesBoardManager) gameSaveStates.getGameSaveState(currentUser,
                             previous);
-                    makeToastLoadedText();
+                    makeToast("Loaded Game");
                     switchToGame();
                 }
             }
         });
     }
 
-
     abstract void switchToGame();
 
-    /**
-     * Make a popup that says that there are no saved games.
-     */
-    private void makeLoadFailToast() {
-        Toast.makeText(this, "You have no saves", Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * Display that a game was loaded successfully.
-     */
-    private void makeToastLoadedText() {
-        Toast.makeText(this, "Loaded Game", Toast.LENGTH_SHORT).show();
+    private void makeToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     /**
