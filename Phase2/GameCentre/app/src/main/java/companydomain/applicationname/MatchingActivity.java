@@ -87,6 +87,7 @@ public class MatchingActivity extends AppCompatActivity implements Observer {
         String scoreCounterString = Integer.toString(boardManager.getScoreCounter());
         scoreCounter.setText(scoreCounterString);
         gameSaveStates.addGameSaveState(currentUser, "matching", this.boardManager);
+        GameSaveStates.writeGameSaveStates(gameSaveStates, this);
         gridView.setAdapter(new CustomAdapter(tileButtons, columnWidth, columnHeight));
         if (boardManager.puzzleSolved()) {
             endgame();
