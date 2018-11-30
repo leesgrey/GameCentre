@@ -56,7 +56,7 @@ public class MasterMindMenuActivity extends AppCompatActivity {
      * Activate the button that starts a size 4 code game.
      */
     private void addStartFourListener() {
-        Button startButton = findViewById(R.id.startFourButton);
+        Button startButton = findViewById(R.id.startSecond);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -66,7 +66,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/startTwelve"
+                android:id="@+id/startFirst"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -74,7 +74,7 @@
                 android:text="3x4" />
 
             <Button
-                android:id="@+id/startFourButton"
+                android:id="@+id/startSecond"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/GameText"
@@ -84,7 +84,7 @@
                 android:textAlignment="center" />
 
             <Button
-                android:id="@+id/startTwenty"
+                android:id="@+id/startThird"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -103,7 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/GameText"
-            android:layout_toStartOf="@+id/startFourButton"
+            android:layout_toStartOf="@+id/startSecond"
             android:backgroundTint="@color/colorAccent"
             android:text="Load Saved Game" />
 
