@@ -76,22 +76,15 @@ public class MatchingBoardManager extends BoardManager {
      * @param position the position
      */
     public void touchMove(int position) {
-        if (selected.size() < 1) {
+        if(selected.size() == 0 || selected.size() == 2) {
+            this.selected.clear();
             selected.add(this.board.getTile(position));
         } else {
-            this.scoreCounter += 1;
+            scoreCounter++;
             selected.add(this.board.getTile(position));
             if (selected.get(0).getId() == selected.get(1).getId()) {
                 this.unmatched.remove(selected.get(0));
                 this.unmatched.remove(selected.get(1));
-                this.selected.clear();
-            } else {
-                new Timer().schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        selected.clear();
-                    }
-                }, 5);
             }
         }
         board.flipCard();
