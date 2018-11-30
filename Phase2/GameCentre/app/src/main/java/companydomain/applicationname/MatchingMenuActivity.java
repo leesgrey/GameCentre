@@ -78,7 +78,7 @@ public class MatchingMenuActivity extends AppCompatActivity {
      * Activate the button that starts a 3x4 game.
      */
     private void addStartTwelveListener() {
-        Button startButton = findViewById(R.id.startTwelve);
+        Button startButton = findViewById(R.id.startThreeButton);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,7 +104,7 @@ public class MatchingMenuActivity extends AppCompatActivity {
      * Activate the button that starts a 5x5 game.
      */
     private void addStartTwentyListener() {
-        Button startButton = findViewById(R.id.startTwenty);
+        Button startButton = findViewById(R.id.startFiveButton);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
