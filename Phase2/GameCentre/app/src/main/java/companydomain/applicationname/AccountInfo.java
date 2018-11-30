@@ -101,7 +101,7 @@ class AccountInfo implements Serializable {
     /**
      * Return the account info contained in the file.
      *
-     * @param activity TODO: not sure what to put here
+     * @param activity an activity used to do file IO
      * @return the account info contained in the file
      */
     static AccountInfo loadAccountInfo(AppCompatActivity activity) {
