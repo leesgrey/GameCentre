@@ -99,15 +99,6 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/LoadButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/GameText"
-            android:layout_toStartOf="@+id/startFourButton"
-            android:backgroundTint="@color/colorAccent"
-            android:text="Load Saved Game" />
-
-        <Button
             android:id="@+id/scoreboardButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
