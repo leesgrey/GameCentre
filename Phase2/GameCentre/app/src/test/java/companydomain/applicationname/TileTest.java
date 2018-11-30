@@ -1,48 +1,40 @@
 package companydomain.applicationname;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class TileTest {
 
-    /** A tile to test.
-     *
-     */
-    Tile testTile;
-
-
     /**
-     * A method to setupTile.
+     * Two tiles to test. The zero tile and the five tile.
      */
-    private void setupTile(int id)
-        {testTile = new Tile(id);
-        }
+    Tile zeroTile, fiveTile;
 
-    @Test
-    public void getBackgroundTest() {
-        setupTile(5);
-
-        assertEquals(R.drawable.tile_5, testTile.getBackground());
-
-
-    }
-    @Test
-    public void getIdTest() {
-        setupTile(5);
-        int expectedId = 5;
-        int actualId  = testTile.getId();
-        assertEquals(expectedId, actualId);
-
+    @Before
+    public void setUp() {
+        zeroTile = new Tile(0);
+        fiveTile = new Tile(5);
     }
 
+
+    @Test
+    public void getBackground() {
+        assertEquals(zeroTile.getBackground(), R.drawable.tile_0);
+        assertEquals(fiveTile.getBackground(), R.drawable.tile_5);
+    }
+
+    @Test
+    public void getId() {
+        assertEquals(zeroTile.getId(), 0);
+        assertEquals(fiveTile.getId(), 5);
+    }
 
     @Test
     public void compareTo() {
-        setupTile(5);
-        Tile testTile1 = new Tile(4);
-        int expectedValue = 1;
-        int actualValue = testTile.compareTo(testTile1);
-        assertEquals(expectedValue, actualValue);
+        assertEquals(zeroTile.compareTo(fiveTile), -5);
+        assertEquals(fiveTile.compareTo(zeroTile), 5);
+        assertEquals(zeroTile.compareTo(zeroTile), 0);
     }
 }
