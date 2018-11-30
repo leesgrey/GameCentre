@@ -6,26 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class MasterMindMenuActivity extends AppCompatActivity {
-
-
-    /**
-     * A temporary save file.
-     */
-    public static final String TEMP_SAVE_FILENAME = "save_file_tmp.ser";
-
-    /**
-     * The board manager.
-     */
-    private MatchingBoardManager boardManager;
-
-    /**
-     * The game save states.
-     */
-    private GameSaveStates gameSaveStates;
 
     /**
      * The current user.
@@ -107,7 +90,7 @@ public class MasterMindMenuActivity extends AppCompatActivity {
             }
         });
     }
-    
+
     /**
      * Switch to the MasterMindGameActivity view to play the game.
      */
