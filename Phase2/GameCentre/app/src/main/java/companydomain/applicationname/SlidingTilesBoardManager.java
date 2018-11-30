@@ -83,7 +83,7 @@ class SlidingTilesBoardManager extends BoardManager implements Serializable {
         int position = 0;
         for (Tile t : this.board) {
             if (t.getId() == 0) {
-                return position;
+                break;
             }
             position++;
         }
