@@ -23,7 +23,7 @@ public class MatchingMenuActivity extends AppCompatActivity {
     /**
      * A temporary save file.
      */
-    public static final String TEMP_SAVE_FILENAME = "save_file_tmp.ser";
+    public static final String TEMP_SAVE_FILENAME = "save_file_temp.ser";
 
     /**
      * The board manager.
