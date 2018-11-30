@@ -38,17 +38,6 @@ public class Tile implements Comparable<Tile>, Serializable {
     }
 
     /**
-     * A Tile with id and background. The background may not have a corresponding image.
-     *
-     * @param id         the id
-     * @param background the background
-     */
-    Tile(int id, int background) {
-        this.id = id;
-        this.background = background;
-    }
-
-    /**
      * A tile with a background id; look up and set the id.
      *
      * @param backgroundId the id of the background picture

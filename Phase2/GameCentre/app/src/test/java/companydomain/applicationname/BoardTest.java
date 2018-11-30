@@ -8,13 +8,13 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class BoardTest {
-    /* A test board
-
+    /**
+     * A test board
      */
     Board testBoard;
 
-    /*
-    Setup board.
+    /**
+     * Setup board.
      */
     private void setupBoard(List<Tile> tiles, int numRows, int numCols)
     {

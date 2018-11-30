@@ -1,64 +1,44 @@
 package companydomain.applicationname;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class ScoreTest {
 
-    /** A score instance
-     *
+    /**
+     * A Score to test.
      */
-    Score scoreTest;
-    /** Setup a score to test.
-     *
-     */
-    private void setupScore(String username, int score, int size)
-    { scoreTest = new Score(username, score, size);
+    private Score score;
 
+    /**
+     * Initialize a Score.
+     */
+    @Before
+    public void setUp() {
+        score = new Score("Bob", 7, 3);
     }
 
-    /** Test getScore() method.
-     *
-     */
     @Test
-    public void getScoreTest() {
-        setupScore("testusername", 3,3);
-        int expectedScore = 3;
-        int actualScore = scoreTest.getScore();
-        assertEquals(expectedScore, actualScore);
+    public void getScore() {
+        assertEquals(score.getScore(), 7);
     }
 
-    /**Test getUsername() method
-     *
-     */
     @Test
-    public void getUsernameTest() {
-        setupScore("testusername", 3,3);
-        String expectedUsername = "testusername";
-        String actualUsername = scoreTest.getUsername();
-        assertEquals(expectedUsername, actualUsername);
+    public void getUsername() {
+        assertEquals(score.getUsername(), "Bob");
     }
 
-    /** Test getSize() method.
-     *
-     */
     @Test
-    public void getSizeTest() {
-        setupScore("testusername", 3,3);
-        int expectedSize = 3;
-        int actualSize = scoreTest.getSize();
-        assertEquals(expectedSize, actualSize);
+    public void getSize() {
+        assertEquals(score.getSize(), 3);
     }
 
-    /** Test compareTo() method.
-     *
-     */
     @Test
-    public void compareToTest() {
-        setupScore("testusername",3,3);
-        int expectedResult = 1;
-        int actualResult = scoreTest.compareTo(new Score("testusername1", 2,3));
-        assertEquals(expectedResult,actualResult);
+    public void compareTo() {
+        assertEquals(score.compareTo(new Score("Alice", 3, 3)), 4);
+        assertEquals(score.compareTo(new Score("Candice", 7, 3)), 0);
+        assertEquals(score.compareTo(new Score("Eve", 17, 3)), -10);
     }
 }
