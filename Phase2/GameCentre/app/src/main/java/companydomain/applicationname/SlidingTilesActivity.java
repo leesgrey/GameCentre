@@ -89,6 +89,7 @@ public class SlidingTilesActivity extends AppCompatActivity implements Observer 
         updateTileButtons();
         String scoreCounterString = Integer.toString(boardManager.getScoreCounter());
         scoreCounter.setText(scoreCounterString);
+        gameSaveStates.addGameSaveState(currentUser, "slidingTiles", this.boardManager);
         GameSaveStates.writeGameSaveStates(gameSaveStates, this);
         gridView.setAdapter(new CustomAdapter(tileButtons, columnWidth, columnHeight));
         if (boardManager.puzzleSolved()) {

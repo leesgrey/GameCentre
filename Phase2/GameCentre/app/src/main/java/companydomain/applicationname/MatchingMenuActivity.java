@@ -139,10 +139,10 @@ public class MatchingMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (currentUser.equals("Guest") || !gameSaveStates.gameSaveStateExists(currentUser,
-                        "slidingTiles")) {
+                        "matching")) {
                     makeLoadFailToast();
                 } else {
-                    //boardManager = gameSaveStates.getGameSaveState(currentUser, "slidingTiles");
+                    boardManager = (MatchingBoardManager) gameSaveStates.getGameSaveState(currentUser, "matching");
                     makeToastLoadedText();
                     switchToGame();
                 }
