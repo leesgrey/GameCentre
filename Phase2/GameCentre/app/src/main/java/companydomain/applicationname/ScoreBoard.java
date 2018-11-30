@@ -48,16 +48,6 @@ class ScoreBoard implements Serializable {
         Collections.sort(scoreBoards.get(score.getSize()));
     }
 
-    // TODO: probably get rid of this
-    /**
-     * Return the file in which this Scoreboard is being stored.
-     *
-     * @return the file in which this Scoreboard is being stored
-     */
-    private String getScoreBoardFile() {
-        return scoreBoardFile;
-    }
-
     /**
      * Return the top "n" scores from games of size "size".
      *
@@ -88,11 +78,9 @@ class ScoreBoard implements Serializable {
         int numberOfScoresFound = 0;
         int scoresCheckedSoFar = 0;
         while (numberOfScoresFound < n) {
-            // if there are no more scores for this user
             if (scoreBoards.get(size) == null || scoresCheckedSoFar >= scoreBoards.get(size).size()) {
                 topScores.add(new Score("Default", 9999, size));
                 numberOfScoresFound++;
-                // if the next score is one of the user's
             } else if (username.equals(scoreBoards.get(size).get(scoresCheckedSoFar).getUsername())) {
                 topScores.add(scoreBoards.get(size).get(scoresCheckedSoFar));
                 numberOfScoresFound++;
@@ -107,7 +95,7 @@ class ScoreBoard implements Serializable {
     /**
      * Create, save, and return a ScoreBoard.
      *
-     * @param game the String "slidingTiles", "matching", or "masterMind"
+     * @param game     the String "slidingTiles", "matching", or "masterMind"
      * @param activity an AppCompatActivity that we will use to do file writing
      */
     static private ScoreBoard createScoreBoard(String game, AppCompatActivity activity) {
@@ -156,7 +144,7 @@ class ScoreBoard implements Serializable {
         } catch (ClassNotFoundException e) {
             Log.e("login activity", "File contained unexpected data type: " + e.toString());
         }
-        if(scoreBoard == null) {
+        if (scoreBoard == null) {
             return ScoreBoard.createScoreBoard(game, activity);
         }
         return scoreBoard;
