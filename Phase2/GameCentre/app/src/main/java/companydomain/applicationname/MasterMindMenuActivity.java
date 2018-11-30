@@ -6,26 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class MasterMindMenuActivity extends AppCompatActivity {
-
-
-    /**
-     * A temporary save file.
-     */
-    public static final String TEMP_SAVE_FILENAME = "save_file_tmp.ser";
-
-    /**
-     * The board manager.
-     */
-    private MatchingBoardManager boardManager;
-
-    /**
-     * The game save states.
-     */
-    private GameSaveStates gameSaveStates;
 
     /**
      * The current user.
@@ -57,7 +40,7 @@ public class MasterMindMenuActivity extends AppCompatActivity {
     }
 
     /**
-     * Activate the button that starts a 3x4 game.
+     * Activate the button that starts a size 3 code game.
      */
     private void addStartThreeListener() {
         Button startButton = findViewById(R.id.startThreeButton);
@@ -70,7 +53,7 @@ public class MasterMindMenuActivity extends AppCompatActivity {
     }
 
     /**
-     * Activate the button that starts a 4x4 game.
+     * Activate the button that starts a size 4 code game.
      */
     private void addStartFourListener() {
         Button startButton = findViewById(R.id.startFourButton);
@@ -83,7 +66,7 @@ public class MasterMindMenuActivity extends AppCompatActivity {
     }
 
     /**
-     * Activate the button that starts a 5x5 game.
+     * Activate the button that starts a size 5 code game.
      */
     private void addStartFiveListener() {
         Button startButton = findViewById(R.id.startFiveButton);
@@ -109,61 +92,10 @@ public class MasterMindMenuActivity extends AppCompatActivity {
     }
 
     /**
-     * Activate the load button.
-     */
-    private void addLoadButtonListener() {
-        Button loadButton = findViewById(R.id.LoadButton);
-        loadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (currentUser.equals("Guest") || !gameSaveStates.gameSaveStateExists(currentUser,
-                        "slidingTiles")) {
-                    makeLoadFailToast();
-                } else {
-                    //boardManager = gameSaveStates.getGameSaveState(currentUser, "slidingTiles");
-                    makeToastLoadedText();
-                    switchToGame(3);
-                }
-            }
-        });
-    }
-
-    /**
-     * Make a popup that says that there are no saved games.
-     */
-    private void makeLoadFailToast() {
-        Toast.makeText(this, "You have no saves", Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * Display that a game was loaded successfully.
-     */
-    private void makeToastLoadedText() {
-        Toast.makeText(this, "Loaded Game", Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * Notify the user to provide a number of undos.
-     */
-    private void makeEmptyUndoToast() {
-        Toast.makeText(this, "Provide a maximum number of undos.", Toast.LENGTH_LONG).show();
-    }
-
-    /**
-     * Read the temporary board from disk.
-     */
-    @Override
-    protected void onResume() {
-        super.onResume();
-        loadBoardManagerFromFile(TEMP_SAVE_FILENAME);
-    }
-
-    /**
      * Switch to the MasterMindGameActivity view to play the game.
      */
     private void switchToGame(int size) {
         Intent tmp = new Intent(this, MasterMindGameActivity.class);
-        //saveBoardManagerToFile(MatchingMenuActivity.TEMP_SAVE_FILENAME);
         tmp.putExtra("currentUser", currentUser);
         tmp.putExtra("size", size);
         startActivity(tmp);
@@ -175,51 +107,8 @@ public class MasterMindMenuActivity extends AppCompatActivity {
     private void switchToScoreboard() {
         Intent tmp = new Intent(this, ScoreboardActivity.class);
         tmp.putExtra("currentUser", currentUser);
-        tmp.putExtra("previousGame", "mastermind");
+        tmp.putExtra("previousGame", "masterMind");
         startActivity(tmp);
-    }
-
-    /**
-     * Load the board manager from fileName.
-     *
-     * @param fileName the name of the file
-     */
-    private void loadBoardManagerFromFile(String fileName) {
-        /*
-
-        try {
-            InputStream inputStream = this.openFileInput(fileName);
-            if (inputStream != null) {
-                ObjectInputStream input = new ObjectInputStream(inputStream);
-                boardManager = (MatchingBoardManager) input.readObject();
-                inputStream.close();
-            }
-        } catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        } catch (ClassNotFoundException e) {
-            Log.e("login activity", "File contained unexpected data type: " + e.toString());
-        }
-        */
-    }
-
-    /**
-     * Save the board manager to fileName.
-     *
-     * @param fileName the name of the file
-     */
-    public void saveBoardManagerToFile(String fileName) {
-        /*
-        try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(boardManager);
-            outputStream.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
-        */
     }
 
     @Override

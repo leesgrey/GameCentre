@@ -8,25 +8,48 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class MasterMindGameActivity extends AppCompatActivity {
+    /**
+     * The manager for the MasterMindGame
+     */
     private MasterMindManager manager;
+
+    /**
+     * String containing the current user
+     */
     private String currentUser;
+
+    /**
+     * The size of the game passed from the previous frame
+     */
     private int size;
-    private Spinner singleEntryGuess;
+
+    /**
+     * Variable keeping track of the input for the answers
+     */
     private int inputCounter = 1;
+
+    /**
+     * Contains the users answers
+     */
     private int[] answer;
+
+    /**
+     * The GUI components that need to be kept track for the game to be updated properly
+     */
+    private Spinner singleEntryGuess;
     private TextView text1, text2, text3, text4, text5, text6, text7, text8, text9, text10,
             guess1, guess2, guess3, guess4, guess5, correct1, correct2, correct3, correct4, score;
     private ScoreBoard scoreBoard;
 
+    /**
+     *
+     * Code that sets up the MasterMindGame UI. a
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,12 +133,16 @@ public class MasterMindGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String text = singleEntryGuess.getSelectedItem().toString();
-                changeText(text);
+                changeAnswer(text);
             }
         });
     }
 
-    void changeText(String text){
+    /**
+     * Updates the temporary answer fields by the user so that answer can be edited and finalised
+     * @param text
+     */
+    void changeAnswer(String text){
         if (this.inputCounter == 1){
             this.guess1.setText(text); this.answer[this.inputCounter - 1] = Integer.parseInt(text);
             this.inputCounter += 1;
@@ -134,6 +161,9 @@ public class MasterMindGameActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * submitButton listener that keep tracks of submission of the answer for the game
+     */
     void submitGuessListener(){
         Button submitButton = findViewById(R.id.submitGuessButton);
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -144,8 +174,12 @@ public class MasterMindGameActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Submitting the answer to the masterMindManager backend and interacting with the game
+     */
     void submitAnswer(){
         if(this.manager.makeGuess(this.answer)){
+            displayResult();
             endGame();
         } else{
             resetText();
@@ -153,6 +187,9 @@ public class MasterMindGameActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * endGame method that writes to the scoreboard class and calls the scoreboard gui method
+     */
     void endGame(){
         Score score = new Score(currentUser,
                 this.manager.getScore(), this.size);
@@ -166,6 +203,9 @@ public class MasterMindGameActivity extends AppCompatActivity {
         }, 2000);
     }
 
+    /**
+     * Method that switches to the scoreboard and passes on several values to the game
+     */
     private void switchToScoreboard() {
         Intent tmp = new Intent(this, ScoreboardActivity.class);
         tmp.putExtra("currentUser", currentUser);
@@ -173,9 +213,15 @@ public class MasterMindGameActivity extends AppCompatActivity {
         startActivity(tmp);
     }
 
+    /**
+     * Updating the result of the user's moves with the GUI
+     */
     void displayResult(){
         MasterMindCombination[] lastNGuesses = this.manager.getLastNGuesses(2);
         this.score.setText(String.valueOf(this.manager.getScore()));
+        System.out.println(this.manager.getAnswerCode()[0]);
+        System.out.println(this.manager.getAnswerCode()[1]);
+        System.out.println(this.manager.getAnswerCode()[2]);
         if (this.size == 3){
             displayThree(lastNGuesses);
         } else if (this.size == 4){
@@ -185,50 +231,50 @@ public class MasterMindGameActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * displaying the results of user input for size 3 games
+     * @param lastNGuesses
+     */
     void displayThree(MasterMindCombination[] lastNGuesses){
-        int[] secondLast = lastNGuesses[1].getCode();
-        int[] secondCorrect = lastNGuesses[1].getCorrectness();
-        this.text1.setText(String.valueOf(secondLast[0]));
-        this.text2.setText(String.valueOf(secondLast[1]));
-        this.text3.setText(String.valueOf(secondLast[2]));
-        this.correct1.setText(String.valueOf(secondCorrect[0]));
-        this.correct2.setText(String.valueOf(secondCorrect[1]));
-        int[] last = lastNGuesses[0].getCode();
-        int[] lastCorrect = lastNGuesses[0].getCorrectness();
-        this.text6.setText(String.valueOf(last[0]));
-        this.text7.setText(String.valueOf(last[1]));
-        this.text8.setText(String.valueOf(last[2]));
-        this.correct3.setText(String.valueOf(lastCorrect[0]));
-        this.correct4.setText(String.valueOf(lastCorrect[1]));
+        standardDisplay(lastNGuesses);
     }
 
+    /**
+     * Displaying the results of user input for size 4 games
+     * @param lastNGuesses
+     */
     void displayFour(MasterMindCombination[] lastNGuesses){
+        standardDisplay(lastNGuesses);
         int[] secondLast = lastNGuesses[1].getCode();
-        int[] secondCorrect = lastNGuesses[1].getCorrectness();
-        this.text1.setText(String.valueOf(secondLast[0]));
-        this.text2.setText(String.valueOf(secondLast[1]));
-        this.text3.setText(String.valueOf(secondLast[2]));
         this.text4.setText(String.valueOf(secondLast[3]));
-        this.correct1.setText(String.valueOf(secondCorrect[0]));
-        this.correct2.setText(String.valueOf(secondCorrect[1]));
         int[] last = lastNGuesses[0].getCode();
-        int[] lastCorrect = lastNGuesses[0].getCorrectness();
-        this.text6.setText(String.valueOf(last[0]));
-        this.text7.setText(String.valueOf(last[1]));
-        this.text8.setText(String.valueOf(last[2]));
         this.text9.setText(String.valueOf(last[3]));
-        this.correct3.setText(String.valueOf(lastCorrect[0]));
-        this.correct4.setText(String.valueOf(lastCorrect[1]));
     }
 
+    /**
+     * Displaying the results of user input for size 5 games
+     */
     void displayFive(MasterMindCombination[] lastNGuesses){
+        standardDisplay(lastNGuesses);
         int[] secondLast = lastNGuesses[1].getCode();
-        int[] secondCorrect = lastNGuesses[1].getCorrectness();
-        this.text1.setText(String.valueOf(secondLast[0]));
-        this.text2.setText(String.valueOf(secondLast[1]));
-        this.text3.setText(String.valueOf(secondLast[2]));
         this.text4.setText(String.valueOf(secondLast[3]));
         this.text5.setText(String.valueOf(secondLast[3]));
+        int[] last = lastNGuesses[0].getCode();
+        this.text9.setText(String.valueOf(last[3]));
+        this.text10.setText(String.valueOf(last[4]));
+    }
+
+    /**
+     * Helper method that helps the displayThree, displayFour, displayFive methods to prevent code
+     * duplication
+     * @param lastNGuesses
+     */
+    void standardDisplay(MasterMindCombination[] lastNGuesses){
+        int[] secondLast = lastNGuesses[1].getCode();
+        int[] secondCorrect = lastNGuesses[1].getCorrectness();
+        this.text1.setText(String.valueOf(secondLast[0]));
+        this.text2.setText(String.valueOf(secondLast[1]));
+        this.text3.setText(String.valueOf(secondLast[2]));
         this.correct1.setText(String.valueOf(secondCorrect[0]));
         this.correct2.setText(String.valueOf(secondCorrect[1]));
         int[] last = lastNGuesses[0].getCode();
@@ -236,13 +282,13 @@ public class MasterMindGameActivity extends AppCompatActivity {
         this.text6.setText(String.valueOf(last[0]));
         this.text7.setText(String.valueOf(last[1]));
         this.text8.setText(String.valueOf(last[2]));
-        this.text9.setText(String.valueOf(last[3]));
-        this.text10.setText(String.valueOf(last[4]));
         this.correct3.setText(String.valueOf(lastCorrect[0]));
         this.correct4.setText(String.valueOf(lastCorrect[1]));
-
     }
 
+    /**
+     * Listener button that undoes a move when the undo button is pressed
+     */
     void undoListener(){
         Button undoButton = findViewById(R.id.undoButton);
         undoButton.setOnClickListener(new View.OnClickListener() {
@@ -253,12 +299,18 @@ public class MasterMindGameActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * undoMove logic behind the undoListener
+     */
     void undoMove(){
         this.manager.undoMove();
         displayResult();
         this.score.setText(String.valueOf(this.manager.getScore()));
     }
 
+    /**
+     * Clears the user inputs for a potential answer
+     */
     void clearListener(){
         Button clearButton = findViewById(R.id.clearButton);
         clearButton.setOnClickListener(new View.OnClickListener() {
@@ -269,6 +321,9 @@ public class MasterMindGameActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Resets the text of the inputs so that the user can choose a new set of answers
+     */
     void resetText(){
         this.guess1.setText(""); this.guess2.setText(""); this.guess3.setText("");
         this.guess4.setText(""); this.guess5.setText("");

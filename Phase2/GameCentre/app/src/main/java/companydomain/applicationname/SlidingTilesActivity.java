@@ -58,7 +58,6 @@ public class SlidingTilesActivity extends AppCompatActivity implements Observer 
      */
     private ScoreBoard scoreBoard;
 
-    // Grid View and calculated column height and width based on device size
     private GestureDetectGridView gridView;
     private static int columnWidth, columnHeight;
 
